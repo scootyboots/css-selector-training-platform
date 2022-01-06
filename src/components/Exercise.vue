@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import Browser from './Browser.vue'
+
 </script>
 
 <template>
-
-  <h1>exercise component</h1>
 
     <div class="two-pain-grid">
     <div class="two-pain-grid__left">
@@ -18,7 +17,6 @@ import Browser from './Browser.vue'
       </div>
     </div>
   </div>
-
 
 </template>
 
