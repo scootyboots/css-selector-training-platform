@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import Browser from './Browser.vue'
+import Prompt from './Prompt.vue';
 
+const explanationArray = [
+  'this is the first paragraph',
+  'this is the second paragraph'
+]
 </script>
 
 <template>
@@ -8,7 +13,7 @@ import Browser from './Browser.vue'
     <div class="two-pain-grid">
     <div class="two-pain-grid__left">
       <div class="two-pain-grid__left-container">
-        left side
+        <Prompt header="Example Exercise" :explanationPs="explanationArray"/>
       </div>
     </div>
     <div class="two-pain-grid__right">
