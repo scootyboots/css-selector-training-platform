@@ -6,6 +6,11 @@ const explanationArray = [
   'this is the first paragraph',
   'this is the second paragraph'
 ]
+
+const correctSelectors = [
+  '.browser__page-content h2',
+  '.browser__page-content p'
+]
 </script>
 
 <template>
@@ -13,7 +18,12 @@ const explanationArray = [
     <div class="two-pain-grid">
     <div class="two-pain-grid__left">
       <div class="two-pain-grid__left-container">
-        <Prompt header="Example Exercise" :explanationPs="explanationArray"/>
+        <Prompt 
+          header="Example Exercise" 
+          :explanationPs="explanationArray"
+          inputPlaceholder="input CSS selector here"
+          :correctSelectors="correctSelectors"
+        />
       </div>
     </div>
     <div class="two-pain-grid__right">
