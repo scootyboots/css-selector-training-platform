@@ -23,6 +23,7 @@ const correctSelectors = [
           :explanationPs="explanationArray"
           inputPlaceholder="input CSS selector here"
           :correctSelectors="correctSelectors"
+          :selectAll="false"
         />
       </div>
     </div>
