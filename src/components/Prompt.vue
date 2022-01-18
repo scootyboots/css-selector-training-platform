@@ -15,6 +15,23 @@ const answer = ref<string>('')
 
 const correctAnswerGiven = ref<boolean>(false)
 
+const compareArrayElements = (answerElements:Element[]) => {
+  props.correctSelectors.forEach(correctSelector => {
+      const correctElements = [...document.querySelectorAll(correctSelector)];
+      let elementChecks:boolean[] = []
+      // check length
+      if (answerElements.length === correctElements.length) {
+        // check if each element matches
+        answerElements.forEach((answerEl, i) => {
+          answerEl === correctElements[i] ? elementChecks = [...elementChecks, true] : elementChecks = [...elementChecks, false]
+        })
+        if (!elementChecks.includes(false)) {
+          correctAnswerGiven.value = true
+        }
+      }
+  });
+}
+
 const checkSingleAnswer = (event:KeyboardEvent) => {
   if (event.key === 'Enter') {
     props.correctSelectors.forEach(correctSelector => {
@@ -34,22 +51,9 @@ const checkSingleAnswer = (event:KeyboardEvent) => {
 const checkSelectAllAnswer = (event:KeyboardEvent) => {
   if (event.key === 'Enter') {
     const answerElements = [...document.querySelectorAll(answer.value)];
-
-    props.correctSelectors.forEach(correctSelector => {
-      const correctElements = [...document.querySelectorAll(correctSelector)];
-      let elementChecks:boolean[] = []
-      // check length
-      if (answerElements.length === correctElements.length) {
-        // check if each element matches
-        answerElements.forEach((answerEl, i) => {
-          answerEl === correctElements[i] ? elementChecks = [...elementChecks, true] : elementChecks = [...elementChecks, false]
-        })
-        if (!elementChecks.includes(false)) {
-          correctAnswerGiven.value = true
-        }
-      }
-    });
-    
+    const answerElementsScoped = [...document.querySelectorAll(`.browser__page-content-container ${answer.value}`)];
+    compareArrayElements(answerElements)
+    compareArrayElements(answerElementsScoped)
   }
 }
 

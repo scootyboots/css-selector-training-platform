@@ -8,7 +8,6 @@ const explanationArray = [
 ]
 
 const correctSelectors = [
-  '.browser__page-content h2',
   '.browser__page-content p'
 ]
 </script>
@@ -23,7 +22,7 @@ const correctSelectors = [
           :explanationPs="explanationArray"
           inputPlaceholder="input CSS selector here"
           :correctSelectors="correctSelectors"
-          :selectAll="false"
+          :selectAll="true"
         />
       </div>
     </div>
