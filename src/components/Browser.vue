@@ -35,8 +35,10 @@ defineProps<{url: string}>()
 .browser {
   border-radius: 6px;
   background-color: #202124;
+  /* light mode box shadow 
   -webkit-box-shadow: 0px 0px 40px -3px #000000bf; 
-  box-shadow: 0px 0px 40px -3px #000000bf;
+  box-shadow: 0px 0px 40px -3px #000000bf; */
+  box-shadow: 0px 0px 15px -3px rgb(143 230 244 / 50%);
 }
 
 .browser__window-buttons {

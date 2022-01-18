@@ -56,9 +56,9 @@ const correctSelectors = [
   min-width: 260px;
   margin: 40px;
   padding: 20px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0px 0px 40px -3px rgb(0 0 0 / 45%);
-  box-shadow: 0px 0px 40px -3px rgb(0 0 0 / 45%);
+  /* border-radius: 5px; */
+  /* -webkit-box-shadow: 0px 0px 40px -3px rgb(0 0 0 / 45%);
+  box-shadow: 0px 0px 40px -3px rgb(0 0 0 / 45%); */
 }
 
 .two-pain-grid__right-container {

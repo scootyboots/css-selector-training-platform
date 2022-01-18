@@ -79,17 +79,59 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
     @keydown="(event) => checkSelectAllAnswer(event)"
   >
   <p class="Prompt-check-tip">press Enter to check answer</p>
-  <div class="correct" v-if="correctAnswerGiven">you did it!</div>
+  <div class="Prompt-correct" v-if="correctAnswerGiven">you did it!</div>
 </div>
 
 </template>
 
-<style>
+<style scoped>
 
+* {
+  color: var(--text-color)
+}
 .Prompt-input {
-  width: 100%;
+  border:none;
+  background-image:none;
+  background-color:transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  width: 98%;
   padding: 4px 0px;
   margin: 0px;
+  border-bottom: 2px solid var(--highlight-pink);
+  color: var(--highlight-pink);
+  font-size: 18px;
+  font-family: 'Fira Code', monospace;
+  font-weight: 700;
+  transition: .115s;
+}
+
+.Prompt-input:focus {
+  outline: none;
+  border-bottom: 5px solid var(--highlight-pink);
+}
+
+.Prompt-input::placeholder {
+  color: var(--lowlight);
+  font-size: 16px;
+  font-style: italic;
+}
+
+.Prompt-header {
+  font-family: 'Fira Code', monospace;
+  font-family: 'Open Sans', sans-serif;
+  /* color: var(--highlight-purple); */
+}
+
+.Prompt-check-tip {
+  color: var(--lowlight);
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+.Prompt-correct {
+  color: var(--highlight-blue)
 }
 
 </style>
