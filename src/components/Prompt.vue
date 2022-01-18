@@ -21,7 +21,10 @@ const checkSingleAnswer = (event:KeyboardEvent) => {
       if (document.querySelector(answer.value!) === document.querySelector(correctSelector)) {
         correctAnswerGiven.value = true
       }
-      if (document.querySelector(`.browser__page-content ${answer.value!}`) === document.querySelector(correctSelector)) {
+      if (document.querySelector(`.browser__page-content-container ${answer.value!}`) === document.querySelector(correctSelector)) {
+        correctAnswerGiven.value = true
+      }
+      if (document.querySelector(`.two-pain-grid__right ${answer.value!}`) === document.querySelector(correctSelector)) {
         correctAnswerGiven.value = true
       }
     });
