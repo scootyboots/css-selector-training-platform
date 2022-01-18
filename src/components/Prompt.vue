@@ -114,6 +114,10 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
   transition: .115s;
 }
 
+/* 
+TODO: make animation for wrong answer
+*/
+
 .Prompt-input:focus {
   outline: none;
   border-bottom: 5px solid var(--highlight-pink);
