@@ -103,7 +103,7 @@ defineProps<{url: string}>()
 
 .browser__page-content-container {
   max-height: calc(95vh - 150px);
-  max-width: calc(60vw - 60px);
+  max-width: calc(60vw - 40px);
   min-width: 650px;
   min-height: 600px;
   overflow: auto;
