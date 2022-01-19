@@ -85,7 +85,7 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
     :placeholder="inputPlaceholder"
     @keydown="(event) => checkSelectAllAnswer(event)"
   >
-  <p class="Prompt-check-tip">press Enter to check answer</p>
+  <p class="Prompt-check-tip"><span class="hotkey">Enter</span>to check answer</p>
   <div class="Prompt-correct" v-if="correctAnswerGiven">you did it!</div>
 </div>
 
@@ -130,7 +130,6 @@ TODO: make animation for wrong answer
 }
 
 .Prompt-header {
-  font-family: 'Fira Code', monospace;
   font-family: 'Open Sans', sans-serif;
   /* color: var(--highlight-purple); */
 }
@@ -143,6 +142,16 @@ TODO: make animation for wrong answer
 
 .Prompt-correct {
   color: var(--highlight-blue)
+}
+
+.hotkey {
+  padding: 2px 6px;
+  margin-right: 4px;
+  background-color: var(--lowlight);
+  color: var(--main-bg-color);
+  font-weight: 700;
+  border-radius: 3px;
+  box-shadow: -2px 2px 0px #202024;
 }
 
 </style>
