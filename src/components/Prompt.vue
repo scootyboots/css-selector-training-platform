@@ -15,6 +15,13 @@ const answer = ref<string>('')
 
 const correctAnswerGiven = ref<boolean>(false)
 
+const wrongAnswerAnimation = ref<boolean>(false)
+
+const handleWrongAnswer = () => {
+  wrongAnswerAnimation.value = true
+  setTimeout(() => wrongAnswerAnimation.value = false, 180)
+}
+
 const compareArrayElements = (answerElements:Element[]) => {
   props.correctSelectors.forEach(correctSelector => {
       const correctElements = [...document.querySelectorAll(correctSelector)];
@@ -34,6 +41,7 @@ const compareArrayElements = (answerElements:Element[]) => {
 
 const checkSingleAnswer = (event:KeyboardEvent) => {
   if (event.key === 'Enter') {
+    // TODO: check if answer is blank
     props.correctSelectors.forEach(correctSelector => {
       if (document.querySelector(answer.value!) === document.querySelector(correctSelector)) {
         correctAnswerGiven.value = true
@@ -45,6 +53,9 @@ const checkSingleAnswer = (event:KeyboardEvent) => {
         correctAnswerGiven.value = true
       }
     });
+    if (!correctAnswerGiven.value) {
+      handleWrongAnswer()
+    }
   }
 }
 
@@ -54,6 +65,9 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
     const answerElementsScoped = [...document.querySelectorAll(`.browser__page-content-container ${answer.value}`)];
     compareArrayElements(answerElements)
     compareArrayElements(answerElementsScoped)
+    if (!correctAnswerGiven.value) {
+      handleWrongAnswer()
+    }
   }
 }
 
@@ -71,7 +85,7 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
   </div>
   <input
     v-if="!selectAll" 
-    class="Prompt-input"
+    :class="`Prompt-input ${wrongAnswerAnimation ? 'shake-horizontal' : ''}`"
     type="text"
     v-model="answer"
     :placeholder="inputPlaceholder"
@@ -79,7 +93,7 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
   >
   <input 
     v-if="selectAll" 
-    class="Prompt-input shake-horizontal"
+    :class="`Prompt-input ${wrongAnswerAnimation ? 'shake-horizontal' : ''}`"
     type="text"
     v-model="answer"
     :placeholder="inputPlaceholder"
