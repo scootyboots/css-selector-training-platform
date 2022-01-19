@@ -39,7 +39,7 @@ const correctSelectors = [
 
 .two-pain-grid {
   display: grid;
-  grid-template-columns: 40% auto;
+  grid-template-columns: 40% auto 15px;
 }
 
 .two-pain-grid__left {
@@ -61,9 +61,10 @@ const correctSelectors = [
 }
 
 .two-pain-grid__right-container {
-  margin: 15px 15px 15px 0;
+  margin: 15px auto 15px auto;
   position: sticky;
   top: 15px;
+  max-width: 950px;
 }
 
 @media (max-width: 1090px) {
@@ -75,6 +76,11 @@ const correctSelectors = [
     position: absolute;
     top: 0;
     left: 20px;
+    right: 20px;
+  }
+
+  .browser__page-content-container {
+    max-width: 100%;
   }
 }
 

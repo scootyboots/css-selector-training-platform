@@ -110,4 +110,10 @@ defineProps<{url: string}>()
   background-color: white;
 }
 
+@media (max-width: 1090px) {
+  .browser__page-content-container {
+    max-width: 100%;
+  }
+}
+
 </style>
