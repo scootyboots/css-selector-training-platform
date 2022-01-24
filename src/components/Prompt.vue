@@ -41,8 +41,7 @@ const compareArrayElements = (answerElements:Element[]) => {
 
 const checkSingleAnswer = (event:KeyboardEvent) => {
   if (event.key === 'Enter') {
-    // if (answer.value === '') return
-    // TODO: check if answer is blank
+    if (answer.value === '') return
     props.correctSelectors.forEach(correctSelector => {
       if (document.querySelector(answer.value!) === document.querySelector(correctSelector)) {
         correctAnswerGiven.value = true
@@ -62,7 +61,7 @@ const checkSingleAnswer = (event:KeyboardEvent) => {
 
 const checkSelectAllAnswer = (event:KeyboardEvent) => {
   if (event.key === 'Enter') {
-    // if (answer.value === '') return
+    if (answer.value === '') return
     const answerElements = [...document.querySelectorAll(answer.value)];
     const answerElementsScoped = [...document.querySelectorAll(`.browser__page-content-container ${answer.value}`)];
     compareArrayElements(answerElements)
