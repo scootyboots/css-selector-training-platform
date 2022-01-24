@@ -2,13 +2,13 @@
 import { Component } from 'vue';
 import Browser from './Browser.vue'
 import Prompt from './Prompt.vue';
+// import TrainingSite from '../components/training_sites/TrainingSite.vue'
 
 interface ExerciseProps {
   explanationArray: string[]
   correctSelectors: string[]
   selectAll: boolean
-  browserURL: string
-  browserHTML: Component
+  browserUrl: string
   nextStepPath: string
 }
 
@@ -40,7 +40,9 @@ const props = defineProps<ExerciseProps>()
     </div>
     <div class="two-pain-grid__right">
       <div class="two-pain-grid__right-container">
-        <Browser :url="browserURL" :Html="browserHTML"/>
+        <Browser :url="browserUrl">
+          <slot></slot>
+        </Browser>
       </div>
     </div>
   </div>

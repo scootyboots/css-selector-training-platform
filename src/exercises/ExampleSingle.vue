@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Exercise from '../components/Exercise.vue'
-import trainingSite from '../components/training_site/TrainingSite.vue'
+import TrainingSite from '../components/training_sites/TrainingSite.vue'
 
 </script>
 
@@ -13,9 +13,10 @@ import trainingSite from '../components/training_site/TrainingSite.vue'
   :correct-selectors="['.browser__page-content p']"
   :select-all="false"
   browser-url="www.example.biz/single"
-  :browser-html="trainingSite"
   next-step-path="/next"
- />
+  >
+    <TrainingSite />
+  </Exercise>
 </template>
 
 <style>

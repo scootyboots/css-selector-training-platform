@@ -2,7 +2,7 @@
 import { Component, ref } from 'vue';
 
 
-defineProps<{url: string, Html: Component}>()
+defineProps<{url: string}>()
 
 </script>
 
@@ -22,7 +22,8 @@ defineProps<{url: string, Html: Component}>()
       </div>
       <div class="browser__page-content">
         <div class="browser__page-content-container">
-          <Html />
+          <slot>this is the slot!</slot>
+          <!-- <Html /> -->
         </div>  
       </div>
     </div>
