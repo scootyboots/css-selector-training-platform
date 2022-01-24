@@ -3,7 +3,9 @@ import Exercise from './components/Exercise.vue'
 </script>
 
 <template>
-  <Exercise />
+  <router-link to="/">hello world</router-link>
+  <router-link to="/exercise/1">exercise</router-link>
+  <router-view/>
 </template>
 
 <style>
