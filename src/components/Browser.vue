@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import TrainingSite from './training_site/TrainingSite.vue';
+import { Component, ref } from 'vue';
 
-defineProps<{url: string}>()
+
+defineProps<{url: string, Html: Component}>()
 
 </script>
 
@@ -22,7 +22,7 @@ defineProps<{url: string}>()
       </div>
       <div class="browser__page-content">
         <div class="browser__page-content-container">
-          <TrainingSite />
+          <Html />
         </div>  
       </div>
     </div>

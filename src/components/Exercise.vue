@@ -1,15 +1,27 @@
 <script setup lang="ts">
+import { Component } from 'vue';
 import Browser from './Browser.vue'
 import Prompt from './Prompt.vue';
 
-const explanationArray = [
-  'this is the first paragraph',
-  'this is the second paragraph'
-]
+interface ExerciseProps {
+  explanationArray: string[]
+  correctSelectors: string[]
+  selectAll: boolean
+  browserURL: string
+  browserHTML: Component
+  nextStepPath: string
+}
 
-const correctSelectors = [
-  '.browser__page-content p'
-]
+const props = defineProps<ExerciseProps>()
+
+// const explanationArray = [
+//   'this is the first paragraph',
+//   'this is the second paragraph'
+// ]
+
+// const correctSelectors = [
+//   '.browser__page-content p'
+// ]
 </script>
 
 <template>
@@ -22,13 +34,13 @@ const correctSelectors = [
           :explanationPs="explanationArray"
           inputPlaceholder="input CSS selector here"
           :correctSelectors="correctSelectors"
-          :selectAll="true"
+          :selectAll="selectAll"
         />
       </div>
     </div>
     <div class="two-pain-grid__right">
       <div class="two-pain-grid__right-container">
-        <Browser url="www.example-website.com/url-goes-here" />
+        <Browser :url="browserURL" :Html="browserHTML"/>
       </div>
     </div>
   </div>
