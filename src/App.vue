@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Exercise from './components/Exercise.vue'
+import Progress from './components/Progress.vue'
 </script>
 
 <template>
-  <router-link to="/">hello world</router-link>
-  <router-link to="/exercise/1">exercise</router-link>
+  <!-- <router-link to="/">hello world</router-link>
+  <router-link to="/exercise/1">exercise</router-link> -->
   <router-view/>
 </template>
 

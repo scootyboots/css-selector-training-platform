@@ -2,6 +2,7 @@
 import { Component } from 'vue';
 import Browser from './Browser.vue'
 import Prompt from './Prompt.vue';
+import Progress from './Progress.vue'
 // import TrainingSite from '../components/training_sites/TrainingSite.vue'
 
 interface ExerciseProps {
@@ -29,6 +30,7 @@ const props = defineProps<ExerciseProps>()
     <div class="two-pain-grid">
     <div class="two-pain-grid__left">
       <div class="two-pain-grid__left-container">
+        <Progress />
         <Prompt 
           header="Example Exercise" 
           :explanationPs="explanationArray"
@@ -57,7 +59,7 @@ const props = defineProps<ExerciseProps>()
 }
 
 .two-pain-grid__left {
-  
+  position: relative;
 }
 
 .two-pain-grid__right{

@@ -7,9 +7,9 @@ import ExampleAll from '../exercises/ExampleAll.vue'
 
 export const routes = [
   { path: paths.home, component: HelloWorld },
-  { path: paths.exercise1, component: Exercise },
   { path: paths.exampleSingle, component:  ExampleSingle },
-  { path: paths.exampleAll, component: ExampleAll  }
+  { path: paths.exampleAll, component: ExampleAll  },
+  { path: paths.exampleTesting, component: ExampleAll}
 ]
 
 const router = createRouter({
