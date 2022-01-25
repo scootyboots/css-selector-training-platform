@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Component, ref } from 'vue';
-
 
 defineProps<{url: string}>()
 
@@ -23,7 +21,6 @@ defineProps<{url: string}>()
       <div class="browser__page-content">
         <div class="browser__page-content-container">
           <slot>this is the slot!</slot>
-          <!-- <Html /> -->
         </div>  
       </div>
     </div>
