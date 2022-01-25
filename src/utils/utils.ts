@@ -7,3 +7,6 @@ export const findCurrentRouteIndex = (currentPath:string):number => {
   const currentPathIndex = exercisePaths.indexOf(currentPath)
   return currentPathIndex
 }
+
+// TODO: add more function to find useful information about the current rout
+//// findNextPath and/or findPrevious path
