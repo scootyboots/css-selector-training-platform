@@ -2,11 +2,11 @@
 import { useRoute } from 'vue-router';
 import paths from '../router/paths'
 import { Paths } from '../types/types'
+import { findCurrentRouteIndex } from '../utils/utils';
 const exerciseKeys = Object.keys(paths)
 const exercisePaths = exerciseKeys.map(key => paths[<keyof Paths>key])
-const route = useRoute()
-const currentPath = route.fullPath
-const currentPathIndex = exercisePaths.indexOf(currentPath)
+const currentPath = useRoute().fullPath
+const currentPathIndex = findCurrentRouteIndex(currentPath)
 
 let inactiveIndexes = ['']
 if (typeof currentPathIndex === 'number') {
