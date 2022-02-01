@@ -101,7 +101,11 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
     @keydown="(event) => checkSelectAllAnswer(event)"
   >
   <p class="Prompt-check-tip"><span class="hotkey">Enter</span>to check answer</p>
-  <div class="Prompt-correct" v-if="correctAnswerGiven">you did it!</div>
+  <div class="Prompt-correct" v-if="correctAnswerGiven">
+  you did it!
+  <!-- TODO: finish making next link dynamic -->
+    <router-link to="">next</router-link>
+  </div>
 </div>
 
 </template>

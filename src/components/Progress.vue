@@ -3,6 +3,9 @@ import { useRoute } from 'vue-router';
 import paths from '../router/paths'
 import { Paths } from '../types/types'
 import { findCurrentRouteIndex } from '../utils/utils';
+// TODO: refactor this to use the routs array
+// something like
+// routs.findOf(route => route.path === currentPath)
 const exerciseKeys = Object.keys(paths)
 const exercisePaths = exerciseKeys.map(key => paths[<keyof Paths>key])
 const currentPath = useRoute().fullPath

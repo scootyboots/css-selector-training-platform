@@ -8,7 +8,7 @@ import ExampleAll from '../exercises/ExampleAll.vue'
 export const routes = [
   { path: paths.home, component: HelloWorld },
   { path: paths.exampleSingle, component:  ExampleSingle },
-  { path: paths.exampleAll, component: ExampleAll  },
+  { path: paths.exampleAll, component: ExampleAll },
   { path: paths.exampleTesting, component: ExampleAll}
 ]
 
