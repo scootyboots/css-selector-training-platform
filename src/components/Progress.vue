@@ -4,17 +4,10 @@ import { routes } from '../router'
 import { findCurrentRouteIndex } from '../utils/utils';
 
 const currentPath = useRoute().fullPath
+
 const currentPathIndex = findCurrentRouteIndex(currentPath)
-
-
-// let inactiveRoutes = [{}]
-// if (typeof currentPathIndex === 'number') {
-//   inactiveRoutes = routesToSplice.splice(currentPathIndex + 1, routes.length - 1)
-// }
-
 const activeRoutes = routes.slice(0, currentPathIndex)
 const inactiveRoutes = routes.slice(currentPathIndex)
-
 
 const progressWidth = `${(100 / (routes.length - 1)) * currentPathIndex}%`
 
@@ -27,7 +20,6 @@ const progressWidth = `${(100 / (routes.length - 1)) * currentPathIndex}%`
     <span class="Progress-exercises-bar"></span>
     <div v-for="route in activeRoutes" class="Progress-exercise --active"></div>
     <div v-for="route in inactiveRoutes" class="Progress-exercise"></div>
-      <!-- {{ paths[<keyof Paths>key] === currentPath ?   }} -->
   </div>
 </div>
 
