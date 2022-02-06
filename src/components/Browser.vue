@@ -36,7 +36,8 @@ defineProps<{url: string}>()
   /* light mode box shadow 
   -webkit-box-shadow: 0px 0px 40px -3px #000000bf; 
   box-shadow: 0px 0px 40px -3px #000000bf; */
-  box-shadow: 0px 0px 15px -3px rgb(143 230 244 / 50%);
+  /* box-shadow: 0px 0px 15px -3px rgb(143 230 244 / 50%); */
+  box-shadow: 0px 0px 15px -3px rgb(165 165 165 / 65%);
 }
 
 .browser__window-buttons {
