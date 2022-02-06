@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { findNextPreviousPath } from '../utils/utils'
+import { useRoute } from 'vue-router';
+
+const currentPath = useRoute().fullPath
 
 interface PromptProps {
   header: string
@@ -104,7 +108,7 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
   <div class="Prompt-correct" v-if="correctAnswerGiven">
   you did it!
   <!-- TODO: finish making next link dynamic -->
-    <router-link to="">next</router-link>
+    <router-link :to="findNextPreviousPath(currentPath, 'next')">next</router-link>
   </div>
 </div>
 

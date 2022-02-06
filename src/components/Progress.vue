@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import paths from '../router/paths'
-import { Paths } from '../types/types'
+import { routes } from '../router'
 import { findCurrentRouteIndex } from '../utils/utils';
-// TODO: refactor this to use the routs array
-// something like
-// routs.findOf(route => route.path === currentPath)
-const exerciseKeys = Object.keys(paths)
-const exercisePaths = exerciseKeys.map(key => paths[<keyof Paths>key])
+
 const currentPath = useRoute().fullPath
 const currentPathIndex = findCurrentRouteIndex(currentPath)
 
-let inactiveIndexes = ['']
-if (typeof currentPathIndex === 'number') {
-  inactiveIndexes = exerciseKeys.splice(currentPathIndex + 1, exerciseKeys.length - 1)
-}
 
-const progressWidth = `${(100 / (exercisePaths.length - 1)) * currentPathIndex}%`
+// let inactiveRoutes = [{}]
+// if (typeof currentPathIndex === 'number') {
+//   inactiveRoutes = routesToSplice.splice(currentPathIndex + 1, routes.length - 1)
+// }
 
+const activeRoutes = routes.slice(0, currentPathIndex)
+const inactiveRoutes = routes.slice(currentPathIndex)
+
+
+const progressWidth = `${(100 / (routes.length - 1)) * currentPathIndex}%`
 
 </script>
 
@@ -26,8 +25,8 @@ const progressWidth = `${(100 / (exercisePaths.length - 1)) * currentPathIndex}%
 <div class="Progress">
   <div class="Progress-exercises">
     <span class="Progress-exercises-bar"></span>
-    <div v-for="(key, index) in exerciseKeys" class="Progress-exercise --active"></div>
-    <div v-for="(key, index) in inactiveIndexes" class="Progress-exercise"></div>
+    <div v-for="route in activeRoutes" class="Progress-exercise --active"></div>
+    <div v-for="route in inactiveRoutes" class="Progress-exercise"></div>
       <!-- {{ paths[<keyof Paths>key] === currentPath ?   }} -->
   </div>
 </div>
@@ -70,7 +69,7 @@ const progressWidth = `${(100 / (exercisePaths.length - 1)) * currentPathIndex}%
   height: 0.6rem;
   background-color: var(--lowlight);
   border-radius: 100%;
-  z-index: 1000;
+  z-index: 100;
 }
 
 .--active {

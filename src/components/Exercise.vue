@@ -10,7 +10,6 @@ interface ExerciseProps {
   correctSelectors: string[]
   selectAll: boolean
   browserUrl: string
-  nextStepPath: string
 }
 
 const props = defineProps<ExerciseProps>()
@@ -93,6 +92,7 @@ const props = defineProps<ExerciseProps>()
     top: 0;
     left: 20px;
     right: 20px;
+    z-index: 1000;
   }
 
   .browser__page-content-container {

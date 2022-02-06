@@ -1,28 +1,19 @@
-import paths from '../router/paths'
-import { Paths } from '../types/types'
+import { routes } from '../router/index'
 
 export const findCurrentRouteIndex = (currentPath:string):number => {
-  const exerciseKeys = Object.keys(paths)
-  const exercisePaths = exerciseKeys.map(key => paths[<keyof Paths>key])
-  const currentPathIndex = exercisePaths.indexOf(currentPath)
-  return currentPathIndex
+  return routes.findIndex(route => route.path === currentPath)
 }
 
-// TODO: add more function to find useful information about the current rout
-//// findNextPath and/or findPrevious path
-
-export const findNextPreviousPath = (currentPath: string) => {
-  const currentPathIndex = findCurrentRouteIndex(currentPath)
-  
+export const findNextPreviousPath = (currentPath: string, direction: 'next' | 'prev') => {
+  const currentRouteIndex = findCurrentRouteIndex(currentPath)
+  console.log('current index:', currentRouteIndex)
+  console.log('routes', routes)
+  console.log('next', routes[currentRouteIndex + 1])
+  if (direction === 'next') {
+    return routes[currentRouteIndex + 1] ? routes[currentRouteIndex + 1].path : currentPath
+  }
+  if (direction === 'prev') {
+    return routes[currentRouteIndex - 1] ? routes[currentRouteIndex - 1].path : currentPath
+  }
 }
 
-// TODO: remove this 
-
-export const findRouteIndex = (currentPath:string, whichIndex: 'current-index' | 'next-path' | 'prev-path') => {
-  const exerciseKeys = Object.keys(paths)
-  const exercisePaths = exerciseKeys.map(key => paths[<keyof Paths>key])
-  const currentPathIndex = exercisePaths.indexOf(currentPath)
-  if (whichIndex === 'current-index') return currentPathIndex
-  if (whichIndex === 'next-path') return 'something'
-  if (whichIndex === 'prev-path') return ''
-}

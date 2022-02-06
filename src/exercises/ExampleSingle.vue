@@ -13,7 +13,6 @@ import TrainingSite from '../components/training_sites/TrainingSite.vue'
   :correct-selectors="['.browser__page-content p']"
   :select-all="false"
   browser-url="www.example.biz/single"
-  next-step-path="/next"
   >
     <TrainingSite />
   </Exercise>
