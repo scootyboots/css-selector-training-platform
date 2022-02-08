@@ -1,15 +1,26 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import { routes } from '../router'
-import { findCurrentRouteIndex } from '../utils/utils';
+import router, { routes } from '../router'
+import { findCurrentRouteIndex } from '../utils/utils'
+import { ref } from 'vue'
 
-const currentPath = useRoute().fullPath
+const currentPath = ref(useRoute().fullPath)
 
-const currentPathIndex = findCurrentRouteIndex(currentPath)
-const activeRoutes = routes.slice(0, currentPathIndex)
-const inactiveRoutes = routes.slice(currentPathIndex)
+const currentPathIndex = ref(findCurrentRouteIndex(currentPath.value))
+const activeRoutes = ref(routes.slice(0, currentPathIndex.value))
+const inactiveRoutes = ref(routes.slice(currentPathIndex.value))
 
-const progressWidth = `${(100 / (routes.length - 1)) * currentPathIndex}%`
+const progressWidth = ref(`${(100 / (routes.length - 1)) * currentPathIndex.value}%`)
+
+router.afterEach((to, from) => {
+  console.log('to from router', to)
+  currentPath.value = to.fullPath
+  currentPathIndex.value = findCurrentRouteIndex(currentPath.value)
+  activeRoutes.value = routes.slice(0, currentPathIndex.value)
+  inactiveRoutes.value = routes.slice(currentPathIndex.value)
+  progressWidth.value = `${(100 / (routes.length - 1)) * currentPathIndex.value}%`
+})
+
 
 </script>
 
@@ -29,15 +40,14 @@ const progressWidth = `${(100 / (routes.length - 1)) * currentPathIndex}%`
 
 .Progress {
   position: absolute;
-  top: -1rem;
-  left: 0;
+  left: 3.5rem;
   display: flex;
   align-items: center;
-  margin: 1rem;
+  margin: 2rem auto 1rem auto;
   height: 0.2rem;
-  width: calc(100% - 2rem);
   border-radius: 0.2rem;
   background-color: var(--lowlight);
+  width: calc(40% - 6rem);
 }
 
 .Progress-exercises {
@@ -63,7 +73,7 @@ const progressWidth = `${(100 / (routes.length - 1)) * currentPathIndex}%`
   background-color: var(--lowlight);
   border-radius: 100%;
   z-index: 100;
-  transition: 0.35s;
+  transition: 0.95s;
 }
 
 .--active {

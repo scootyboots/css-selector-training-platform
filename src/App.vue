@@ -5,6 +5,7 @@ import Progress from './components/Progress.vue'
 <template>
   <!-- <router-link to="/">hello world</router-link>
   <router-link to="/exercise/1">exercise</router-link> -->
+  <Progress />
   <router-view/>
 </template>
 
