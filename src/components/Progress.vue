@@ -54,6 +54,7 @@ const progressWidth = `${(100 / (routes.length - 1)) * currentPathIndex}%`
   background-color: var(--highlight-purple);
   height: 0.2rem;
   width: v-bind(progressWidth);
+  transition: 0.65s;
 }
 
 .Progress-exercise {
@@ -62,6 +63,7 @@ const progressWidth = `${(100 / (routes.length - 1)) * currentPathIndex}%`
   background-color: var(--lowlight);
   border-radius: 100%;
   z-index: 100;
+  transition: 0.35s;
 }
 
 .--active {
