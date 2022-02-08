@@ -37,7 +37,9 @@ defineProps<{url: string}>()
   -webkit-box-shadow: 0px 0px 40px -3px #000000bf; 
   box-shadow: 0px 0px 40px -3px #000000bf; */
   /* box-shadow: 0px 0px 15px -3px rgb(143 230 244 / 50%); */
-  box-shadow: 0px 0px 15px -3px rgb(165 165 165 / 65%);
+  box-shadow: 
+    rgb(255 255 255 / 20%) 0px 0px 15px, 
+    rgb(255 255 255 / 15%) 0px 0px 3px 1px
 }
 
 .browser__window-buttons {
