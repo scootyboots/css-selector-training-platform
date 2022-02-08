@@ -134,12 +134,8 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
   font-size: 18px;
   font-family: 'Fira Code', monospace;
   font-weight: 700;
-  transition: .115s;
+  transition: .065s;
 }
-
-/* 
-TODO: make animation for wrong answer
-*/
 
 .Prompt-input:focus {
   outline: none;
