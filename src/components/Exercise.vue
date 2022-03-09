@@ -33,10 +33,10 @@ const props = defineProps<ExerciseProps>()
         <!-- <Progress /> -->
         <Prompt 
           header="Example Exercise" 
-          :explanationPs="explanationArray"
-          inputPlaceholder="input CSS selector here"
-          :correctSelectors="correctSelectors"
-          :selectAll="selectAll"
+          :explanation-array="explanationArray"
+          input-placeholder="input CSS selector here"
+          :correct-selectors="correctSelectors"
+          :select-all="selectAll"
         />
       </div>
     </div>

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { findNextPreviousPath } from '../utils/utils'
+import { findNextPreviousPath, lastPathCheck } from '../utils/utils'
 import { useRoute } from 'vue-router';
 
 const currentPath = useRoute().fullPath
 
 interface PromptProps {
   header: string
-  explanationPs: string[]
+  explanationArray: string[]
   inputPlaceholder: string
   correctSelectors: string[]
   selectAll: boolean
@@ -20,6 +20,8 @@ const answer = ref<string>('')
 const correctAnswerGiven = ref<boolean>(false)
 
 const wrongAnswerAnimation = ref<boolean>(false)
+
+const isLastPath = ref<boolean>(lastPathCheck(currentPath))
 
 const handleWrongAnswer = () => {
   wrongAnswerAnimation.value = true
@@ -84,7 +86,7 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
 <div class="Prompt">
   <h2 class="Prompt-header">{{ header }}</h2>
   <div class="Prompt-explanation">
-    <p v-for="(explanation, index) in explanationPs" :key="'explanation' + index">
+    <p v-for="(explanation, index) in explanationArray" :key="'explanation' + index">
         {{ explanation }}
     </p>
   </div>
@@ -105,10 +107,13 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
     @keydown="(event) => checkSelectAllAnswer(event)"
   >
   <p class="Prompt-check-tip"><span class="hotkey">Enter</span>to check answer</p>
-  <div class="Prompt-correct" v-if="correctAnswerGiven">
+  <div class="Prompt-correct" v-if="correctAnswerGiven && !isLastPath">
   you did it!
   <!-- TODO: finish making next link dynamic -->
     <router-link :to="findNextPreviousPath(currentPath, 'next')">next</router-link>
+  </div>
+  <div class="Prompt-correct last" v-if="correctAnswerGiven && isLastPath">
+    you finished all the exercises!
   </div>
 </div>
 

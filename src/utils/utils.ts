@@ -17,3 +17,7 @@ export const findNextPreviousPath = (currentPath: string, direction: 'next' | 'p
   }
 }
 
+export const lastPathCheck = (currentPath:string):boolean => {
+  const currentIndex = findCurrentRouteIndex(currentPath)
+  return routes.length === currentIndex + 1 ? true : false
+}
