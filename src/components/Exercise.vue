@@ -29,6 +29,8 @@ const props = defineProps<ExerciseProps>()
     <div class="two-pain-grid">
     <div class="two-pain-grid__left">
       <div class="two-pain-grid__left-container">
+        <!-- TODO: refactor to move Progress into the app component -->
+        <!-- <Progress /> -->
         <Prompt 
           header="Example Exercise" 
           :explanationPs="explanationArray"
