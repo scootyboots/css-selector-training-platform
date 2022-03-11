@@ -23,6 +23,8 @@ const wrongAnswerAnimation = ref<boolean>(false)
 
 const isLastPath = ref<boolean>(lastPathCheck(currentPath))
 
+const showNextLink = ref<boolean>(false)
+
 const handleWrongAnswer = () => {
   wrongAnswerAnimation.value = true
   setTimeout(() => wrongAnswerAnimation.value = false, 180)
@@ -120,14 +122,19 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
     @keydown="(event) => checkSelectAllAnswer(event)"
   >
   <p class="Prompt-check-tip"><span class="hotkey">Enter</span>to check answer</p>
-  <div class="Prompt-correct" v-if="correctAnswerGiven && !isLastPath">
-  you did it!
-  <!-- TODO: finish making next link dynamic -->
-    <router-link :to="findNextPreviousPath(currentPath, 'next')">next</router-link>
-  </div>
-  <div class="Prompt-correct last" v-if="correctAnswerGiven && isLastPath">
-    you finished all the exercises!
-  </div>
+  <Transition name="slide-in" @after-enter="showNextLink = true">
+    <div class="Prompt-correct" v-if="correctAnswerGiven && !isLastPath">
+      you did it!
+      <Transition name="fade-in">
+        <router-link :to="findNextPreviousPath(currentPath, 'next')" v-if="showNextLink" class="next-exercise-link">next</router-link>
+      </Transition>
+    </div>
+  </Transition>
+  <Transition name="slide-in">
+    <div class="Prompt-correct last" v-if="correctAnswerGiven && isLastPath">
+      you finished all the exercises!
+    </div>
+  </Transition>
 </div>
 
 </template>
@@ -188,6 +195,29 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
   font-weight: 700;
   border-radius: 3px;
   box-shadow: -2px 2px 0px #202024;
+}
+
+.fade-in-enter-active,
+.fade-in-leave-active {
+  transition: all 0.175s ease-in;
+}
+.fade-in-enter-from,
+.fade-in-leave-to {
+  opacity: 0;
+}
+.slide-in-enter-active {
+  transition: all 0.175s ease-in;
+}
+.slide-in-leave-active {
+  transition: all 0.175s ease-out;
+}
+.slide-in-enter-from {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+.slide-in-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
 }
 
 .shake-horizontal {
