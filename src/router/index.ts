@@ -7,6 +7,7 @@ import ExampleAll from '../exercises/ExampleAll.vue'
 import ExampleTesting from '../exercises/ExampleTesting.vue'
 
 export const routes = [
+  // TODO: add forwarding for / and /example-exercise routes 
   { path: paths.home, component: HelloWorld },
   { path: paths.exampleSingle, component:  ExampleSingle },
   { path: paths.exampleAll, component: ExampleAll },

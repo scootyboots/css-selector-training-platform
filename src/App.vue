@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { provide } from 'vue';
 import Progress from './components/Progress.vue'
+
+provide('completed', (completed:boolean) => completed)
 </script>
 
 <template>
@@ -7,6 +10,7 @@ import Progress from './components/Progress.vue'
   <router-link to="/exercise/1">exercise</router-link> -->
   <Progress />
   <router-view/>
+
 </template>
 
 <style>

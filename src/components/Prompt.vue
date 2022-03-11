@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import { findNextPreviousPath, lastPathCheck } from '../utils/utils'
 import { useRoute } from 'vue-router';
 
@@ -28,6 +28,15 @@ const handleWrongAnswer = () => {
   setTimeout(() => wrongAnswerAnimation.value = false, 180)
 }
 
+const fillLastCircle = () => {
+  if (correctAnswerGiven.value && isLastPath.value) {
+    const lastProgressCircle = document.querySelector('.Progress-exercise:last-child')
+    if (lastProgressCircle) {
+      lastProgressCircle.classList.add('--active')
+    }
+  }
+}
+
 const compareArrayElements = (answerElements:Element[]) => {
   props.correctSelectors.forEach(correctSelector => {
       const correctElements = [...document.querySelectorAll(correctSelector)];
@@ -40,6 +49,7 @@ const compareArrayElements = (answerElements:Element[]) => {
         })
         if (!elementChecks.includes(false)) {
           correctAnswerGiven.value = true
+          fillLastCircle()
         }
       }
   });
@@ -51,12 +61,15 @@ const checkSingleAnswer = (event:KeyboardEvent) => {
     props.correctSelectors.forEach(correctSelector => {
       if (document.querySelector(answer.value!) === document.querySelector(correctSelector)) {
         correctAnswerGiven.value = true
+        fillLastCircle()
       }
       if (document.querySelector(`.browser__page-content-container ${answer.value!}`) === document.querySelector(correctSelector)) {
         correctAnswerGiven.value = true
+        fillLastCircle()
       }
       if (document.querySelector(`.two-pain-grid__right ${answer.value!}`) === document.querySelector(correctSelector)) {
         correctAnswerGiven.value = true
+        fillLastCircle()
       }
     });
     if (!correctAnswerGiven.value) {
