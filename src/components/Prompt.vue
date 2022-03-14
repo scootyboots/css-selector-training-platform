@@ -2,6 +2,7 @@
 import { ref, inject } from 'vue';
 import { findNextPreviousPath, lastPathCheck } from '../utils/utils'
 import { useRoute } from 'vue-router';
+import ShortcutIndicatorVue from './ShortcutIndicator.vue';
 import Modal from './Modal.vue'
 
 const currentPath = useRoute().fullPath
@@ -38,6 +39,22 @@ const fillLastCircle = () => {
     const lastProgressCircle = document.querySelector('.Progress-exercise:last-child')
     if (lastProgressCircle) {
       lastProgressCircle.classList.add('--active')
+    }
+  }
+}
+
+const addKeyboardListener = () => {
+  window.addEventListener('keydown', (event) => handleModalDisplay(event))
+}
+
+const handleModalDisplay = (event:KeyboardEvent) => {
+  if (event.key === 'i') {
+    // displayModal.value = !displayModal.value
+    console.log(document.hasFocus())
+    const activeElement = document.activeElement
+    const answerInputElement = document.querySelector('input.Prompt-input')
+    if (activeElement !== answerInputElement) {
+      displayModal.value = !displayModal.value
     }
   }
 }
@@ -96,6 +113,8 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
   }
 }
 
+addKeyboardListener()
+
 </script>
 
 
@@ -124,7 +143,9 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
     :placeholder="inputPlaceholder"
     @keydown="(event) => checkSelectAllAnswer(event)"
   >
-  <p class="Prompt-check-tip"><span class="hotkey">Enter</span>to check answer</p>
+  <ShortcutIndicatorVue hotkey="Enter" explanation="to check answer" />
+  <ShortcutIndicatorVue hotkey="i" explanation="to show information" />
+  
   <Transition name="slide-in" @after-enter="showNextLink = true">
     <div class="Prompt-correct" v-if="correctAnswerGiven && !isLastPath">
       you did it!
@@ -140,7 +161,9 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
   </Transition>
 </div>
 
-<Modal v-if="displayModal" />
+<Modal 
+  v-if="displayModal"
+/>
 
 </template>
 
@@ -182,24 +205,9 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
   font-family: 'Open Sans', sans-serif;
   /* color: var(--highlight-purple); */
 }
-.Prompt-check-tip {
-  color: var(--lowlight);
-  font-size: 0.8em;
-  font-style: italic;
-}
 
 .Prompt-correct {
   color: var(--highlight-blue)
-}
-
-.hotkey {
-  padding: 2px 6px;
-  margin-right: 4px;
-  background-color: var(--lowlight);
-  color: var(--main-bg-color);
-  font-weight: 700;
-  border-radius: 3px;
-  box-shadow: -2px 2px 0px #202024;
 }
 
 .fade-in-enter-active,
