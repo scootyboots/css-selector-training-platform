@@ -1,27 +1,25 @@
 import { routes } from '../router/index'
-import exercisePaths from '../router/paths'
+import {exercisePaths, exercisePathKeys} from '../router/paths'
 import { ExercisePaths } from '../types/types'
 
 export const findCurrentRouteIndex = (currentPath:string):number => {
-  // return routes.findIndex(route => route.path === currentPath)
-  const pathKeys = Object.keys(exercisePaths)
-  return pathKeys.findIndex(key => exercisePaths[<keyof ExercisePaths>key] === currentPath)
+  return exercisePathKeys.findIndex(key => exercisePaths[<keyof ExercisePaths>key] === currentPath)
 }
 
 export const findNextPreviousPath = (currentPath: string, direction: 'next' | 'prev') => {
-  const currentRouteIndex = findCurrentRouteIndex(currentPath)
-  console.log('current index:', currentRouteIndex)
-  console.log('routes', routes)
-  console.log('next', routes[currentRouteIndex + 1])
+  const currentPathIndex = findCurrentRouteIndex(currentPath)
+  console.log('current index:', currentPathIndex)
+  console.log('routes', exercisePathKeys)
+  console.log('next', exercisePathKeys[currentPathIndex + 1])
   if (direction === 'next') {
-    return routes[currentRouteIndex + 1] ? routes[currentRouteIndex + 1].path : currentPath
+    return exercisePaths[<keyof ExercisePaths>exercisePathKeys[currentPathIndex + 1]] ? exercisePaths[<keyof ExercisePaths>exercisePathKeys[currentPathIndex + 1]] : currentPath
   }
   if (direction === 'prev') {
-    return routes[currentRouteIndex - 1] ? routes[currentRouteIndex - 1].path : currentPath
+    return exercisePaths[<keyof ExercisePaths>exercisePathKeys[currentPathIndex - 1]] ? exercisePaths[<keyof ExercisePaths>exercisePathKeys[currentPathIndex - 1]] : currentPath
   }
 }
 
 export const lastPathCheck = (currentPath:string):boolean => {
-  const currentIndex = findCurrentRouteIndex(currentPath)
-  return routes.length === currentIndex + 1 ? true : false
+  const currentPathIndex = findCurrentRouteIndex(currentPath)
+  return exercisePathKeys.length === currentPathIndex + 1 ? true : false
 }

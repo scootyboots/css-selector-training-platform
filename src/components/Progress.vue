@@ -2,23 +2,24 @@
 import { useRoute } from 'vue-router';
 import router, { routes } from '../router'
 import { findCurrentRouteIndex } from '../utils/utils'
+import {exercisePaths, exercisePathKeys} from '../router/paths'
 import { ref } from 'vue'
 
 const currentPath = ref(useRoute().fullPath)
 
 const currentPathIndex = ref(findCurrentRouteIndex(currentPath.value))
-const activeRoutes = ref(routes.slice(0, currentPathIndex.value))
-const inactiveRoutes = ref(routes.slice(currentPathIndex.value))
+const activeRoutes = ref(exercisePathKeys.slice(0, currentPathIndex.value))
+const inactiveRoutes = ref(exercisePathKeys.slice(currentPathIndex.value))
 
-const progressWidth = ref(`${(100 / (routes.length - 1)) * currentPathIndex.value}%`)
+const progressWidth = ref(`${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`)
 
 router.afterEach((to, from) => {
   console.log('to from router', to)
   currentPath.value = to.fullPath
   currentPathIndex.value = findCurrentRouteIndex(currentPath.value)
-  activeRoutes.value = routes.slice(0, currentPathIndex.value)
-  inactiveRoutes.value = routes.slice(currentPathIndex.value)
-  progressWidth.value = `${(100 / (routes.length - 1)) * currentPathIndex.value}%`
+  activeRoutes.value = exercisePathKeys.slice(0, currentPathIndex.value)
+  inactiveRoutes.value = exercisePathKeys.slice(currentPathIndex.value)
+  progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`
 })
 
 
