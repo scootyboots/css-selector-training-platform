@@ -1,7 +1,11 @@
 import { routes } from '../router/index'
+import exercisePaths from '../router/paths'
+import { ExercisePaths } from '../types/types'
 
 export const findCurrentRouteIndex = (currentPath:string):number => {
-  return routes.findIndex(route => route.path === currentPath)
+  // return routes.findIndex(route => route.path === currentPath)
+  const pathKeys = Object.keys(exercisePaths)
+  return pathKeys.findIndex(key => exercisePaths[<keyof ExercisePaths>key] === currentPath)
 }
 
 export const findNextPreviousPath = (currentPath: string, direction: 'next' | 'prev') => {
