@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory  } from 'vue-router'
-import paths from './paths'
+import exercisePaths from './paths'
 import HelloWorld from "../components/HelloWorld.vue"
 import Exercise from "../components/Exercise.vue"
 import ExampleSingle from '../exercises/ExampleSingle.vue'
@@ -8,10 +8,11 @@ import ExampleTesting from '../exercises/ExampleTesting.vue'
 
 export const routes = [
   // TODO: add forwarding for / and /example-exercise routes 
-  { path: paths.home, component: HelloWorld },
-  { path: paths.exampleSingle, component:  ExampleSingle },
-  { path: paths.exampleAll, component: ExampleAll },
-  { path: paths.exampleTesting, component: ExampleTesting }
+  { path: '/', redirect: exercisePaths.exampleSingle },
+  { path: '/example-exercise/', redirect: exercisePaths.exampleSingle },
+  { path: exercisePaths.exampleSingle, component:  ExampleSingle },
+  { path: exercisePaths.exampleAll, component: ExampleAll },
+  { path: exercisePaths.exampleTesting, component: ExampleTesting }
 ]
 
 const router = createRouter({
