@@ -1,4 +1,3 @@
-import { routes } from '../router/index'
 import {exercisePaths, exercisePathKeys} from '../router/paths'
 import { ExercisePaths } from '../types/types'
 

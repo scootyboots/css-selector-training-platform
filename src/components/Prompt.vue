@@ -2,6 +2,7 @@
 import { ref, inject } from 'vue';
 import { findNextPreviousPath, lastPathCheck } from '../utils/utils'
 import { useRoute } from 'vue-router';
+import Modal from './Modal.vue'
 
 const currentPath = useRoute().fullPath
 
@@ -14,6 +15,8 @@ interface PromptProps {
 }
 
 const props = defineProps<PromptProps>()
+
+const displayModal = ref<boolean>(true)
 
 const answer = ref<string>('')
 
@@ -136,6 +139,8 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
     </div>
   </Transition>
 </div>
+
+<Modal v-if="displayModal" />
 
 </template>
 

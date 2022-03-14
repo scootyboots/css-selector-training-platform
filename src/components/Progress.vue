@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import router, { routes } from '../router'
+import router from '../router'
 import { findCurrentRouteIndex } from '../utils/utils'
-import {exercisePaths, exercisePathKeys} from '../router/paths'
+import { exercisePathKeys } from '../router/paths'
 import { ref } from 'vue'
 
 const currentPath = ref(useRoute().fullPath)
 
 const currentPathIndex = ref(findCurrentRouteIndex(currentPath.value))
-const activeRoutes = ref(exercisePathKeys.slice(0, currentPathIndex.value))
-const inactiveRoutes = ref(exercisePathKeys.slice(currentPathIndex.value))
+const activeExerciseKeys = ref(exercisePathKeys.slice(0, currentPathIndex.value))
+const inactiveExerciseKeys = ref(exercisePathKeys.slice(currentPathIndex.value))
 
 const progressWidth = ref(`${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`)
 
@@ -17,12 +17,10 @@ router.afterEach((to, from) => {
   console.log('to from router', to)
   currentPath.value = to.fullPath
   currentPathIndex.value = findCurrentRouteIndex(currentPath.value)
-  activeRoutes.value = exercisePathKeys.slice(0, currentPathIndex.value)
-  inactiveRoutes.value = exercisePathKeys.slice(currentPathIndex.value)
+  activeExerciseKeys.value = exercisePathKeys.slice(0, currentPathIndex.value)
+  inactiveExerciseKeys.value = exercisePathKeys.slice(currentPathIndex.value)
   progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`
 })
-
-
 </script>
 
 <template>
@@ -30,8 +28,8 @@ router.afterEach((to, from) => {
 <div class="Progress">
   <div class="Progress-exercises">
     <span class="Progress-exercises-bar"></span>
-    <div v-for="route in activeRoutes" class="Progress-exercise --active"></div>
-    <div v-for="route in inactiveRoutes" class="Progress-exercise"></div>
+    <div v-for="exercisePath in activeExerciseKeys" class="Progress-exercise --active"></div>
+    <div v-for="exercisePath in inactiveExerciseKeys" class="Progress-exercise"></div>
   </div>
 </div>
 
