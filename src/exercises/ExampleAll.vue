@@ -1,6 +1,11 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import Exercise from '../components/Exercise.vue'
 import TrainingSite2 from '../components/training_sites/TrainingSite2.vue';
+import Modal from '../components/Modal.vue';
+import ExampleAllModalSlot from './ExampleAllModalSlot.vue';
+
+const modalDisplay = ref<boolean>(true)
 
 </script>
 
@@ -16,6 +21,10 @@ import TrainingSite2 from '../components/training_sites/TrainingSite2.vue';
   >
     <TrainingSite2 />
   </Exercise>
+
+  <Modal>
+    <ExampleAllModalSlot/>
+  </Modal>
 </template>
 
 <style>
