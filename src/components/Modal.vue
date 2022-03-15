@@ -4,11 +4,10 @@
 
 <template>
   <div class="Information-modal">
-    <div class="Information-modal-bg" @click="$emit('close-modal')"></div>
+    <div class="Information-modal-bg" @click="$emit('closeModal')"></div>
     <div class="Information-modal-content-container">
       <div class="Information-modal-content">
-        this is the modal
-        <slot></slot>
+        <slot/>
       </div>
     </div>
   </div>

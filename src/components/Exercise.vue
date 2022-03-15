@@ -1,27 +1,36 @@
 <script setup lang="ts">
-import { Component } from 'vue';
+import { Component, ref } from 'vue';
 import Browser from './Browser.vue'
 import Prompt from './Prompt.vue';
-import Progress from './Progress.vue'
-// import TrainingSite from '../components/training_sites/TrainingSite.vue'
+import Modal from './Modal.vue'
 
 interface ExerciseProps {
   explanationArray: string[]
   correctSelectors: string[]
   selectAll: boolean
   browserUrl: string
+  modalDefaultDisplay: boolean
+  allowModalToggle: boolean
 }
 
 const props = defineProps<ExerciseProps>()
 
-// const explanationArray = [
-//   'this is the first paragraph',
-//   'this is the second paragraph'
-// ]
+const displayModal = ref<boolean>(props.modalDefaultDisplay)
 
-// const correctSelectors = [
-//   '.browser__page-content p'
-// ]
+const handleModalDisplay = (event:KeyboardEvent) => {
+  if (event.key === 'i') {
+    if (props.allowModalToggle) {
+      const activeElement = document.activeElement
+      const answerInputElement = document.querySelector('input.Prompt-input')
+      if (activeElement !== answerInputElement) {
+        displayModal.value = !displayModal.value
+      }
+    }
+  }
+}
+
+window.addEventListener('keydown', (event) => handleModalDisplay(event))
+
 </script>
 
 <template>
@@ -29,25 +38,28 @@ const props = defineProps<ExerciseProps>()
     <div class="two-pain-grid">
     <div class="two-pain-grid__left">
       <div class="two-pain-grid__left-container">
-        <!-- TODO: refactor to move Progress into the app component -->
-        <!-- <Progress /> -->
         <Prompt 
           header="Example Exercise" 
           :explanation-array="explanationArray"
           input-placeholder="input CSS selector here"
           :correct-selectors="correctSelectors"
           :select-all="selectAll"
+          :allow-modal-toggle="allowModalToggle"
         />
       </div>
     </div>
     <div class="two-pain-grid__right">
       <div class="two-pain-grid__right-container">
         <Browser :url="browserUrl">
-          <slot></slot>
+          <slot name="training-site"/>
         </Browser>
       </div>
     </div>
   </div>
+
+  <Modal v-if="displayModal && allowModalToggle" @close-modal="displayModal = false">
+    <slot name="modal-content"/>
+  </Modal>
 
 </template>
 

@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { ref, inject } from 'vue';
+import { ref } from 'vue';
 import { findNextPreviousPath, lastPathCheck } from '../utils/utils'
 import { useRoute } from 'vue-router';
 import ShortcutIndicatorVue from './ShortcutIndicator.vue';
-import Modal from './Modal.vue'
 
 const currentPath = useRoute().fullPath
 
@@ -13,11 +12,10 @@ interface PromptProps {
   inputPlaceholder: string
   correctSelectors: string[]
   selectAll: boolean
+  allowModalToggle: boolean
 }
 
 const props = defineProps<PromptProps>()
-
-const displayModal = ref<boolean>(true)
 
 const answer = ref<string>('')
 
@@ -43,21 +41,6 @@ const fillLastCircle = () => {
   }
 }
 
-const addKeyboardListener = () => {
-  window.addEventListener('keydown', (event) => handleModalDisplay(event))
-}
-
-const handleModalDisplay = (event:KeyboardEvent) => {
-  if (event.key === 'i') {
-    // displayModal.value = !displayModal.value
-    console.log(document.hasFocus())
-    const activeElement = document.activeElement
-    const answerInputElement = document.querySelector('input.Prompt-input')
-    if (activeElement !== answerInputElement) {
-      displayModal.value = !displayModal.value
-    }
-  }
-}
 
 const compareArrayElements = (answerElements:Element[]) => {
   props.correctSelectors.forEach(correctSelector => {
@@ -113,8 +96,6 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
   }
 }
 
-addKeyboardListener()
-
 </script>
 
 
@@ -144,7 +125,7 @@ addKeyboardListener()
     @keydown="(event) => checkSelectAllAnswer(event)"
   >
   <ShortcutIndicatorVue hotkey="Enter" explanation="to check answer" />
-  <ShortcutIndicatorVue hotkey="i" explanation="to show information" />
+  <ShortcutIndicatorVue v-if="allowModalToggle" hotkey="i" explanation="to show information" />
   
   <Transition name="slide-in" @after-enter="showNextLink = true">
     <div class="Prompt-correct" v-if="correctAnswerGiven && !isLastPath">
@@ -160,10 +141,6 @@ addKeyboardListener()
     </div>
   </Transition>
 </div>
-
-<Modal 
-  v-if="displayModal"
-/>
 
 </template>
 

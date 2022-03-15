@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Exercise from '../components/Exercise.vue'
 import TrainingSite from '../components/training_sites/TrainingSite.vue'
+import ExampleSingleModalContent from './ExampleSingleModalContent.vue';
 
 </script>
 
@@ -13,8 +14,15 @@ import TrainingSite from '../components/training_sites/TrainingSite.vue'
   :correct-selectors="['.browser__page-content p']"
   :select-all="false"
   browser-url="www.example.biz/single"
+  :modal-default-display="true"
+  :allow-modal-toggle="true"
   >
-    <TrainingSite />
+    <template #training-site>
+      <TrainingSite />
+    </template>
+    <template #modal-content>
+      <ExampleSingleModalContent/>
+    </template>
   </Exercise>
 </template>
 

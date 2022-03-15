@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import Exercise from '../components/Exercise.vue'
 import TrainingSite2 from '../components/training_sites/TrainingSite2.vue';
-import Modal from '../components/Modal.vue';
-import ExampleAllModalSlot from './ExampleAllModalSlot.vue';
-
-const modalDisplay = ref<boolean>(true)
+import ExampleAllModalContent from './ExampleAllModalContent.vue';
 
 </script>
 
@@ -18,13 +14,17 @@ const modalDisplay = ref<boolean>(true)
   :correct-selectors="['.browser__page-content p']"
   :select-all="false"
   browser-url="www.example.biz/all"
+  :modal-default-display="true"
+  :allow-modal-toggle="true"
   >
-    <TrainingSite2 />
+    <template v-slot:training-site>
+      <TrainingSite2 />
+    </template>
+    <template v-slot:modal-content>
+      <ExampleAllModalContent />
+    </template>
   </Exercise>
 
-  <Modal>
-    <ExampleAllModalSlot/>
-  </Modal>
 </template>
 
 <style>
