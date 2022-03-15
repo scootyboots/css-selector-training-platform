@@ -39,12 +39,12 @@ router.afterEach((to, from) => {
 
 .Progress {
   position: absolute;
-  left: 3.5rem;
+  left: 5.5rem;
   display: flex;
   align-items: center;
-  margin: 2rem auto 1rem auto;
-  height: 0.2rem;
-  border-radius: 0.2rem;
+  margin: 3.5rem auto 1.5rem auto;
+  height: 0.3rem;
+  border-radius: 0.6rem;
   background-color: var(--lowlight);
   width: calc(40% - 6rem);
 }
@@ -58,17 +58,17 @@ router.afterEach((to, from) => {
 
 .Progress-exercises-bar {
   position: absolute;
-  top: 0.2rem;
+  top: 0.4rem;
   left: 0;
   background-color: var(--highlight-purple);
-  height: 0.2rem;
+  height: 0.4rem;
   width: v-bind(progressWidth);
   transition: 0.65s;
 }
 
 .Progress-exercise {
-  width: 0.6rem;
-  height: 0.6rem;
+  width: 1rem;
+  height: 1rem;
   background-color: var(--lowlight);
   border-radius: 100%;
   z-index: 100;
