@@ -56,10 +56,15 @@ window.addEventListener('keydown', (event) => handleModalDisplay(event))
       </div>
     </div>
   </div>
-
-  <Modal v-if="displayModal && allowModalToggle" @close-modal="displayModal = false">
-    <slot name="modal-content"/>
-  </Modal>
+  
+  <Transition name="fade">
+    <div class="darken-fullscreen" v-if="displayModal" @click="displayModal = false"></div>
+  </Transition>
+  <Transition name="slide-fade">
+    <Modal v-show="displayModal && allowModalToggle" @close-modal="displayModal = false">
+      <slot name="modal-content"/>
+    </Modal>
+  </Transition>
 
 </template>
 
@@ -111,6 +116,48 @@ window.addEventListener('keydown', (event) => handleModalDisplay(event))
   .browser__page-content-container {
     max-width: 100%;
   }
+}
+
+.darken-fullscreen {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000000d9;
+  /* background-color: var(--main-bg-color); */
+  opacity: 0.8;
+  z-index: 1001;
+}
+
+/* .slide-fade-enter-active {
+  transition: all 0.175s ease-out;
+} */
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.225s ease-out;
+}
+
+.slide-fade-enter-from {
+  transform: translateY(2rem);
+  opacity: 1;
+}
+.slide-fade-leave-to {
+  transform: translateY(-2rem);
+  opacity: 0;
+}
+
+
+.fade-enter-active {
+  transition: all 0.125s ease-in;
+}
+.fade-leave-active {
+  transition: all 0.45s ease-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 </style>

@@ -26,6 +26,14 @@ provide('completed', (completed:boolean) => completed)
   --highlight-blue: rgba(143,230,244,255);
 }
 
+html {
+  font-size: 10px
+}
+
+body {
+  font-size: 1.6rem;
+}
+
 #app {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

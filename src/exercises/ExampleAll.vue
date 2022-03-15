@@ -17,10 +17,10 @@ import ExampleAllModalContent from './ExampleAllModalContent.vue';
   :modal-default-display="true"
   :allow-modal-toggle="true"
   >
-    <template v-slot:training-site>
+    <template #training-site>
       <TrainingSite2 />
     </template>
-    <template v-slot:modal-content>
+    <template #modal-content>
       <ExampleAllModalContent />
     </template>
   </Exercise>
