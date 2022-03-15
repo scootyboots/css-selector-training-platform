@@ -27,6 +27,9 @@ const handleModalDisplay = (event:KeyboardEvent) => {
       }
     }
   }
+  if (event.key === 'Escape') {
+    displayModal.value = false
+  }
 }
 
 window.addEventListener('keydown', (event) => handleModalDisplay(event))
