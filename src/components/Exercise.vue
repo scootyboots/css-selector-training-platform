@@ -22,6 +22,7 @@ const displayHint = ref<boolean>(false)
 const inputSelector = 'input.Prompt-input'
 
 const handleHotkeyPress = (event:KeyboardEvent) => {
+  console.log('event key', event.key)
   if (event.key === 'i') {
     if (props.allowModalToggle) {
       if (!checkInputFocus()) {
@@ -40,8 +41,8 @@ const handleHotkeyPress = (event:KeyboardEvent) => {
     }
   }
   if (event.key === 'l') {
-    event.preventDefault()
-    if (checkInputFocus()) {
+    if (!checkInputFocus()) {
+      event.preventDefault()
       const answerInputElement:HTMLInputElement | null = document.querySelector(inputSelector)
       if (answerInputElement) {
         answerInputElement.focus()

@@ -23,7 +23,6 @@ const correctAnswerGiven = ref<boolean>(false)
 const wrongAnswerAnimation = ref<boolean>(false)
 const isLastPath = ref<boolean>(lastPathCheck(currentPath))
 const showNextLink = ref<boolean>(false)
-// const displayHintPrompt = ref<boolean>(props.displayHint)
 
 const handleWrongAnswer = () => {
   wrongAnswerAnimation.value = true
@@ -58,40 +57,64 @@ const compareArrayElements = (answerElements:Element[]) => {
   });
 }
 
-const checkSingleAnswer = (event:KeyboardEvent) => {
-  if (event.key === 'Enter') {
-    if (answer.value === '') return
-    props.correctSelectors.forEach(correctSelector => {
-      if (document.querySelector(answer.value!) === document.querySelector(correctSelector)) {
-        correctAnswerGiven.value = true
-        fillLastCircle()
+const checkSingleAnswer = (clicked:boolean, event?:KeyboardEvent) => {
+  if (event) {
+    if (event.key === 'Enter' || clicked) {
+      singleAnswerLogic()
+      if (!correctAnswerGiven.value) {
+        handleWrongAnswer()
       }
-      if (document.querySelector(`.browser__page-content-container ${answer.value!}`) === document.querySelector(correctSelector)) {
-        correctAnswerGiven.value = true
-        fillLastCircle()
-      }
-      if (document.querySelector(`.two-pain-grid__right ${answer.value!}`) === document.querySelector(correctSelector)) {
-        correctAnswerGiven.value = true
-        fillLastCircle()
-      }
-    });
+    } 
+  }
+  if (clicked) {
+    singleAnswerLogic()
     if (!correctAnswerGiven.value) {
       handleWrongAnswer()
     }
   }
 }
 
-const checkSelectAllAnswer = (event:KeyboardEvent) => {
-  if (event.key === 'Enter') {
-    if (answer.value === '') return
-    const answerElements = [...document.querySelectorAll(answer.value)];
-    const answerElementsScoped = [...document.querySelectorAll(`.browser__page-content-container ${answer.value}`)];
-    compareArrayElements(answerElements)
-    compareArrayElements(answerElementsScoped)
+const checkSelectAllAnswer = (clicked:boolean, event?:KeyboardEvent) => {
+  if (event) {
+    if (event.key === 'Enter') {
+      selectAllLogic()
+      if (!correctAnswerGiven.value) {
+        handleWrongAnswer()
+      }
+    }
+  }
+  if (clicked) {
+    selectAllLogic()
     if (!correctAnswerGiven.value) {
       handleWrongAnswer()
     }
   }
+}
+
+const singleAnswerLogic = () => {
+  if (answer.value === '') return
+  props.correctSelectors.forEach(correctSelector => {
+    if (document.querySelector(answer.value!) === document.querySelector(correctSelector)) {
+      correctAnswerGiven.value = true
+      fillLastCircle()
+    }
+    if (document.querySelector(`.browser__page-content-container ${answer.value!}`) === document.querySelector(correctSelector)) {
+      correctAnswerGiven.value = true
+      fillLastCircle()
+    }
+    if (document.querySelector(`.two-pain-grid__right ${answer.value!}`) === document.querySelector(correctSelector)) {
+      correctAnswerGiven.value = true
+      fillLastCircle()
+    }
+  });
+}
+
+const selectAllLogic = () => {
+  if (answer.value === '') return
+  const answerElements = [...document.querySelectorAll(answer.value)];
+  const answerElementsScoped = [...document.querySelectorAll(`.browser__page-content-container ${answer.value}`)];
+  compareArrayElements(answerElements)
+  compareArrayElements(answerElementsScoped)
 }
 
 </script>
@@ -112,7 +135,7 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
     type="text"
     v-model="answer"
     :placeholder="inputPlaceholder"
-    @keydown="(event) => checkSingleAnswer(event)"
+    @keydown="(event) => checkSingleAnswer(false, event)"
   >
   <input 
     v-if="selectAll" 
@@ -120,9 +143,10 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
     type="text"
     v-model="answer"
     :placeholder="inputPlaceholder"
-    @keydown="(event) => checkSelectAllAnswer(event)"
+    @keydown="(event) => checkSelectAllAnswer(false, event)"
   >
-  <ShortcutIndicatorVue hotkey="Enter" explanation="to check answer" />
+  <ShortcutIndicatorVue v-if="!selectAll" hotkey="Enter" @clicked-Enter="checkSingleAnswer(true)" explanation="to check answer" />
+  <ShortcutIndicatorVue v-if="selectAll" hotkey="Enter" @clicked-Enter="checkSelectAllAnswer(true)" explanation="to check answer" />
   <ShortcutIndicatorVue hotkey="l" explanation="to focus input" />
   <ShortcutIndicatorVue v-if="allowModalToggle" hotkey="i" explanation="to show information" />
   <ShortcutIndicatorVue v-if="hint" hotkey="h" explanation="to get a hint" />
