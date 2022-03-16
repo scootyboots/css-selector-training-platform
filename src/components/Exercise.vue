@@ -11,18 +11,20 @@ interface ExerciseProps {
   browserUrl: string
   modalDefaultDisplay: boolean
   allowModalToggle: boolean
+  hint: string
 }
 
 const props = defineProps<ExerciseProps>()
 
 const displayModal = ref<boolean>(props.modalDefaultDisplay)
+const displayHint = ref<boolean>(false)
 
-const handleModalDisplay = (event:KeyboardEvent) => {
+const inputSelector = 'input.Prompt-input'
+
+const handleHotkeyPress = (event:KeyboardEvent) => {
   if (event.key === 'i') {
     if (props.allowModalToggle) {
-      const activeElement = document.activeElement
-      const answerInputElement = document.querySelector('input.Prompt-input')
-      if (activeElement !== answerInputElement) {
+      if (!checkInputFocus()) {
         displayModal.value = !displayModal.value
       }
     }
@@ -30,9 +32,31 @@ const handleModalDisplay = (event:KeyboardEvent) => {
   if (event.key === 'Escape') {
     displayModal.value = false
   }
+  if (event.key === 'h') {
+    if (props.hint) {
+      if (!checkInputFocus()) {
+        displayHint.value = !displayHint.value
+      }
+    }
+  }
+  if (event.key === 'l') {
+    event.preventDefault()
+    if (checkInputFocus()) {
+      const answerInputElement:HTMLInputElement | null = document.querySelector(inputSelector)
+      if (answerInputElement) {
+        answerInputElement.focus()
+      }
+    }
+  }
 }
 
-window.addEventListener('keydown', (event) => handleModalDisplay(event))
+const checkInputFocus = () => {
+  const activeElement = document.activeElement
+  const answerInputElement = document.querySelector(inputSelector)
+  return activeElement === answerInputElement
+}
+
+window.addEventListener('keydown', (event) => handleHotkeyPress(event))
 
 </script>
 
@@ -48,6 +72,8 @@ window.addEventListener('keydown', (event) => handleModalDisplay(event))
           :correct-selectors="correctSelectors"
           :select-all="selectAll"
           :allow-modal-toggle="allowModalToggle"
+          :display-hint="displayHint"
+          :hint="hint"
         />
       </div>
     </div>

@@ -16,6 +16,7 @@ import ExampleTestingModalContentVue from '../components/modal_content/ExampleAl
   browser-url="www.example.biz/single"
   :modal-default-display="true"
   :allow-modal-toggle="false"
+  hint=""
   >
     <template #test-site>
       <TrainingSite />

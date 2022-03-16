@@ -13,19 +13,17 @@ interface PromptProps {
   correctSelectors: string[]
   selectAll: boolean
   allowModalToggle: boolean
+  displayHint: boolean
+  hint: string
 }
 
 const props = defineProps<PromptProps>()
-
 const answer = ref<string>('')
-
 const correctAnswerGiven = ref<boolean>(false)
-
 const wrongAnswerAnimation = ref<boolean>(false)
-
 const isLastPath = ref<boolean>(lastPathCheck(currentPath))
-
 const showNextLink = ref<boolean>(false)
+// const displayHintPrompt = ref<boolean>(props.displayHint)
 
 const handleWrongAnswer = () => {
   wrongAnswerAnimation.value = true
@@ -125,7 +123,12 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
     @keydown="(event) => checkSelectAllAnswer(event)"
   >
   <ShortcutIndicatorVue hotkey="Enter" explanation="to check answer" />
+  <ShortcutIndicatorVue hotkey="l" explanation="to focus input" />
   <ShortcutIndicatorVue v-if="allowModalToggle" hotkey="i" explanation="to show information" />
+  <ShortcutIndicatorVue v-if="hint" hotkey="h" explanation="to get a hint" />
+  <Transition name="slide-in">
+    <div class="Prompt-hint" v-if="displayHint">{{ hint }}</div>
+  </Transition>
   
   <Transition name="slide-in" @after-enter="showNextLink = true">
     <div class="Prompt-correct" v-if="correctAnswerGiven && !isLastPath">
@@ -187,6 +190,17 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
   color: var(--highlight-blue)
 }
 
+.Prompt-hint {
+  background-color: var(--highlight-yellow);
+  color: var(--main-bg-color);
+  font-size: 1.6rem;
+  border-radius: 0.3rem;
+  box-shadow: -4px 4px 0px #202024;
+  padding: 1rem;
+  line-height: 3.2rem;
+  margin-bottom: 1.5rem;
+}
+
 .fade-in-enter-active,
 .fade-in-leave-active {
   transition: all 0.175s ease-in;
@@ -196,7 +210,7 @@ const checkSelectAllAnswer = (event:KeyboardEvent) => {
   opacity: 0;
 }
 .slide-in-enter-active {
-  transition: all 0.175s ease-in;
+  transition: all 0.175s;
 }
 .slide-in-leave-active {
   transition: all 0.175s ease-out;

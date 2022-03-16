@@ -16,6 +16,7 @@ import ExampleSingleModalContent from '../components/modal_content/ExampleSingle
   browser-url="www.example.biz/single"
   :modal-default-display="true"
   :allow-modal-toggle="true"
+  hint='<p> elements inside a <div> with the class "browser__page-content"'
   >
     <template #training-site>
       <TrainingSite />
