@@ -42,7 +42,7 @@ router.afterEach((to, from) => {
   left: 5.5rem;
   display: flex;
   align-items: center;
-  margin: 3.5rem auto 1.5rem auto;
+  margin: 3.9rem auto 1.5rem auto;
   height: 0.3rem;
   border-radius: 0.6rem;
   background-color: var(--lowlight);

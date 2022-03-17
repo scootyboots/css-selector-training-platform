@@ -117,19 +117,19 @@ window.addEventListener('keydown', (event) => handleHotkeyPress(event))
 
 .two-pain-grid__left-container {
   position: relative;
-  min-width: 260px;
-  margin: 40px;
-  padding: 20px;
+  min-width: 26rem;
+  margin: 6rem;
+  padding: 2rem;
   /* border-radius: 5px; */
   /* -webkit-box-shadow: 0px 0px 40px -3px rgb(0 0 0 / 45%);
   box-shadow: 0px 0px 40px -3px rgb(0 0 0 / 45%); */
 }
 
 .two-pain-grid__right-container {
-  margin: 15px auto 15px auto;
+  margin: 1.5rem auto 1.5rem auto;
   position: sticky;
-  top: 15px;
-  max-width: 950px;
+  top: 1.5rem;
+  max-width: 95rem;
 }
 
 @media (max-width: 1090px) {
@@ -140,8 +140,8 @@ window.addEventListener('keydown', (event) => handleHotkeyPress(event))
   .two-pain-grid__right {
     position: absolute;
     top: 0;
-    left: 20px;
-    right: 20px;
+    left: 2rem;
+    right: 2rem;
     z-index: 1000;
   }
 
