@@ -21,6 +21,13 @@ const displayHint = ref<boolean>(false)
 
 const inputSelector = 'input.Prompt-input'
 
+const focusInput = () => {
+  const answerInputElement:HTMLInputElement | null = document.querySelector(inputSelector)
+    if (answerInputElement) {
+      answerInputElement.focus()
+  }
+}
+
 const handleHotkeyPress = (event:KeyboardEvent) => {
   console.log('event key', event.key)
   if (event.key === 'i') {
@@ -43,10 +50,7 @@ const handleHotkeyPress = (event:KeyboardEvent) => {
   if (event.key === 'l') {
     if (!checkInputFocus()) {
       event.preventDefault()
-      const answerInputElement:HTMLInputElement | null = document.querySelector(inputSelector)
-      if (answerInputElement) {
-        answerInputElement.focus()
-      }
+      focusInput()
     }
   }
 }
@@ -76,6 +80,8 @@ window.addEventListener('keydown', (event) => handleHotkeyPress(event))
           :default-display-hint="displayHint"
           :hint="hint"
           @i-clicked="displayModal = !displayModal"
+          @h-clicked="displayHint = !displayHint"
+          @l-clicked="focusInput()"
         />
       </div>
     </div>

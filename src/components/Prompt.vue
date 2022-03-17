@@ -131,27 +131,29 @@ const selectAllLogic = () => {
         {{ explanation }}
     </p>
   </div>
-  <input
-    v-if="!selectAll" 
-    :class="`Prompt-input ${wrongAnswerAnimation ? 'shake-horizontal' : ''}`"
-    type="text"
-    v-model="answer"
-    :placeholder="inputPlaceholder"
-    @keydown="(event) => checkSingleAnswer(false, event)"
-  >
-  <input 
-    v-if="selectAll" 
-    :class="`Prompt-input ${wrongAnswerAnimation ? 'shake-horizontal' : ''}`"
-    type="text"
-    v-model="answer"
-    :placeholder="inputPlaceholder"
-    @keydown="(event) => checkSelectAllAnswer(false, event)"
-  >
-  <ShortcutIndicatorVue v-if="!selectAll" hotkey="Enter" @clicked-Enter="checkSingleAnswer(true)" explanation="to check answer" />
-  <ShortcutIndicatorVue v-if="selectAll" hotkey="Enter" @clicked-Enter="checkSelectAllAnswer(true)" explanation="to check answer" />
-  <ShortcutIndicatorVue hotkey="l" explanation="to focus input" />
+  <div class="Prompt-input-container">
+    <input
+      v-if="!selectAll" 
+      :class="`Prompt-input ${wrongAnswerAnimation ? 'shake-horizontal' : ''}`"
+      type="text"
+      v-model="answer"
+      :placeholder="inputPlaceholder"
+      @keydown="(event) => checkSingleAnswer(false, event)"
+    >
+    <input 
+      v-if="selectAll" 
+      :class="`Prompt-input ${wrongAnswerAnimation ? 'shake-horizontal' : ''}`"
+      type="text"
+      v-model="answer"
+      :placeholder="inputPlaceholder"
+      @keydown="(event) => checkSelectAllAnswer(false, event)"
+    >
+  </div>
+  <ShortcutIndicatorVue v-if="!selectAll" hotkey="Enter" @click="checkSingleAnswer(true)" explanation="to check answer" />
+  <ShortcutIndicatorVue v-if="selectAll" hotkey="Enter" @click="checkSelectAllAnswer(true)" explanation="to check answer" />
+  <ShortcutIndicatorVue hotkey="l" explanation="to focus input" @click="$emit('l-clicked')"/>
   <ShortcutIndicatorVue v-if="allowModalToggle" hotkey="i" explanation="to show information" @click="$emit('i-clicked')"/>
-  <ShortcutIndicatorVue v-if="hint" hotkey="h" explanation="to get a hint" />
+  <ShortcutIndicatorVue v-if="hint" hotkey="h" explanation="to get a hint" @click="$emit('h-clicked')" />
   <Transition name="slide-in">
     <div class="Prompt-hint" v-if="defaultDisplayHint">{{ hint }}</div>
   </Transition>
@@ -178,7 +180,15 @@ const selectAllLogic = () => {
 * {
   color: var(--text-color)
 }
+
+.Prompt-input-container {
+  position: relative;
+  height: 4rem;
+}
 .Prompt-input {
+  position: absolute;
+  top: 0;
+  left: 0;
   border:none;
   background-image:none;
   background-color:transparent;

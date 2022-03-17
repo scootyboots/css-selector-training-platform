@@ -9,19 +9,19 @@ const props = defineProps<ShortcutIndicatorProps>()
 
 <template>
 
-<div class="Prompt-check-tip"><span class="hotkey" @click="$emit(`clicked-${hotkey}`)">{{ hotkey  }}</span>{{ explanation  }}</div>
+<div class="Prompt-check-tip"><span class="hotkey">{{ hotkey  }}</span>{{ explanation  }}</div>
 
 </template>
 
 <style scoped>
 .Prompt-check-tip {
+  cursor: pointer;
   color: var(--lowlight);
   font-size: 0.8em;
   font-style: italic;
   margin: 20px 0px
 }
 .hotkey {
-  cursor: pointer;
   padding: 2px 6px;
   margin-right: 4px;
   background-color: var(--lowlight);
