@@ -13,7 +13,7 @@ interface PromptProps {
   correctSelectors: string[]
   selectAll: boolean
   allowModalToggle: boolean
-  displayHint: boolean
+  defaultDisplayHint: boolean
   hint: string
 }
 
@@ -23,6 +23,8 @@ const correctAnswerGiven = ref<boolean>(false)
 const wrongAnswerAnimation = ref<boolean>(false)
 const isLastPath = ref<boolean>(lastPathCheck(currentPath))
 const showNextLink = ref<boolean>(false)
+
+
 
 const handleWrongAnswer = () => {
   wrongAnswerAnimation.value = true
@@ -148,10 +150,10 @@ const selectAllLogic = () => {
   <ShortcutIndicatorVue v-if="!selectAll" hotkey="Enter" @clicked-Enter="checkSingleAnswer(true)" explanation="to check answer" />
   <ShortcutIndicatorVue v-if="selectAll" hotkey="Enter" @clicked-Enter="checkSelectAllAnswer(true)" explanation="to check answer" />
   <ShortcutIndicatorVue hotkey="l" explanation="to focus input" />
-  <ShortcutIndicatorVue v-if="allowModalToggle" hotkey="i" explanation="to show information" />
+  <ShortcutIndicatorVue v-if="allowModalToggle" hotkey="i" explanation="to show information" @click="$emit('i-clicked')"/>
   <ShortcutIndicatorVue v-if="hint" hotkey="h" explanation="to get a hint" />
   <Transition name="slide-in">
-    <div class="Prompt-hint" v-if="displayHint">{{ hint }}</div>
+    <div class="Prompt-hint" v-if="defaultDisplayHint">{{ hint }}</div>
   </Transition>
   
   <Transition name="slide-in" @after-enter="showNextLink = true">

@@ -3,19 +3,18 @@ const props = defineProps<{ display: boolean, toggle: boolean  }>()
 </script>
 
 <template>
-
-  <div class="Information-modal">
-    <Transition name="fade">
-      <div class="Information-modal-bg" v-show="display && toggle" @click="$emit('close-modal')"></div>
-    </Transition>
-    <Transition name="slide-fade">
-      <div class="Information-modal-content-container" v-show="display">
-        <div class="Information-modal-content">
-            <slot></slot>
+  <Transition name="fade">
+    <div class="Information-modal" v-show="display && toggle">
+      <div class="Information-modal-bg" @click="$emit('close-modal')"></div>
+      <Transition name="slide-fade">
+        <div class="Information-modal-content-container" v-show="display">
+          <div class="Information-modal-content">
+              <slot></slot>
+          </div>
         </div>
-      </div>
-    </Transition>
-  </div>
+      </Transition>
+    </div>
+  </Transition>
 
 </template>
 
@@ -94,17 +93,17 @@ const props = defineProps<{ display: boolean, toggle: boolean  }>()
 }
 
 .slide-fade-enter-from {
-  transform: translateY(2rem);
+  transform: translateY(4rem);
   opacity: 1;
 }
 .slide-fade-leave-to {
-  transform: translateY(-2rem);
+  transform: translateY(-4rem);
   opacity: 0;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.75s;
+  transition: all 0.225s;
 }
 .fade-enter-from,
 .fade-leave-to {

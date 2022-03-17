@@ -73,8 +73,9 @@ window.addEventListener('keydown', (event) => handleHotkeyPress(event))
           :correct-selectors="correctSelectors"
           :select-all="selectAll"
           :allow-modal-toggle="allowModalToggle"
-          :display-hint="displayHint"
+          :default-display-hint="displayHint"
           :hint="hint"
+          @i-clicked="displayModal = !displayModal"
         />
       </div>
     </div>
