@@ -46,7 +46,7 @@ router.afterEach((to, from) => {
   height: 0.3rem;
   border-radius: 0.6rem;
   background-color: var(--lowlight);
-  width: calc(40% - 6rem);
+  width: calc(40% - 12rem);
 }
 
 .Progress-exercises {
