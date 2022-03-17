@@ -87,14 +87,9 @@ window.addEventListener('keydown', (event) => handleHotkeyPress(event))
     </div>
   </div>
   
-  <Transition name="fade">
-    <div class="darken-fullscreen" v-if="displayModal" @click="displayModal = false"></div>
-  </Transition>
-  <Transition name="slide-fade">
-    <Modal v-show="displayModal && allowModalToggle" @close-modal="displayModal = false">
-      <slot name="modal-content"/>
-    </Modal>
-  </Transition>
+  <Modal :display="displayModal" :toggle="allowModalToggle"  @close-modal="displayModal = false">
+    <slot name="modal-content"/>
+  </Modal>
 
 </template>
 

@@ -1,15 +1,20 @@
 <script setup lang="ts">
+const props = defineProps<{ display: boolean, toggle: boolean  }>()
 </script>
 
 <template>
 
   <div class="Information-modal">
-    <div class="Information-modal-bg" @click="$emit('close-modal')"></div>
-    <div class="Information-modal-content-container">
-      <div class="Information-modal-content">
-          <slot/>
+    <Transition name="fade">
+      <div class="Information-modal-bg" v-show="display && toggle" @click="$emit('close-modal')"></div>
+    </Transition>
+    <Transition name="slide-fade">
+      <div class="Information-modal-content-container" v-show="display">
+        <div class="Information-modal-content">
+            <slot></slot>
+        </div>
       </div>
-    </div>
+    </Transition>
   </div>
 
 </template>
@@ -35,6 +40,8 @@
   right: 0;
   opacity: 0.8;
   z-index: 10001;
+  background-color: #000000d9;
+  opacity: 0.8;
 }
 
 .Information-modal-content-container {
@@ -79,5 +86,31 @@
 .Information-modal-content a {
   color: var(--highlight-blue);
 }
+
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.225s ease-out;
+}
+
+.slide-fade-enter-from {
+  transform: translateY(2rem);
+  opacity: 1;
+}
+.slide-fade-leave-to {
+  transform: translateY(-2rem);
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.75s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
 
 </style>
