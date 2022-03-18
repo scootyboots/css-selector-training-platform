@@ -149,11 +149,13 @@ const selectAllLogic = () => {
       @keydown="(event) => checkSelectAllAnswer(false, event)"
     >
   </div>
-  <ShortcutIndicatorVue v-if="!selectAll" hotkey="Enter" @click="checkSingleAnswer(true)" explanation="to check answer" />
-  <ShortcutIndicatorVue v-if="selectAll" hotkey="Enter" @click="checkSelectAllAnswer(true)" explanation="to check answer" />
-  <ShortcutIndicatorVue hotkey="l" explanation="to focus input" @click="$emit('l-clicked')"/>
-  <ShortcutIndicatorVue v-if="allowModalToggle" hotkey="i" explanation="to show information" @click="$emit('i-clicked')"/>
-  <ShortcutIndicatorVue v-if="hint" hotkey="h" explanation="to get a hint" @click="$emit('h-clicked')" />
+  <div class="Prompt-shortcuts">
+    <ShortcutIndicatorVue v-if="!selectAll" hotkey="Enter" @click="checkSingleAnswer(true)" explanation="to check answer" />
+    <ShortcutIndicatorVue v-if="selectAll" hotkey="Enter" @click="checkSelectAllAnswer(true)" explanation="to check answer" />
+    <ShortcutIndicatorVue hotkey="l" explanation="to focus input" @click="$emit('l-clicked')"/>
+    <ShortcutIndicatorVue v-if="allowModalToggle" hotkey="i" explanation="to show information" @click="$emit('i-clicked')"/>
+    <ShortcutIndicatorVue v-if="hint" hotkey="h" explanation="to get a hint" @click="$emit('h-clicked')" />
+  </div>
   <Transition name="slide-in">
     <div class="Prompt-hint" v-if="defaultDisplayHint">{{ hint }}</div>
   </Transition>

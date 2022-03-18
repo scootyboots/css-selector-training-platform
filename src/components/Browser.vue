@@ -114,6 +114,9 @@ defineProps<{url: string}>()
 @media (max-width: 1090px) {
   .browser__page-content-container {
     max-width: 100%;
+    max-height: calc(70vh - 15rem);
+    min-width: 100%;
+    min-height: 30rem;
   }
 }
 

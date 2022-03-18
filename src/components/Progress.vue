@@ -80,4 +80,13 @@ router.afterEach((to, from) => {
   background-color: var(--highlight-purple);
 }
 
+@media (max-width: 1090px) { 
+  .Progress {
+    margin-top: 2rem;
+    width: calc(100% - 5rem);
+    left: 2.2rem;
+    right: 2.2rem;
+  }
+}
+
 </style>

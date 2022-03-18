@@ -118,7 +118,7 @@ window.addEventListener('keydown', (event) => handleHotkeyPress(event))
 .two-pain-grid__left-container {
   position: relative;
   min-width: 26rem;
-  margin: 6rem;
+  margin: 6rem 4rem 4rem 4rem;
   padding: 2rem;
   /* border-radius: 5px; */
   /* -webkit-box-shadow: 0px 0px 40px -3px rgb(0 0 0 / 45%);
@@ -134,7 +134,7 @@ window.addEventListener('keydown', (event) => handleHotkeyPress(event))
 
 @media (max-width: 1090px) {
   .two-pain-grid {
-    position: relative;
+    /* position: relative; */
   }
 
   .two-pain-grid__right {
@@ -147,6 +147,29 @@ window.addEventListener('keydown', (event) => handleHotkeyPress(event))
 
   .browser__page-content-container {
     max-width: 100%;
+  }
+
+  .two-pain-grid {
+    display: block;
+    /* grid-template-columns: 60% auto 15px; */
+  }
+
+  .two-pain-grid__left {
+    margin-top: calc(70vh + 2rem);
+  }
+  .two-pain-grid__left-container {
+    margin: 8rem 1rem 1rem 1rem
+  }
+
+  .Prompt {
+    margin-bottom: 4rem;
+  }
+  .Prompt-input {
+    width: 100%;
+  }
+  .Prompt-shortcuts {
+    display: flex;
+    justify-content: space-evenly;
   }
 }
 
