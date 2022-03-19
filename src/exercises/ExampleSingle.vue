@@ -2,6 +2,7 @@
 import Exercise from '../components/Exercise.vue'
 import TrainingSite from '../components/training_sites/TrainingSite.vue'
 import ExampleSingleModalContent from '../components/modal_content/ExampleSingleModalContent.vue';
+import FirstModalContent from '../components/modal_content/FirstModalContent.vue';
 
 </script>
 
@@ -22,7 +23,7 @@ import ExampleSingleModalContent from '../components/modal_content/ExampleSingle
       <TrainingSite />
     </template>
     <template #modal-content>
-      <ExampleSingleModalContent/>
+      <FirstModalContent/>
     </template>
   </Exercise>
 </template>

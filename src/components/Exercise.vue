@@ -112,7 +112,9 @@ window.addEventListener('keydown', (event) => handleHotkeyPress(event))
 }
 
 .two-pain-grid__right{
-  
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .two-pain-grid__left-container {
@@ -139,6 +141,8 @@ window.addEventListener('keydown', (event) => handleHotkeyPress(event))
 
   .two-pain-grid__right {
     position: absolute;
+    display: block;
+    min-height: 0;
     top: 0;
     left: 2rem;
     right: 2rem;

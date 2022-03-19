@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import MobileWarning from './modal_content/MobileWarning.vue'
 const props = defineProps<{ display: boolean, toggle: boolean  }>()
+const screenWidth = window.innerWidth
 </script>
 
 <template>
@@ -9,7 +11,8 @@ const props = defineProps<{ display: boolean, toggle: boolean  }>()
       <Transition name="slide-fade">
         <div class="Information-modal-content-container" v-show="display">
           <div class="Information-modal-content">
-              <slot></slot>
+              <MobileWarning v-if="screenWidth < 500"/>
+              <slot v-else></slot>
           </div>
         </div>
       </Transition>
@@ -46,16 +49,21 @@ const props = defineProps<{ display: boolean, toggle: boolean  }>()
 .Information-modal-content-container {
   /* display: flex; */
   overflow: auto;
-  width: 80%;
+  width: 50%;
   max-width: 70rem;
-  height: 80vh;
+  max-height: 80vh;
   margin: 0 auto;
+  padding: 2rem;
   z-index: 10002;
   background-color: var(--main-bg-color);
   border-radius: 0.5rem;
-  /* box-shadow: 
-    rgb(255 255 255 / 20%) 0px 0px 15px, 
-    rgb(255 255 255 / 15%) 0px 0px 3px 1px */
+  box-shadow: 
+    rgb(0 0 0 / 30%) 0px 0px 15px, 
+    rgb(0 0 0 / 25%) 0px 0px 3px 1px
+}
+
+.Information-modal-content-container p:not(:last-child) {
+  margin-bottom: 3rem;
 }
 
 .Information-modal-content-container::-webkit-scrollbar {
@@ -110,6 +118,14 @@ const props = defineProps<{ display: boolean, toggle: boolean  }>()
   opacity: 0;
 }
 
-
+@media (max-width: 1090px) {
+  .Information-modal {
+    margin: 2rem
+  }
+  .Information-modal-content-container {
+    width: 100%;
+    padding: 1rem;
+  }
+}
 
 </style>

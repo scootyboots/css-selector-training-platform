@@ -9,7 +9,7 @@ const props = defineProps<ShortcutIndicatorProps>()
 
 <template>
 
-<div class="Prompt-check-tip"><span class="hotkey">{{ hotkey  }}</span>{{ explanation  }}</div>
+<div class="Prompt-check-tip"><span class="hotkey">{{ hotkey  }}</span><span class="explanation">{{ explanation  }}</span></div>
 
 </template>
 
@@ -29,5 +29,12 @@ const props = defineProps<ShortcutIndicatorProps>()
   font-weight: 700;
   border-radius: 3px;
   box-shadow: -2px 2px 0px #202024;
+}
+
+@media (max-width: 1090px) {
+  .explanation {
+    display: block;
+    margin-top: 0.5rem;
+  }
 }
 </style>

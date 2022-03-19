@@ -156,23 +156,27 @@ const selectAllLogic = () => {
     <ShortcutIndicatorVue v-if="allowModalToggle" hotkey="i" explanation="to show information" @click="$emit('i-clicked')"/>
     <ShortcutIndicatorVue v-if="hint" hotkey="h" explanation="to get a hint" @click="$emit('h-clicked')" />
   </div>
-  <Transition name="slide-in">
-    <div class="Prompt-hint" v-if="defaultDisplayHint">{{ hint }}</div>
-  </Transition>
-  
-  <Transition name="slide-in" @after-enter="showNextLink = true">
-    <div class="Prompt-correct" v-if="correctAnswerGiven && !isLastPath">
-      you did it!
-      <Transition name="fade-in">
-        <router-link :to="findNextPreviousPath(currentPath, 'next')" v-if="showNextLink" class="next-exercise-link">next</router-link>
-      </Transition>
-    </div>
-  </Transition>
-  <Transition name="slide-in">
-    <div class="Prompt-correct last" v-if="correctAnswerGiven && isLastPath">
-      you finished all the exercises!
-    </div>
-  </Transition>
+
+  <div class="Prompt-notification-area">
+    <Transition name="slide-in">
+      <div class="Prompt-hint" v-if="defaultDisplayHint">{{ hint }}</div>
+    </Transition>
+    
+    <Transition name="slide-in" @after-enter="showNextLink = true">
+      <div class="Prompt-correct" v-if="correctAnswerGiven && !isLastPath">
+        you did it!
+        <Transition name="fade-in">
+          <router-link :to="findNextPreviousPath(currentPath, 'next')" v-if="showNextLink" class="next-exercise-link">next</router-link>
+        </Transition>
+      </div>
+    </Transition>
+
+    <Transition name="slide-in">
+      <div class="Prompt-correct last" v-if="correctAnswerGiven && isLastPath">
+        you finished all the exercises!
+      </div>
+    </Transition>
+  </div>
 </div>
 
 </template>
@@ -224,6 +228,10 @@ const selectAllLogic = () => {
   /* color: var(--highlight-purple); */
 }
 
+.Prompt-notification-area {
+  min-height: 25rem;
+}
+
 .Prompt-correct {
   color: var(--highlight-blue)
 }
@@ -237,6 +245,10 @@ const selectAllLogic = () => {
   padding: 1rem;
   line-height: 3.2rem;
   margin-bottom: 1.5rem;
+}
+
+@media (max-width: 1090px) {
+  .Prompt-notification-area { min-height: 25rem; }
 }
 
 .fade-in-enter-active,

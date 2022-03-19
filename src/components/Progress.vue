@@ -42,7 +42,7 @@ router.afterEach((to, from) => {
   left: 5.5rem;
   display: flex;
   align-items: center;
-  margin: 3.9rem auto 1.5rem auto;
+  margin: 5.2rem auto 1.5rem auto;
   height: 0.3rem;
   border-radius: 0.6rem;
   background-color: var(--lowlight);
@@ -86,6 +86,9 @@ router.afterEach((to, from) => {
     width: calc(100% - 5rem);
     left: 2.2rem;
     right: 2.2rem;
+  }
+  .Prompt-check-tip:not(:last-child) {
+    margin-right: 2rem;
   }
 }
 
