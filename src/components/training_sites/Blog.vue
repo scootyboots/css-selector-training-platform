@@ -10,18 +10,6 @@ import BlogPost from '../BlogPost.vue'
     <BlogPost/>
     <BlogPost/>
     <BlogPost/>
-        <BlogPost/>
-    <BlogPost/>
-    <BlogPost/>
-    <BlogPost/>
-        <BlogPost/>
-    <BlogPost/>
-    <BlogPost/>
-    <BlogPost/>
-        <BlogPost/>
-    <BlogPost/>
-    <BlogPost/>
-    <BlogPost/>
   </div>
 </SiteWithHeaderAndFooter>
 </template>

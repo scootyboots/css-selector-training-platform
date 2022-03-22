@@ -24,6 +24,9 @@ provide('completed', (completed:boolean) => completed)
   --highlight-yellow: rgba(248,251,178,255);
   --highlight-purple: rgba(215,177,235,255);
   --highlight-blue: rgba(143,230,244,255);
+
+  --browser-height: calc(95vh - 150px);
+  --browser-width: calc(60vw - 40px);
 }
 
 html {

@@ -21,13 +21,14 @@ const props = defineProps<{ header: string, navLinks: string[], primaryColor: st
 
 <style scoped>
 header, footer {
-  padding: 1rem;
+  padding: 2rem;
   background-color: v-bind(primaryColor);
   align-items: baseline;
 }
 header {
-  height: 100px;
+  height: 10rem;
   display: flex;
+  justify-content: space-between;
   margin-bottom: 3rem;
 }
 
@@ -46,13 +47,14 @@ nav li:not(:last-child) {
 
 main {
   width: 80%;
-  margin: 0 auto 12rem auto
+  margin: 0 auto 2rem auto;
+  min-height: calc(var(--browser-height) - 28rem);
 }
 
 footer {
-  position: absolute;
-  bottom: 1.5rem;
-  height: 10rem;
-  width: calc(60vw - 40px - 2rem);
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

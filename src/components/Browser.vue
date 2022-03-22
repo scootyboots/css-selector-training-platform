@@ -110,8 +110,8 @@ defineProps<{url: string}>()
   max-width: calc(60vw - 40px);
   min-width: 650px;
   min-height: 600px; */
-  height: calc(95vh - 150px);
-  width: calc(60vw - 40px);
+  height: var(--browser-height);
+  width: var(--browser-width);
   overflow: auto;
   background-color: white;
 }
