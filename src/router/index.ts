@@ -8,6 +8,8 @@ import ExampleIframe from '../exercises/ExampleIframe.vue'
 import ExampleTesting from '../exercises/ExampleTesting.vue'
 import ExampleTesting2Vue from '../exercises/ExampleTesting2.vue'
 
+import TrainingSite from '../components/training_sites/TrainingSite.vue'
+
 export const routes = [
   { path: '/', redirect: exercisePaths.exampleSingle },
   { path: '/example-exercise/', redirect: exercisePaths.exampleSingle },
@@ -17,6 +19,7 @@ export const routes = [
   { path: exercisePaths.exampleTesting, component: ExampleTesting },
   { path: exercisePaths.exampleTestingTwo, component:  ExampleTesting2Vue },
   { path: exercisePaths.exampleTestingThree, component:  ExampleTesting2Vue },
+  { path: '/training-site/single', component: TrainingSite }
 ]
 
 const router = createRouter({
