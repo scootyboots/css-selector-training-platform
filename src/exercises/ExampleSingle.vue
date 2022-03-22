@@ -3,7 +3,7 @@ import Exercise from '../components/Exercise.vue'
 import TrainingSite from '../components/training_sites/TrainingSite.vue'
 import ExampleSingleModalContent from '../components/modal_content/ExampleSingleModalContent.vue';
 import FirstModalContent from '../components/modal_content/FirstModalContent.vue';
-
+import Blog from '../components/training_sites/Blog.vue';
 </script>
 
 <template>
@@ -20,7 +20,7 @@ import FirstModalContent from '../components/modal_content/FirstModalContent.vue
   hint='<p> elements inside a <div> with the class "browser__page-content"'
   >
     <template #training-site>
-      <TrainingSite />
+      <Blog />
     </template>
     <template #modal-content>
       <FirstModalContent/>

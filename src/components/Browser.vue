@@ -44,6 +44,7 @@ defineProps<{url: string}>()
 
 .browser__window-buttons {
   padding: 15px;
+  z-index: 10;
 }
 
 .browser__window-buttons-red {
@@ -76,6 +77,7 @@ defineProps<{url: string}>()
 .browser__nav-area {
   padding: 10px 15px;
   background-color: #35363a;
+  z-index: 10;
 }
 
 .browser__nav-area__back {
@@ -100,6 +102,7 @@ defineProps<{url: string}>()
 
 .browser__page-content {
   padding: 15px;
+  z-index: 10;
 }
 
 .browser__page-content-container {

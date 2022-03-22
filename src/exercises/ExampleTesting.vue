@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Exercise from '../components/Exercise.vue'
-import TrainingSite from '../components/training_sites/TrainingSite.vue'
+import Blog from '../components/training_sites/Blog.vue';
 import ExampleTestingModalContentVue from '../components/modal_content/ExampleAllModalContent.vue';
 
 </script>
@@ -19,7 +19,7 @@ import ExampleTestingModalContentVue from '../components/modal_content/ExampleAl
   hint=""
   >
     <template #test-site>
-      <TrainingSite />
+      <Blog />
     </template>
     <template #modal-content>
       <ExampleTestingModalContentVue />
