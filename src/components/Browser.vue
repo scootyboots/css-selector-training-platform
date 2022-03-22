@@ -28,7 +28,7 @@ defineProps<{url: string}>()
 
 </template>
 
-<style scoped>
+<style>
 
 .browser {
   border-radius: 6px;
@@ -103,16 +103,19 @@ defineProps<{url: string}>()
 }
 
 .browser__page-content-container {
-  max-height: calc(95vh - 150px);
+  height: calc(95vh - 150px);
+  width: calc(60vw - 40px);
+  /* max-height: calc(95vh - 150px);
   max-width: calc(60vw - 40px);
   min-width: 650px;
-  min-height: 600px;
+  min-height: 600px; */
   overflow: auto;
   background-color: white;
 }
 
 iframe {
-  width: 100%;
+  height: calc(95vh - 150px);
+  width: calc(60vw - 40px);
 }
 
 @media (max-width: 1090px) {

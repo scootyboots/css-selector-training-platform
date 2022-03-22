@@ -9,10 +9,11 @@ const currentPath = useRoute().fullPath
 interface PromptProps {
   header: string
   explanationArray: string[]
-  inputPlaceholder: string
   correctSelectors: string[]
+  iframe: boolean
   selectAll: boolean
   allowModalToggle: boolean
+  inputPlaceholder: string
   defaultDisplayHint: boolean
   hint: string
 }
@@ -24,6 +25,7 @@ const correctAnswerGiven = ref<boolean>(false)
 const wrongAnswerAnimation = ref<boolean>(false)
 const isLastPath = ref<boolean>(lastPathCheck(currentPath))
 const showNextLink = ref<boolean>(false)
+const mockBrowserDom = props.iframe ? document.querySelector('iframe')?.contentWindow?.document : document
 
 
 
@@ -33,31 +35,35 @@ const handleWrongAnswer = () => {
 }
 
 const fillLastCircle = () => {
-  if (correctAnswerGiven.value && isLastPath.value) {
-    const lastProgressCircle = document.querySelector('.Progress-exercise:last-child')
-    if (lastProgressCircle) {
-      lastProgressCircle.classList.add('--active')
-    }
+  if (mockBrowserDom) { 
+    if (correctAnswerGiven.value && isLastPath.value) {
+        const lastProgressCircle = mockBrowserDom.querySelector('.Progress-exercise:last-child')
+        if (lastProgressCircle) {
+          lastProgressCircle.classList.add('--active')
+        }
+      }
   }
 }
 
 
 const compareArrayElements = (answerElements:Element[]) => {
-  props.correctSelectors.forEach(correctSelector => {
-      const correctElements = [...document.querySelectorAll(correctSelector)];
-      let elementChecks:boolean[] = []
-      // check length
-      if (answerElements.length === correctElements.length) {
-        // check if each element matches
-        answerElements.forEach((answerEl, i) => {
-          answerEl === correctElements[i] ? elementChecks = [...elementChecks, true] : elementChecks = [...elementChecks, false]
-        })
-        if (!elementChecks.includes(false)) {
-          correctAnswerGiven.value = true
-          fillLastCircle()
+  if (mockBrowserDom) {
+    props.correctSelectors.forEach(correctSelector => {
+        const correctElements = [...mockBrowserDom.querySelectorAll(correctSelector)];
+        let elementChecks:boolean[] = []
+        // check length
+        if (answerElements.length === correctElements.length) {
+          // check if each element matches
+          answerElements.forEach((answerEl, i) => {
+            answerEl === correctElements[i] ? elementChecks = [...elementChecks, true] : elementChecks = [...elementChecks, false]
+          })
+          if (!elementChecks.includes(false)) {
+            correctAnswerGiven.value = true
+            fillLastCircle()
+          }
         }
-      }
-  });
+    });
+  }
 }
 
 const checkSingleAnswer = (clicked:boolean, event?:KeyboardEvent) => {
@@ -100,45 +106,51 @@ const checkSelectAllAnswer = (clicked:boolean, event?:KeyboardEvent) => {
 
 const singleAnswerLogic = () => {
   if (answer.value === '') return
-  props.correctSelectors.forEach(correctSelector => {
-    if (document.querySelector(answer.value!) === document.querySelector(correctSelector)) {
-      correctAnswerGiven.value = true
-      fillLastCircle()
-    }
-    if (document.querySelector(`.browser__page-content-container ${answer.value!}`) === document.querySelector(correctSelector)) {
-      correctAnswerGiven.value = true
-      fillLastCircle()
-    }
-    if (document.querySelector(`.two-pain-grid__right ${answer.value!}`) === document.querySelector(correctSelector)) {
-      correctAnswerGiven.value = true
-      fillLastCircle()
-    }
-  });
+  if (mockBrowserDom) {
+    props.correctSelectors.forEach(correctSelector => {
+      if (mockBrowserDom.querySelector(answer.value!) === mockBrowserDom.querySelector(correctSelector)) {
+        correctAnswerGiven.value = true
+        fillLastCircle()
+      }
+      if (mockBrowserDom.querySelector(`.browser__page-content-container ${answer.value!}`) === mockBrowserDom.querySelector(correctSelector)) {
+        correctAnswerGiven.value = true
+        fillLastCircle()
+      }
+      if (mockBrowserDom.querySelector(`.two-pain-grid__right ${answer.value!}`) === mockBrowserDom.querySelector(correctSelector)) {
+        correctAnswerGiven.value = true
+        fillLastCircle()
+      }
+    });
+  }
 }
 
 const selectAllLogic = () => {
   if (answer.value === '') return
-  const answerElements = [...document.querySelectorAll(answer.value)];
-  const answerElementsScoped = [...document.querySelectorAll(`.browser__page-content-container ${answer.value}`)];
-  compareArrayElements(answerElements)
-  compareArrayElements(answerElementsScoped)
+  if (mockBrowserDom) {
+   const answerElements = [...mockBrowserDom.querySelectorAll(answer.value)];
+    const answerElementsScoped = [...mockBrowserDom.querySelectorAll(`.browser__page-content-container ${answer.value}`)];
+    compareArrayElements(answerElements)
+    compareArrayElements(answerElementsScoped)
+  }
 }
 
 const highlightSelected = (all: boolean) => {
   if (answer.value === '') return
-  const browserElement = document.querySelector('.browser')
-  if (lastCheckedAnswer.value) {
-    const lastSelectedElements = [...document.querySelectorAll(lastCheckedAnswer.value)]
-    if (lastSelectedElements.length > 0) {
-      lastSelectedElements.forEach(el => { if (browserElement?.contains(el)) el.classList.remove('--selected-from-answer') })
+  if (mockBrowserDom) {
+    const browserElement = mockBrowserDom.querySelector('.browser')
+    if (lastCheckedAnswer.value) {
+      const lastSelectedElements = [...mockBrowserDom.querySelectorAll(lastCheckedAnswer.value)]
+      if (lastSelectedElements.length > 0) {
+        lastSelectedElements.forEach(el => { if (browserElement?.contains(el)) el.classList.remove('--selected-from-answer') })
+      }
     }
+    const selectedElements = all ? [...mockBrowserDom.querySelectorAll(answer.value)] : [mockBrowserDom.querySelectorAll(answer.value)[0]]
+    console.log('selectedElements', selectedElements)
+    if (selectedElements.length > 0) {
+      selectedElements.forEach(el => { if (browserElement?.contains(el)) el.classList.add('--selected-from-answer') })
+    }
+    lastCheckedAnswer.value = answer.value
   }
-  const selectedElements = all ? [...document.querySelectorAll(answer.value)] : [document.querySelectorAll(answer.value)[0]]
-  console.log('selectedElements', selectedElements)
-  if (selectedElements.length > 0) {
-    selectedElements.forEach(el => { if (browserElement?.contains(el)) el.classList.add('--selected-from-answer') })
-  }
-  lastCheckedAnswer.value = answer.value
 }
 
 </script>

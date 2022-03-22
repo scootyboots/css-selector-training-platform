@@ -13,6 +13,7 @@ import FirstModalContent from '../components/modal_content/FirstModalContent.vue
     'this is the second paragraph'
     ]"
   :correct-selectors="['.browser__page-content p']"
+  :iframe="false"
   :select-all="false"
   browser-url="www.example.biz/single"
   :modal-default-display="true"

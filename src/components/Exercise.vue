@@ -7,6 +7,7 @@ import Modal from './Modal.vue'
 interface ExerciseProps {
   explanationArray: string[]
   correctSelectors: string[]
+  iframe: boolean
   selectAll: boolean
   browserUrl: string
   modalDefaultDisplay: boolean
@@ -75,6 +76,7 @@ window.addEventListener('keydown', (event) => handleHotkeyPress(event))
           :explanation-array="explanationArray"
           input-placeholder="input CSS selector here"
           :correct-selectors="correctSelectors"
+          :iframe="iframe"
           :select-all="selectAll"
           :allow-modal-toggle="allowModalToggle"
           :default-display-hint="displayHint"

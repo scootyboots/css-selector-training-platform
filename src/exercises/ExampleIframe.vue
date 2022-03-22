@@ -12,6 +12,7 @@ import ExampleIframeModalContent from '../components/modal_content/ExampleIframe
     'this is the second paragraph'
     ]"
   :correct-selectors="['.infobox img']"
+  :iframe="true"
   :select-all="false"
   browser-url="www.wikipedia.org"
   :modal-default-display="true"

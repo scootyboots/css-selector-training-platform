@@ -13,6 +13,7 @@ import ExampleTestingModalContentVue from '../components/modal_content/ExampleAl
     ]"
   :correct-selectors="['.browser__page-content p']"
   :select-all="false"
+  :iframe="false"
   browser-url="www.example.biz/single"
   :modal-default-display="true"
   :allow-modal-toggle="false"
