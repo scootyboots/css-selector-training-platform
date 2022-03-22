@@ -29,7 +29,7 @@ router.afterEach((to, from) => {
   <div class="Progress-exercises">
     <span class="Progress-exercises-bar"></span>
     <div v-for="exercisePath in activeExerciseKeys" class="Progress-exercise --active"></div>
-    <div v-for="exercisePath in inactiveExerciseKeys" class="Progress-exercise"></div>
+    <div v-for="(exercisePath, index) in inactiveExerciseKeys" :class="`Progress-exercise ${index < 1 ? '--current' : ''}`"></div>
   </div>
 </div>
 
@@ -78,6 +78,10 @@ router.afterEach((to, from) => {
 
 .--active {
   background-color: var(--highlight-purple);
+}
+
+.--current {
+  box-shadow: inset 0px 0px 0px 2px rgba(215, 177, 235, 1); 
 }
 
 @media (max-width: 1090px) { 
