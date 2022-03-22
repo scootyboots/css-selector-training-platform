@@ -111,6 +111,10 @@ defineProps<{url: string}>()
   background-color: white;
 }
 
+iframe {
+  width: 100%;
+}
+
 @media (max-width: 1090px) {
   .browser__page-content-container {
     max-width: 100%;
