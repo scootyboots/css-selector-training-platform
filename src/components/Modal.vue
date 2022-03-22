@@ -44,6 +44,7 @@ const screenWidth = window.innerWidth
   z-index: 10001;
   background-color: #000000d9;
   opacity: 0.8;
+  cursor: pointer;
 }
 
 .Information-modal-content-container {

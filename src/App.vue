@@ -46,4 +46,8 @@ body {
   margin: 0;
   background-color: var(--main-bg-color);
 }
+
+.--selected-from-answer {
+  border: 2px solid red;
+}
 </style>

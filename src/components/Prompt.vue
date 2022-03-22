@@ -19,6 +19,7 @@ interface PromptProps {
 
 const props = defineProps<PromptProps>()
 const answer = ref<string>('')
+const lastCheckedAnswer = ref<string>('')
 const correctAnswerGiven = ref<boolean>(false)
 const wrongAnswerAnimation = ref<boolean>(false)
 const isLastPath = ref<boolean>(lastPathCheck(currentPath))
@@ -63,6 +64,7 @@ const checkSingleAnswer = (clicked:boolean, event?:KeyboardEvent) => {
   if (event) {
     if (event.key === 'Enter' || clicked) {
       singleAnswerLogic()
+      highlightSelected(false)
       if (!correctAnswerGiven.value) {
         handleWrongAnswer()
       }
@@ -70,6 +72,7 @@ const checkSingleAnswer = (clicked:boolean, event?:KeyboardEvent) => {
   }
   if (clicked) {
     singleAnswerLogic()
+    highlightSelected(false)
     if (!correctAnswerGiven.value) {
       handleWrongAnswer()
     }
@@ -80,6 +83,7 @@ const checkSelectAllAnswer = (clicked:boolean, event?:KeyboardEvent) => {
   if (event) {
     if (event.key === 'Enter') {
       selectAllLogic()
+      highlightSelected(true)
       if (!correctAnswerGiven.value) {
         handleWrongAnswer()
       }
@@ -87,6 +91,7 @@ const checkSelectAllAnswer = (clicked:boolean, event?:KeyboardEvent) => {
   }
   if (clicked) {
     selectAllLogic()
+    highlightSelected(true)
     if (!correctAnswerGiven.value) {
       handleWrongAnswer()
     }
@@ -117,6 +122,23 @@ const selectAllLogic = () => {
   const answerElementsScoped = [...document.querySelectorAll(`.browser__page-content-container ${answer.value}`)];
   compareArrayElements(answerElements)
   compareArrayElements(answerElementsScoped)
+}
+
+const highlightSelected = (all: boolean) => {
+  if (answer.value === '') return
+  const browserElement = document.querySelector('.browser')
+  if (lastCheckedAnswer.value) {
+    const lastSelectedElements = [...document.querySelectorAll(lastCheckedAnswer.value)]
+    if (lastSelectedElements.length > 0) {
+      lastSelectedElements.forEach(el => { if (browserElement?.contains(el)) el.classList.remove('--selected-from-answer') })
+    }
+  }
+  const selectedElements = all ? [...document.querySelectorAll(answer.value)] : [document.querySelectorAll(answer.value)[0]]
+  console.log('selectedElements', selectedElements)
+  if (selectedElements.length > 0) {
+    selectedElements.forEach(el => { if (browserElement?.contains(el)) el.classList.add('--selected-from-answer') })
+  }
+  lastCheckedAnswer.value = answer.value
 }
 
 </script>

@@ -12,7 +12,7 @@ import ExampleAllModalContent from '../components/modal_content/ExampleAllModalC
     'this is the second paragraph'
     ]"
   :correct-selectors="['.browser__page-content p']"
-  :select-all="false"
+  :select-all="true"
   browser-url="www.example.biz/all"
   :modal-default-display="true"
   :allow-modal-toggle="true"
