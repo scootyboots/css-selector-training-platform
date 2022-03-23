@@ -111,6 +111,7 @@ defineProps<{url: string}>()
   min-width: 650px;
   min-height: 600px; */
   height: var(--browser-height);
+  max-width: var(--browser-width);
   /* width: var(--browser-width); */
   overflow: auto;
   background-color: white;

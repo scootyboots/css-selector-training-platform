@@ -6,6 +6,7 @@ import Modal from './Modal.vue'
 
 
 interface ExerciseProps {
+  promptHeader: string
   explanationArray: string[]
   correctSelectors: string[]
   selectAll: boolean
@@ -81,7 +82,7 @@ onMounted(() => {
     <div class="two-pain-grid__left">
       <div class="two-pain-grid__left-container">
         <Prompt 
-          header="Example Exercise" 
+          :header="promptHeader" 
           :explanation-array="explanationArray"
           input-placeholder="input CSS selector here"
           :correct-selectors="correctSelectors"
@@ -173,6 +174,10 @@ onMounted(() => {
   }
   .two-pain-grid__left-container {
     margin: 8rem 1rem 1rem 1rem
+  }
+
+  .two-pain-grid__right-container {
+    margin-top: 1.8rem;
   }
 
   .Prompt {

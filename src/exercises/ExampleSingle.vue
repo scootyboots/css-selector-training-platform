@@ -6,16 +6,16 @@ import Blog from '../components/training_sites/Blog.vue';
 
 <template>
  <Exercise
+  prompt-header="Select Single Element"
   :explanation-array="[
-    'this is the first paragraph',
-    'this is the second paragraph'
+    'write a selector targeting the website\'s header text',
     ]"
-  :correct-selectors="['.browser__page-content p']"
+  :correct-selectors="['.browser__page-content h1']"
   :select-all="false"
   browser-url="www.example.biz/single"
   :modal-default-display="true"
   :allow-modal-toggle="true"
-  hint='<p> elements inside a <div> with the class "browser__page-content"'
+  hint="you'll want to select the <h1> element inside of the <header>"
   >
     <template #training-site>
       <Blog />

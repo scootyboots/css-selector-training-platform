@@ -51,7 +51,7 @@ const screenWidth = window.innerWidth
   /* display: flex; */
   overflow: auto;
   width: 50%;
-  max-width: 70rem;
+  max-width: 62rem;
   max-height: 80vh;
   margin: 0 auto;
   padding: 2rem;
