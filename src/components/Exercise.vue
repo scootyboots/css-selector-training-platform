@@ -30,7 +30,6 @@ const focusInput = () => {
 }
 
 const handleHotkeyPress = (event:KeyboardEvent) => {
-  console.log('event key', event)
   if (event.key === 'i') {
     if (props.allowModalToggle) {
       if (!checkInputFocus()) {
