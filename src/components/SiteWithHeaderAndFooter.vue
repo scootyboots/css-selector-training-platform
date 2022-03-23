@@ -3,28 +3,38 @@ const props = defineProps<{ header: string, navLinks: string[], primaryColor: st
 </script>
 
 <template>
-<header>
-  <h1>{{ header }}</h1>
-  <nav>
-    <ul>
-      <li v-for="link in navLinks">{{ link }}</li>
-    </ul>
-  </nav>
-</header>
-<main>
-  <slot></slot>
-</main>
-<footer>
-  copyright 2022
-</footer>
+
+<div class="header-main-footer">
+  <header>
+    <h1>{{ header }}</h1>
+    <nav>
+      <ul>
+        <li v-for="link in navLinks">{{ link }}</li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <slot></slot>
+  </main>
+  <footer>
+    copyright 2022
+  </footer>
+</div>
+
 </template>
 
 <style scoped>
+
+.header-main-footer {
+  width: inherit;
+}
+
 header, footer {
   padding: 2rem;
   background-color: v-bind(primaryColor);
   align-items: baseline;
 }
+
 header {
   height: 10rem;
   display: flex;

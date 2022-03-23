@@ -104,7 +104,7 @@ window.addEventListener('keydown', (event) => handleHotkeyPress(event))
 
 .two-pain-grid {
   display: grid;
-  grid-template-columns: 40% auto 15px;
+  grid-template-columns: 40% auto;
 }
 
 .two-pain-grid__left {
@@ -128,10 +128,10 @@ window.addEventListener('keydown', (event) => handleHotkeyPress(event))
 }
 
 .two-pain-grid__right-container {
-  margin: 1.5rem auto 1.5rem auto;
+  margin-right: 2.4rem;
+  width: 100%;
   position: sticky;
   top: 1.5rem;
-  max-width: 95rem;
 }
 
 @media (max-width: 1090px) {
