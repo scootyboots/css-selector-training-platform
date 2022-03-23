@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { Component, ref } from 'vue';
+import { Component, onMounted, ref } from 'vue';
 import Browser from './Browser.vue'
 import Prompt from './Prompt.vue';
 import Modal from './Modal.vue'
+
 
 interface ExerciseProps {
   explanationArray: string[]
@@ -29,7 +30,7 @@ const focusInput = () => {
 }
 
 const handleHotkeyPress = (event:KeyboardEvent) => {
-  console.log('event key', event.key)
+  console.log('event key', event)
   if (event.key === 'i') {
     if (props.allowModalToggle) {
       if (!checkInputFocus()) {
@@ -48,9 +49,11 @@ const handleHotkeyPress = (event:KeyboardEvent) => {
     }
   }
   if (event.key === 'l') {
-    if (!checkInputFocus()) {
-      event.preventDefault()
-      focusInput()
+    if (!event.metaKey) {
+      if (!checkInputFocus()) {
+        event.preventDefault()
+        focusInput()
+      }
     }
   }
 }
@@ -61,7 +64,15 @@ const checkInputFocus = () => {
   return activeElement === answerInputElement
 }
 
-window.addEventListener('keydown', (event) => handleHotkeyPress(event))
+onMounted(() => {
+  const docBody = document.querySelector('body')
+  const listenerAddedElement = document.querySelector('[data-keydown-listener-added]')
+  if (listenerAddedElement) return
+  if (!listenerAddedElement) {
+    window.addEventListener('keydown', (event) => handleHotkeyPress(event))
+    docBody!.insertAdjacentHTML('beforeend', '<span data-keydown-listener-added></span>')
+  }
+})
 
 </script>
 

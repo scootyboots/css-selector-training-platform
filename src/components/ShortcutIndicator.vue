@@ -1,4 +1,5 @@
-<script setup lang="ts">import { stringifyQuery } from 'vue-router';
+<script setup lang="ts">
+import { stringifyQuery } from 'vue-router';
 
 interface ShortcutIndicatorProps {
   hotkey: string

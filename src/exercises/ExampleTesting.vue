@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Exercise from '../components/Exercise.vue'
 import Blog from '../components/training_sites/Blog.vue';
-import ExampleTestingModalContentVue from '../components/modal_content/ExampleAllModalContent.vue';
+import ExampleTestingModalContent from '../components/modal_content/ExampleAllModalContent.vue';
 
 </script>
 
@@ -22,7 +22,7 @@ import ExampleTestingModalContentVue from '../components/modal_content/ExampleAl
       <Blog />
     </template>
     <template #modal-content>
-      <ExampleTestingModalContentVue />
+      <ExampleTestingModalContent />
     </template>
   </Exercise>
 </template>

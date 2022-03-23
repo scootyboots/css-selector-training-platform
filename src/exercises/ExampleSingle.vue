@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import Exercise from '../components/Exercise.vue'
-import TrainingSite from '../components/training_sites/TrainingSite.vue'
-import ExampleSingleModalContent from '../components/modal_content/ExampleSingleModalContent.vue';
 import FirstModalContent from '../components/modal_content/FirstModalContent.vue';
 import Blog from '../components/training_sites/Blog.vue';
 </script>
