@@ -53,6 +53,6 @@ body {
 .--selected-from-answer {
   -webkit-box-shadow: 0px 0px 2px 2px rgba(246,55,147,0.72); 
   box-shadow: 0px 0px 2px 2px rgba(246,55,147,0.70);
-  transition: 0.3s;
+  transition: 0.175s;
 }
 </style>
