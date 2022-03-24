@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Component, onMounted, onRenderTriggered, ref } from 'vue';
+import { onMounted, onBeforeUnmount, onRenderTriggered, ref } from 'vue';
 import Browser from './Browser.vue'
 import Prompt from './Prompt.vue';
 import Modal from './Modal.vue'
@@ -22,21 +22,20 @@ const displayHint = ref<boolean>(false)
 
 const inputSelector = 'input.Prompt-input'
 
-const focusInput = () => {
+function focusInput() {
   const answerInputElement:HTMLInputElement | null = document.querySelector(inputSelector)
-    if (answerInputElement) {
+  if (answerInputElement) {
       answerInputElement.focus()
   }
 }
 
-const checkInputFocus = () => {
+function checkInputFocus() {
   const activeElement = document.activeElement
   const answerInputElement = document.querySelector(inputSelector)
   return activeElement === answerInputElement
 }
 
-const handleHotkeyPress = (event:KeyboardEvent) => {
-  console.log('keyboard event', event)
+function handleHotkeyPress (event:KeyboardEvent) {
   if (event.key === 'i') {
     if (props.allowModalToggle) {
       if (!checkInputFocus()) {
@@ -65,24 +64,18 @@ const handleHotkeyPress = (event:KeyboardEvent) => {
 }
 
 onMounted(() => {
-  const docBody = document.querySelector('body')
-  const listenerAddedElement = document.querySelector('[data-keydown-listener-added]')
-  if (listenerAddedElement) return
-  if (!listenerAddedElement) {
-    window.addEventListener('keydown', (event) => handleHotkeyPress(event))
-    docBody!.insertAdjacentHTML('beforeend', '<span data-keydown-listener-added></span>')
-  }
+  window.addEventListener('keydown', (event) => handleHotkeyPress(event))
 })
 
-onRenderTriggered(() => {
-  console.log('render triggered')
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', (event) => handleHotkeyPress(event))
 })
 
 </script>
 
 <template>
 
-    <div class="two-pain-grid">
+  <div class="two-pain-grid">
     <div class="two-pain-grid__left">
       <div class="two-pain-grid__left-container">
         <Prompt 
@@ -96,7 +89,7 @@ onRenderTriggered(() => {
           :hint="hint"
           @i-clicked="displayModal = !displayModal"
           @h-clicked="displayHint = !displayHint"
-          @l-clicked="focusInput()"
+          @l-clicked="focusInput"
         />
       </div>
     </div>
@@ -109,7 +102,7 @@ onRenderTriggered(() => {
     </div>
   </div>
   
-  <Modal :display="displayModal" :toggle="allowModalToggle"  @close-modal="displayModal = false">
+  <Modal v-show="displayModal" :display="displayModal" :toggle="allowModalToggle"  @close-modal="displayModal = false">
     <slot name="modal-content"/>
   </Modal>
 

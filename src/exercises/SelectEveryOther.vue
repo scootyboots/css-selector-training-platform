@@ -12,7 +12,7 @@ import SelectEveryOtherModalContent from '../components/modal_content/SelectEver
   :explanation-array="[
     'Now write a selector that selects every other blog post',
     ]"
-  :correct-selectors="['.browser__page-content .Blog-post:nth-child(odd)']"
+  :correct-selectors="['.browser__page-content .Blog-post:nth-child(even)']"
   :select-all="true"
   browser-url="www.music.blog"
   :modal-default-display="true"
