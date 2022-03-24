@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import MobileWarning from './modal_content/MobileWarning.vue'
 const props = defineProps<{ display: boolean, toggle: boolean  }>()
-const screenWidth = window.innerWidth
 </script>
 
 <template>
@@ -11,8 +9,7 @@ const screenWidth = window.innerWidth
       <Transition name="slide-fade">
         <div class="Information-modal-content-container" v-show="display">
           <div class="Information-modal-content">
-              <MobileWarning v-if="screenWidth < 500"/>
-              <slot v-else></slot>
+              <slot></slot>
           </div>
         </div>
       </Transition>
@@ -24,10 +21,7 @@ const screenWidth = window.innerWidth
 <style>
 .Information-modal {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,10 +30,7 @@ const screenWidth = window.innerWidth
 
 .Information-modal-bg {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 0 0;
   opacity: 0.8;
   z-index: 10001;
   background-color: #000000d9;

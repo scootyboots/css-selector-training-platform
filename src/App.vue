@@ -1,13 +1,21 @@
 <script setup lang="ts">
-import { provide } from 'vue';
+import { ref, onMounted } from 'vue';
 import Progress from './components/Progress.vue'
+import Modal from './components/Modal.vue'
+import MobileWarning from './components/modal_content/MobileWarning.vue'
+const displayMobileWarning = ref<boolean>(false)
 
-provide('completed', (completed:boolean) => completed)
+onMounted(() => {
+  const screenWidth = window.innerWidth
+  if (screenWidth < 1090) displayMobileWarning.value = true
+})
+
 </script>
 
 <template>
-  <!-- <router-link to="/">hello world</router-link>
-  <router-link to="/exercise/1">exercise</router-link> -->
+  <Modal v-show="displayMobileWarning" @click="displayMobileWarning = false" :display="displayMobileWarning" :toggle="displayMobileWarning">
+    <MobileWarning/>
+  </Modal>
   <Progress />
   <router-view/>
 
