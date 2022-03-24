@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 import Progress from './components/Progress.vue'
 import Modal from './components/Modal.vue'
 import MobileWarning from './components/modal_content/MobileWarning.vue'
+
 const displayMobileWarning = ref<boolean>(false)
 
 onMounted(() => {
@@ -13,7 +14,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <Modal v-show="displayMobileWarning" @click="displayMobileWarning = false" :display="displayMobileWarning" :toggle="displayMobileWarning">
+
+  <Modal class="mobile-warning" v-show="displayMobileWarning" @click="displayMobileWarning = false" :display="displayMobileWarning" :toggle="displayMobileWarning">
     <MobileWarning/>
   </Modal>
   <Progress />
@@ -62,5 +64,9 @@ body {
   -webkit-box-shadow: 0px 0px 2px 2px rgba(246,55,147,0.72); 
   box-shadow: 0px 0px 2px 2px rgba(246,55,147,0.70);
   transition: 0.175s;
+}
+
+.mobile-warning {
+  z-index: 100000;
 }
 </style>

@@ -4,7 +4,6 @@ import Browser from './Browser.vue'
 import Prompt from './Prompt.vue';
 import Modal from './Modal.vue'
 
-
 interface ExerciseProps {
   promptHeader: string
   explanationArray: string[]
