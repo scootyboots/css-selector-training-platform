@@ -69,4 +69,13 @@ body {
 .mobile-warning {
   z-index: 100000;
 }
+
+.--lowlight {
+  padding: 0rem 0.4rem;
+  margin: 0 0.2rem;
+  border-radius: 0.3rem;
+  background-color: var(--lowlight);
+  color: black;
+  font-weight: 600;
+}
 </style>

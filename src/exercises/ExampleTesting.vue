@@ -11,6 +11,7 @@ import ExampleTestingModalContent from '../components/modal_content/ExampleAllMo
     'this is the first paragraph',
     'this is the second paragraph'
     ]"
+  prompt-header="Example"
   :correct-selectors="['.browser__page-content p']"
   :select-all="false"
   browser-url="www.example.biz/single"

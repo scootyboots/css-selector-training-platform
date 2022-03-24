@@ -86,6 +86,9 @@ const props = defineProps<{ display: boolean, toggle: boolean  }>()
   color: var(--highlight-blue);
 }
 
+.Information-modal-content p {
+  line-height: 2.8rem;
+}
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Exercise from '../components/Exercise.vue'
-import FirstModalContent from '../components/modal_content/FirstModalContent.vue';
+import SelectSingleModalContent from '../components/modal_content/SelectSingleModalContent.vue';
 import Blog from '../components/training_sites/Blog.vue';
 </script>
 
@@ -12,7 +12,7 @@ import Blog from '../components/training_sites/Blog.vue';
     ]"
   :correct-selectors="['.browser__page-content h1']"
   :select-all="false"
-  browser-url="www.example.biz/single"
+  browser-url="www.music.blog"
   :modal-default-display="true"
   :allow-modal-toggle="true"
   hint="you'll want to select the <h1> element inside of the <header>"
@@ -21,7 +21,7 @@ import Blog from '../components/training_sites/Blog.vue';
       <Blog />
     </template>
     <template #modal-content>
-      <FirstModalContent/>
+      <SelectSingleModalContent />
     </template>
   </Exercise>
 </template>

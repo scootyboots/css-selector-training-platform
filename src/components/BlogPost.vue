@@ -12,10 +12,11 @@
 
 <style>
 .Blog-post {
-  margin-right: 2rem;
+  margin: 2rem 0;
+  width: 15rem;
 }
 .Blog-post__img {
-  width: 16rem;
+  width: 15rem;
 }
 .Blog-post__header {
   font-size: 1.6rem;
