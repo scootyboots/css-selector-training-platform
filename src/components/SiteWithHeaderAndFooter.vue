@@ -36,11 +36,15 @@ header, footer {
 }
 
 header {
-  height: 10rem;
+  height: 5rem;
   display: flex;
   justify-content: space-between;
   margin-bottom: 3rem;
   box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
+}
+
+header h1 {
+  margin: 0;
 }
 
 nav {
