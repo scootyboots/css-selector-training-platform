@@ -73,7 +73,7 @@ router.afterEach((to, from) => {
   background-color: var(--lowlight);
   border-radius: 100%;
   z-index: 100;
-  transition: 0.95s;
+  transition: 2.95s;
 }
 
 .--active {
