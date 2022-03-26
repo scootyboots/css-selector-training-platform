@@ -7,6 +7,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "vscode-jsonrpc": "^8.0.0-next.7",
     "vue": "^3.2.25",
     "vue-router": "^4.0.12"
   },
