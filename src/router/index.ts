@@ -11,7 +11,9 @@ import ExampleTesting2Vue from '../exercises/ExampleTesting2.vue'
 
 export const routes = [
   { path: '/', redirect: exercisePaths.exampleSingle },
+  { path: '/css-selector-training-platform/', redirect: exercisePaths.exampleSingle },
   { path: '/example-exercise/', redirect: exercisePaths.exampleSingle },
+  { path: '/css-selector-training-platform/example-exercise/', redirect: exercisePaths.exampleSingle },
   { path: exercisePaths.exampleSingle, component:  SelectSingle },
   { path: exercisePaths.exampleAll, component: SelectAll },
   { path: exercisePaths.exampleEveryOther, component: SelectEveryOther },
