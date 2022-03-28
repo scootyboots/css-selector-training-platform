@@ -6,7 +6,7 @@
   <div class="Blog-post">
     <img class="Blog-post__img" src="../assets/placeholder.png" alt="placeholder">
     <div class="Blog-post__header">Header text</div>
-    <p class="Blog-post__description">This describes the blog post, This describes the blog post, This describes the blog post...</p>
+    <p>This describes the blog post, This describes the blog post, This describes the blog post...</p>
   </div>
 </template>
 
@@ -23,7 +23,7 @@
   font-weight: 700;
   cursor: pointer;
 }
-.Blog-post__description {
+.Blog-post {
   font-size: 1.4rem;
 }
 @media (max-width: 1090px) {
