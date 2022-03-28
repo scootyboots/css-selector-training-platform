@@ -69,6 +69,10 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', (event) => handleHotkeyPress(event))
+  const browserElements = [...document.querySelectorAll('.browser *')];
+  browserElements.forEach(el => {
+    el.classList.remove('--selected-from-answer')
+  })
 })
 
 </script>
