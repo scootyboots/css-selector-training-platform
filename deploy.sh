@@ -7,6 +7,7 @@ set -e
 npm run build
 
 # get custom 404 page into dist
+# needed to get routing working for SPA on github pages
 cp 404.html ./dist/404.html
 
 # navigate into the build output directory
