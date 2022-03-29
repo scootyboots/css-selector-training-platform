@@ -17,6 +17,7 @@ import BlogPost from '../BlogPost.vue'
     <BlogPost/>
     <BlogPost/>
     <BlogPost/>
+    <BlogPost/>
   </div>
   <p style="margin-top: 3rem;">come back next week for even more culturally relevant recs</p>
 </SiteWithHeaderAndFooter>
