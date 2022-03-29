@@ -8,11 +8,10 @@ import BlogPost from '../BlogPost.vue'
   <p>Welcome to the best music blog on the internet! It just doesn't get better than this folks</p>
   <p style="margin-bottom: 3rem;">Feast your eyes on six of our top recommendations for this week</p>
   <div class="Blog-posts">
-    <BlogPost/>
-    <BlogPost/>
-    <BlogPost/>
-    <BlogPost/>
-    <BlogPost/>
+    <BlogPost new-alt="new-1"/>
+    <BlogPost new-alt="new-2"/>
+    <BlogPost new-alt="new-3"/>
+    <BlogPost new-alt="new-4"/>
     <BlogPost/>
     <BlogPost/>
     <BlogPost/>

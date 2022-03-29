@@ -6,6 +6,7 @@ import SelectAll from '../exercises/SelectAll.vue'
 import SelectEveryOther from '../exercises/SelectEveryOther.vue'
 import Condition from '../exercises/Condition.vue'
 import ConditionNoMatch from '../exercises/ConditionNoMatch.vue'
+import SelectAllAttributes from '../exercises/SelectAllAttributes.vue'
 
 
 export const routes = [
@@ -18,6 +19,7 @@ export const routes = [
   { path: exercisePaths.exampleEveryOther, component: SelectEveryOther },
   { path: exercisePaths.exampleCondition, component:  Condition },
   { path: exercisePaths.exampleConditionNoMatch, component:  ConditionNoMatch },
+  { path: exercisePaths.exampleSelectAllAttributes, component:  SelectAllAttributes },
 ]
 
 const router = createRouter({

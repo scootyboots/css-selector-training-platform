@@ -4,5 +4,5 @@ export interface ExercisePaths {
   exampleEveryOther: '/css-selector-training-platform/example-exercise/every-other',
   exampleCondition: '/css-selector-training-platform/example-exercise/condition',
   exampleConditionNoMatch: '/css-selector-training-platform/example-exercise/condition-no-match',
-  exampleTestingThree: '/css-selector-training-platform/example-exercise/testing-three',
+  exampleSelectAllAttributes: '/css-selector-training-platform/example-exercise/select-all-attributes',
 }
