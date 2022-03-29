@@ -13,6 +13,7 @@ interface ExerciseProps {
   modalDefaultDisplay: boolean
   allowModalToggle: boolean
   hint: string
+  answerCondition?: {regex: RegExp, wantToMatch: boolean}
 }
 
 const props = defineProps<ExerciseProps>()
@@ -91,6 +92,7 @@ onBeforeUnmount(() => {
           :allow-modal-toggle="allowModalToggle"
           :default-display-hint="displayHint"
           :hint="hint"
+          :answer-condition="answerCondition"
           @i-clicked="displayModal = !displayModal"
           @h-clicked="displayHint = !displayHint"
           @l-clicked="focusInput"

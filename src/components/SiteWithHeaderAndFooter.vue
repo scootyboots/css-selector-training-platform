@@ -6,7 +6,7 @@ const props = defineProps<{ header: string, navLinks: string[], primaryColor: st
 
 <div class="header-main-footer">
   <header>
-    <h1>{{ header }}</h1>
+    <h1 id="logo">{{ header }}</h1>
     <nav>
       <ul>
         <li v-for="link in navLinks">{{ link }}</li>

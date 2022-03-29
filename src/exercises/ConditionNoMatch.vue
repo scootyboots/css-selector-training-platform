@@ -10,15 +10,15 @@ import ConditionModalContent from '../components/modal_content/ConditionModalCon
   prompt-header="Select Second"
   :explanation-array="[
     'Write one selector that selects the second blog post',
-    'without using the :nth-child or :first-child pseudo-class'
+    'using the :nth-child pseudo-class'
     ]"
-  :correct-selectors="['.browser__page-content .Blog-post + .Blog-post']"
+  :correct-selectors="['.browser__page-content .Blog-post:nth-child(2)']"
   :select-all="false"
   browser-url="www.music.blog"
   :modal-default-display="true"
   :allow-modal-toggle="true"
-  hint="you will need to use the + operator to select the adjacent sibling of the first blog post"
-  :answer-condition="{regex: /:nth-child|:first-child/, wantToMatch: true}"
+  hint="the :nth-child pseudo-class needs to be passed a number"
+  :answer-condition="{regex: /:nth-child/, wantToMatch: false}"
   >
     <template #training-site>
       <Blog />

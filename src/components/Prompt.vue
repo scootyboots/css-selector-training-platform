@@ -15,6 +15,7 @@ interface PromptProps {
   allowModalToggle: boolean
   defaultDisplayHint: boolean
   hint: string
+  answerCondition?: {regex: RegExp, wantToMatch: boolean}
 }
 
 const props = defineProps<PromptProps>()
@@ -100,28 +101,52 @@ const checkSelectAllAnswer = (clicked:boolean, event?:KeyboardEvent) => {
 
 const singleAnswerLogic = () => {
   if (answer.value === '') return
-  props.correctSelectors.forEach(correctSelector => {
-    if (document.querySelector(answer.value!) === document.querySelector(correctSelector)) {
-      correctAnswerGiven.value = true
-      fillLastCircle()
-    }
-    if (document.querySelector(`.browser__page-content-container ${answer.value!}`) === document.querySelector(correctSelector)) {
-      correctAnswerGiven.value = true
-      fillLastCircle()
-    }
-    if (document.querySelector(`.two-pain-grid__right ${answer.value!}`) === document.querySelector(correctSelector)) {
-      correctAnswerGiven.value = true
-      fillLastCircle()
-    }
-  });
+  console.log('checkCondition returns', checkCondition())
+  if (props.answerCondition && checkCondition()) {
+    handleWrongAnswer()
+  } else {
+    props.correctSelectors.forEach(correctSelector => {
+      if (document.querySelector(answer.value!) === document.querySelector(correctSelector)) {
+        correctAnswerGiven.value = true
+        fillLastCircle()
+      }
+      if (document.querySelector(`.browser__page-content-container ${answer.value!}`) === document.querySelector(correctSelector)) {
+        correctAnswerGiven.value = true
+        fillLastCircle()
+      }
+      if (document.querySelector(`.two-pain-grid__right ${answer.value!}`) === document.querySelector(correctSelector)) {
+        correctAnswerGiven.value = true
+        fillLastCircle()
+      }
+    });
+  }
 }
 
 const selectAllLogic = () => {
   if (answer.value === '') return
-  const answerElements = [...document.querySelectorAll(answer.value)];
-  const answerElementsScoped = [...document.querySelectorAll(`.browser__page-content-container ${answer.value}`)];
-  compareArrayElements(answerElements)
-  compareArrayElements(answerElementsScoped)
+  if (props.answerCondition && checkCondition()) {
+    handleWrongAnswer()
+  } else {
+    const answerElements = [...document.querySelectorAll(answer.value)];
+    const answerElementsScoped = [...document.querySelectorAll(`.browser__page-content-container ${answer.value}`)];
+    compareArrayElements(answerElements)
+    compareArrayElements(answerElementsScoped) 
+  }
+}
+
+const checkCondition = ():boolean => {
+  if (props.answerCondition) {
+    const regexMatch = props.answerCondition.regex.test(answer.value)
+    if (regexMatch && props.answerCondition.wantToMatch) {
+      return true
+    } else if (!regexMatch && !props.answerCondition.wantToMatch) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
 }
 
 const highlightSelected = (all: boolean) => {

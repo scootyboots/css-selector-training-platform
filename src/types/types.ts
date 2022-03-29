@@ -3,6 +3,6 @@ export interface ExercisePaths {
   exampleAll: '/css-selector-training-platform/example-exercise/all',
   exampleEveryOther: '/css-selector-training-platform/example-exercise/every-other',
   exampleCondition: '/css-selector-training-platform/example-exercise/condition',
-  exampleTestingTwo: '/css-selector-training-platform/example-exercise/testing-two',
+  exampleConditionNoMatch: '/css-selector-training-platform/example-exercise/condition-no-match',
   exampleTestingThree: '/css-selector-training-platform/example-exercise/testing-three',
 }
