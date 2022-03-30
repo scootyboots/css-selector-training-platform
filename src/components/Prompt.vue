@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { findNextPreviousPath, lastPathCheck } from '../utils/utils'
 import { useRoute } from 'vue-router';
 import ShortcutIndicatorVue from './ShortcutIndicator.vue';
+import GitHubIcon from './svg_components/GitHubIcon.vue';
 
 const currentPath = useRoute().fullPath
 
@@ -224,11 +225,23 @@ const highlightSelected = (all: boolean) => {
       </div>
     </Transition>
   </div>
+  <div class="External-links">
+    <div class="External-links-link">
+      <a href="https://github.com/scootyboots/css-selector-training-platform" target="_blank" rel="noopener noreferrer">
+        <GitHubIcon class="github-logo" />
+      </a>
+      <div class="link-text">check out on GitHub</div>
+    </div>
+  </div>
 </div>
 
 </template>
 
 <style scoped>
+
+.Prompt {
+  position: relative;
+}
 
 * {
   color: var(--text-color)
@@ -292,6 +305,24 @@ const highlightSelected = (all: boolean) => {
   padding: 1rem;
   line-height: 3.2rem;
   margin-bottom: 1.5rem;
+}
+
+.External-links .link-text {
+  color: var(--lowlight);
+  font-size: 1.4rem;
+  padding-left: 0.6rem;
+}
+.External-links-link {
+  display: flex;
+  align-items: center;
+}
+
+.External-links-link a {
+  height: 3.2rem;
+}
+
+.github-logo {
+  width: 3rem;
 }
 
 @media (max-width: 1090px) {

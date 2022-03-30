@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CloseIcon from './svg_components/CloseIcon.vue';
 const props = defineProps<{ display: boolean, toggle: boolean  }>()
 </script>
 
@@ -8,6 +9,7 @@ const props = defineProps<{ display: boolean, toggle: boolean  }>()
       <div class="Information-modal-bg" @click="$emit('close-modal')"></div>
       <Transition name="slide-fade">
         <div class="Information-modal-content-container" v-show="display">
+          <CloseIcon class="Information-modal__close" @click="$emit('close-modal')"/>
           <div class="Information-modal-content">
               <slot></slot>
           </div>
@@ -40,6 +42,7 @@ const props = defineProps<{ display: boolean, toggle: boolean  }>()
 
 .Information-modal-content-container {
   /* display: flex; */
+  position: relative;
   overflow: auto;
   width: 50%;
   max-width: 62rem;
@@ -52,6 +55,13 @@ const props = defineProps<{ display: boolean, toggle: boolean  }>()
   box-shadow: 
     rgb(0 0 0 / 30%) 0px 0px 15px, 
     rgb(0 0 0 / 25%) 0px 0px 3px 1px
+}
+
+.Information-modal__close {
+  position: absolute;
+  width: 4rem;
+  cursor: pointer;
+  inset: 1rem 1rem auto auto;
 }
 
 .Information-modal-content-container p:not(:last-child) {
