@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router';
 import router from '../router'
 import { findCurrentRouteIndex, findNextPreviousPath } from '../utils/utils'
 import { exercisePathKeys, exercisePaths } from '../router/paths'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { ExercisePaths } from '../types/types';
 
 const currentPath = ref(useRoute().fullPath)
@@ -11,6 +11,7 @@ const currentPath = ref(useRoute().fullPath)
 const currentPathIndex = ref(findCurrentRouteIndex(currentPath.value))
 const activeExerciseKeys = ref(exercisePathKeys.slice(0, currentPathIndex.value))
 const inactiveExerciseKeys = ref(exercisePathKeys.slice(currentPathIndex.value))
+const completeExercisePaths = ref([''])
 
 const progressWidth = ref(`${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`)
 
@@ -27,6 +28,18 @@ router.afterEach((to, from) => {
   inactiveExerciseKeys.value = exercisePathKeys.slice(currentPathIndex.value)
   progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`
 })
+
+onMounted(() => {
+  const exerciseIndicator = [...document.querySelectorAll('.Progress-exercise')]
+  const completedIndexes = Object.keys(localStorage).map(correctIndex => parseInt(localStorage[correctIndex]))
+  exerciseIndicator.forEach((el, i) => {
+    const elIndex = el.getAttribute('data-exercise-index')
+    if (completedIndexes.includes(i)) {
+      el.setAttribute('data-exercise-completed', 'true')
+      el.addEventListener('click', () => handleExerciseClick(i))
+    }
+  })
+})
 </script>
 
 <template>
@@ -34,7 +47,7 @@ router.afterEach((to, from) => {
 <div class="Progress">
   <div class="Progress-exercises">
     <span class="Progress-exercises-bar"></span>
-    <div v-for="(exercisePath, index) in activeExerciseKeys" class="Progress-exercise --active" @click="handleExerciseClick(index)"></div>
+    <div v-for="(exercisePath, index) in activeExerciseKeys" class="Progress-exercise"></div>
     <div v-for="(exercisePath, index) in inactiveExerciseKeys" :class="`Progress-exercise ${index < 1 ? '--current' : ''}`"></div>
   </div>
 </div>
@@ -82,7 +95,12 @@ router.afterEach((to, from) => {
   transition: 2.95s;
 }
 
-.--active {
+/* .--active {
+  background-color: var(--highlight-purple);
+  cursor: pointer;
+} */
+
+[data-completed-exercise] {
   background-color: var(--highlight-purple);
   cursor: pointer;
 }

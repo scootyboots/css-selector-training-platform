@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { findNextPreviousPath, lastPathCheck } from '../utils/utils'
+import { ref, onBeforeUnmount } from 'vue';
+import { findNextPreviousPath, lastPathCheck, findCurrentRouteIndex } from '../utils/utils'
 import { useRoute } from 'vue-router';
 import ShortcutIndicatorVue from './ShortcutIndicator.vue';
 import GitHubIcon from './svg_components/GitHubIcon.vue';
@@ -174,6 +174,10 @@ const highlightSelected = (all: boolean) => {
   lastCheckedAnswer.value = answer.value
 }
 
+
+onBeforeUnmount(() => {
+  localStorage.setItem(currentPath, String(findCurrentRouteIndex(currentPath)))
+})
 </script>
 
 
