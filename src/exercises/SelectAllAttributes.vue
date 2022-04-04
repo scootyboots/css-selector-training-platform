@@ -18,7 +18,7 @@ const correctSelector = '.browser__page-content img[alt^="new-"]'
   browser-url="www.music.blog"
   :modal-default-display="true"
   :allow-modal-toggle="true"
-  hint="you will need to use an Attribute Selector which uses the bracket syntax"
+  hint="you will need to adjust the bracket syntax to perform a partial match - review the provided link in the information modal"
   >
     <template #training-site>
       <Blog />
