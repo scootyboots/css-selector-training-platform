@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import router from '../router'
-import { findCurrentRouteIndex } from '../utils/utils'
-import { exercisePathKeys } from '../router/paths'
+import { findCurrentRouteIndex, findNextPreviousPath } from '../utils/utils'
+import { exercisePathKeys, exercisePaths } from '../router/paths'
 import { ref } from 'vue'
+import { ExercisePaths } from '../types/types';
 
 const currentPath = ref(useRoute().fullPath)
 
@@ -12,6 +13,11 @@ const activeExerciseKeys = ref(exercisePathKeys.slice(0, currentPathIndex.value)
 const inactiveExerciseKeys = ref(exercisePathKeys.slice(currentPathIndex.value))
 
 const progressWidth = ref(`${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`)
+
+const handleExerciseClick = (index:number) => {
+  const path = exercisePaths[<keyof ExercisePaths>exercisePathKeys[index]]
+  router.push(path)
+}
 
 router.afterEach((to, from) => {
   console.log('to from router', to)
@@ -28,7 +34,7 @@ router.afterEach((to, from) => {
 <div class="Progress">
   <div class="Progress-exercises">
     <span class="Progress-exercises-bar"></span>
-    <div v-for="exercisePath in activeExerciseKeys" class="Progress-exercise --active"></div>
+    <div v-for="(exercisePath, index) in activeExerciseKeys" class="Progress-exercise --active" @click="handleExerciseClick(index)"></div>
     <div v-for="(exercisePath, index) in inactiveExerciseKeys" :class="`Progress-exercise ${index < 1 ? '--current' : ''}`"></div>
   </div>
 </div>
@@ -78,6 +84,7 @@ router.afterEach((to, from) => {
 
 .--active {
   background-color: var(--highlight-purple);
+  cursor: pointer;
 }
 
 .--current {
