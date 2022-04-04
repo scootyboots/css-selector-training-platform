@@ -27,19 +27,22 @@ router.afterEach((to, from) => {
   activeExerciseKeys.value = exercisePathKeys.slice(0, currentPathIndex.value)
   inactiveExerciseKeys.value = exercisePathKeys.slice(currentPathIndex.value)
   progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`
+  fillCompletedExercise()
 })
 
-onMounted(() => {
-  const exerciseIndicator = [...document.querySelectorAll('.Progress-exercise')]
+const fillCompletedExercise = () => {
+  const exerciseIndicators = [...document.querySelectorAll('.Progress-exercise')]
   const completedIndexes = Object.keys(localStorage).map(correctIndex => parseInt(localStorage[correctIndex]))
-  exerciseIndicator.forEach((el, i) => {
-    const elIndex = el.getAttribute('data-exercise-index')
+  console.log(localStorage, completedIndexes)
+  exerciseIndicators.forEach((el, i) => {
+    console.log(completedIndexes.includes(i))
     if (completedIndexes.includes(i)) {
+      console.log('adding to', el)
       el.setAttribute('data-exercise-completed', 'true')
       el.addEventListener('click', () => handleExerciseClick(i))
     }
   })
-})
+}
 </script>
 
 <template>
@@ -100,7 +103,7 @@ onMounted(() => {
   cursor: pointer;
 } */
 
-[data-completed-exercise] {
+[data-exercise-completed] {
   background-color: var(--highlight-purple);
   cursor: pointer;
 }

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onBeforeUnmount } from 'vue';
-import { findNextPreviousPath, lastPathCheck, findCurrentRouteIndex } from '../utils/utils'
+import { findNextPreviousPath, lastPathCheck } from '../utils/utils'
+import { exercisePathKeys } from '../router/paths'
 import { useRoute } from 'vue-router';
 import ShortcutIndicatorVue from './ShortcutIndicator.vue';
 import GitHubIcon from './svg_components/GitHubIcon.vue';
@@ -176,7 +177,7 @@ const highlightSelected = (all: boolean) => {
 
 
 onBeforeUnmount(() => {
-  localStorage.setItem(currentPath, String(findCurrentRouteIndex(currentPath)))
+  localStorage.setItem(currentPath, exercisePathKeys[0])
 })
 </script>
 
