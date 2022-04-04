@@ -102,8 +102,11 @@ const checkSelectAllAnswer = (clicked:boolean, event?:KeyboardEvent) => {
 
 const singleAnswerLogic = () => {
   if (answer.value === '') return
-  console.log('checkCondition returns', checkCondition())
-  if (props.answerCondition && checkCondition()) {
+  // check to make sure one one's trying to game the system 
+  // by using the attribute that highlights the selected elements
+  if (/data-selected-from-answer/.test(answer.value)) {
+    handleWrongAnswer()
+  } else if (props.answerCondition && checkCondition()) {
     handleWrongAnswer()
   } else {
     props.correctSelectors.forEach(correctSelector => {
@@ -125,7 +128,11 @@ const singleAnswerLogic = () => {
 
 const selectAllLogic = () => {
   if (answer.value === '') return
-  if (props.answerCondition && checkCondition()) {
+  // check to make sure one one's trying to game the system 
+  // by using the attribute that highlights the selected elements
+  if (/data-selected-from-answer/.test(answer.value)) {
+    handleWrongAnswer()
+  } else if (props.answerCondition && checkCondition()) {
     handleWrongAnswer()
   } else {
     const answerElements = [...document.querySelectorAll(answer.value)];
@@ -156,13 +163,13 @@ const highlightSelected = (all: boolean) => {
   if (lastCheckedAnswer.value) {
     const lastSelectedElements = [...document.querySelectorAll(lastCheckedAnswer.value)]
     if (lastSelectedElements.length > 0) {
-      lastSelectedElements.forEach(el => { if (browserElement?.contains(el)) el.classList.remove('--selected-from-answer') })
+      lastSelectedElements.forEach(el => { if (browserElement?.contains(el)) el.removeAttribute('data-selected-from-answer') })
     }
   }
   const selectedElements = all ? [...document.querySelectorAll(answer.value)] : [document.querySelectorAll(answer.value)[0]]
   console.log('selectedElements', selectedElements)
   if (selectedElements.length > 0) {
-    selectedElements.forEach(el => { if (browserElement?.contains(el)) el.classList.add('--selected-from-answer') })
+    selectedElements.forEach(el => { if (browserElement?.contains(el)) el.setAttribute('data-selected-from-answer' , 'true') })
   }
   lastCheckedAnswer.value = answer.value
 }
