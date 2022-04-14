@@ -177,7 +177,9 @@ const highlightSelected = (all: boolean) => {
 
 
 onBeforeUnmount(() => {
-  localStorage.setItem(currentPath, String(findCurrentRouteIndex(currentPath)))
+  if (correctAnswerGiven.value)  {
+    localStorage.setItem(currentPath, String(findCurrentRouteIndex(currentPath)))
+  }
 })
 </script>
 

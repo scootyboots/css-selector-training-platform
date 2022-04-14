@@ -28,50 +28,32 @@ router.afterEach((to, from) => {
   activeExerciseKeys.value = exercisePathKeys.slice(0, currentPathIndex.value)
   inactiveExerciseKeys.value = exercisePathKeys.slice(currentPathIndex.value)
   progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`
-  findCompletedExercises()
+  // findCompletedExercises()
 })
 
 const findCompletedExercises = () => {
     for (const path in exercisePaths) {
     if (localStorage.getItem(exercisePaths[<keyof ExercisePaths>path])) {
-      if (!completeExerciseKeys.value.includes(path)) {
-        completeExerciseKeys.value = [...completeExerciseKeys.value, path]
+      if (completeExerciseKeys.value) {
+        if (!completeExerciseKeys.value.includes(path)) {
+          completeExerciseKeys.value = [...completeExerciseKeys.value, path]
+        }
       }
     }
   }
 }
 
-const fillCompletedExercise = () => {
-  completeExerciseKeys.value.forEach(key => {
-    if (key) {
-      setTimeout(() => {
-        console.log('tried adding complete with', `[data-path="${key}"]`)
-        const completeIndicatorElement = document.querySelector(`[data-path="${key}"]`)
-        console.log('which selects', completeIndicatorElement)
-        if (completeIndicatorElement) {
-          completeIndicatorElement.setAttribute('data-exercise-completed', 'true')
-          completeIndicatorElement.addEventListener('click', () => handleExerciseClick(key))
-        }
-      }, 1000)
-    }
-  });
-  // console.log(localStorage, completedIndexes)
-  // console.log(exerciseIndicators)
-  // exerciseIndicators.forEach((el, i) => {
-  //   console.log(el)
-  //   console.log(i)
-  //   console.log(completedIndexes.value.includes(i))
-  //   if (completedIndexes.value.includes(i)) {
-  //     console.log('adding to', el)
-  //     el.setAttribute('data-exercise-completed', 'true')
-  //     el.addEventListener('click', () => handleExerciseClick(i))
-  //   }
-  // })
+const checkIfCompleted = (exercisePath:string) => {
+  if (completeExerciseKeys.value) {
+    return completeExerciseKeys.value.includes(exercisePath)
+  } else {
+    return false
+  }
 }
 
 
 onUpdated(() => {
-    findCompletedExercises()
+  findCompletedExercises()
 })
 
 onMounted(() => {
@@ -88,7 +70,8 @@ onMounted(() => {
     <div 
       v-for="(exercisePath, index) in activeExerciseKeys" 
       class="Progress-exercise" :ref="exercisePath" 
-      :data-exercise-completed="`${completeExerciseKeys.includes(exercisePath) ? 'true' : 'false'}`"
+      :data-exercise-completed="`${checkIfCompleted(exercisePath) ? 'true' : 'false'}`"
+      @click="handleExerciseClick(exercisePath)"
       :data-path="exercisePath"  
       :key="`exercise-${index}`"
       >
@@ -96,7 +79,8 @@ onMounted(() => {
     <div 
       v-for="(exercisePath, index) in inactiveExerciseKeys" 
       :class="`Progress-exercise ${index < 1 ? '--current' : ''}`" 
-      :data-exercise-completed="`${completeExerciseKeys.includes(exercisePath) ? 'true' : 'false'}`"
+      :data-exercise-completed="`${checkIfCompleted(exercisePath) ? 'true' : 'false'}`"
+      @click="handleExerciseClick(exercisePath)"
       :data-path="exercisePath" 
       :key="`exercise-${index}`"
       >
@@ -155,6 +139,10 @@ onMounted(() => {
 [data-exercise-completed="true"] {
   background-color: var(--highlight-purple);
   cursor: pointer;
+}
+
+[data-exercise-completed="false"] {
+  pointer-events: none;
 }
 
 .--current {
