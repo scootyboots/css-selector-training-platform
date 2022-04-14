@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router';
 import router from '../router'
 import { findCurrentRouteIndex, findNextPreviousPath } from '../utils/utils'
 import { exercisePathKeys, exercisePaths } from '../router/paths'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUpdated } from 'vue'
 import { ExercisePaths } from '../types/types';
 
 const currentPath = ref(useRoute().fullPath)
@@ -11,12 +11,13 @@ const currentPath = ref(useRoute().fullPath)
 const currentPathIndex = ref(findCurrentRouteIndex(currentPath.value))
 const activeExerciseKeys = ref(exercisePathKeys.slice(0, currentPathIndex.value))
 const inactiveExerciseKeys = ref(exercisePathKeys.slice(currentPathIndex.value))
-const completeExercisePaths = ref([''])
+const completeExerciseKeys = ref([''])
+
 
 const progressWidth = ref(`${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`)
 
-const handleExerciseClick = (index:number) => {
-  const path = exercisePaths[<keyof ExercisePaths>exercisePathKeys[index]]
+const handleExerciseClick = (key:string) => {
+  const path = exercisePaths[<keyof ExercisePaths>key]
   router.push(path)
 }
 
@@ -27,22 +28,56 @@ router.afterEach((to, from) => {
   activeExerciseKeys.value = exercisePathKeys.slice(0, currentPathIndex.value)
   inactiveExerciseKeys.value = exercisePathKeys.slice(currentPathIndex.value)
   progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`
-  fillCompletedExercise()
+  findCompletedExercises()
 })
 
-const fillCompletedExercise = () => {
-  const exerciseIndicators = [...document.querySelectorAll('.Progress-exercise')]
-  const completedIndexes = Object.keys(localStorage).map(correctIndex => parseInt(localStorage[correctIndex]))
-  console.log(localStorage, completedIndexes)
-  exerciseIndicators.forEach((el, i) => {
-    console.log(completedIndexes.includes(i))
-    if (completedIndexes.includes(i)) {
-      console.log('adding to', el)
-      el.setAttribute('data-exercise-completed', 'true')
-      el.addEventListener('click', () => handleExerciseClick(i))
+const findCompletedExercises = () => {
+    for (const path in exercisePaths) {
+    if (localStorage.getItem(exercisePaths[<keyof ExercisePaths>path])) {
+      if (!completeExerciseKeys.value.includes(path)) {
+        completeExerciseKeys.value = [...completeExerciseKeys.value, path]
+      }
     }
-  })
+  }
 }
+
+const fillCompletedExercise = () => {
+  completeExerciseKeys.value.forEach(key => {
+    if (key) {
+      setTimeout(() => {
+        console.log('tried adding complete with', `[data-path="${key}"]`)
+        const completeIndicatorElement = document.querySelector(`[data-path="${key}"]`)
+        console.log('which selects', completeIndicatorElement)
+        if (completeIndicatorElement) {
+          completeIndicatorElement.setAttribute('data-exercise-completed', 'true')
+          completeIndicatorElement.addEventListener('click', () => handleExerciseClick(key))
+        }
+      }, 1000)
+    }
+  });
+  // console.log(localStorage, completedIndexes)
+  // console.log(exerciseIndicators)
+  // exerciseIndicators.forEach((el, i) => {
+  //   console.log(el)
+  //   console.log(i)
+  //   console.log(completedIndexes.value.includes(i))
+  //   if (completedIndexes.value.includes(i)) {
+  //     console.log('adding to', el)
+  //     el.setAttribute('data-exercise-completed', 'true')
+  //     el.addEventListener('click', () => handleExerciseClick(i))
+  //   }
+  // })
+}
+
+
+onUpdated(() => {
+    findCompletedExercises()
+})
+
+onMounted(() => {
+  findCompletedExercises()
+})
+
 </script>
 
 <template>
@@ -50,8 +85,22 @@ const fillCompletedExercise = () => {
 <div class="Progress">
   <div class="Progress-exercises">
     <span class="Progress-exercises-bar"></span>
-    <div v-for="(exercisePath, index) in activeExerciseKeys" class="Progress-exercise"></div>
-    <div v-for="(exercisePath, index) in inactiveExerciseKeys" :class="`Progress-exercise ${index < 1 ? '--current' : ''}`"></div>
+    <div 
+      v-for="(exercisePath, index) in activeExerciseKeys" 
+      class="Progress-exercise" :ref="exercisePath" 
+      :data-exercise-completed="`${completeExerciseKeys.includes(exercisePath) ? 'true' : 'false'}`"
+      :data-path="exercisePath"  
+      :key="`exercise-${index}`"
+      >
+    </div>
+    <div 
+      v-for="(exercisePath, index) in inactiveExerciseKeys" 
+      :class="`Progress-exercise ${index < 1 ? '--current' : ''}`" 
+      :data-exercise-completed="`${completeExerciseKeys.includes(exercisePath) ? 'true' : 'false'}`"
+      :data-path="exercisePath" 
+      :key="`exercise-${index}`"
+      >
+    </div>
   </div>
 </div>
 
@@ -103,7 +152,7 @@ const fillCompletedExercise = () => {
   cursor: pointer;
 } */
 
-[data-exercise-completed] {
+[data-exercise-completed="true"] {
   background-color: var(--highlight-purple);
   cursor: pointer;
 }
