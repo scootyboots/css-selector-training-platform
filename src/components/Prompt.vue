@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onBeforeUnmount } from 'vue';
-import { findNextPreviousPath, lastPathCheck, findCurrentRouteIndex } from '../utils/utils'
+import router from '../router';
+import { findNextPreviousPath, lastPathCheck, findKeyFromPath, findCurrentRouteIndex } from '../utils/utils'
 import { exercisePathKeys } from '../router/paths'
 import { useRoute } from 'vue-router';
 import ShortcutIndicatorVue from './ShortcutIndicator.vue';
@@ -58,6 +59,7 @@ const compareArrayElements = (answerElements:Element[]) => {
         if (!elementChecks.includes(false)) {
           correctAnswerGiven.value = true
           fillLastCircle()
+          updateLocalStorage()
         }
       }
   });
@@ -114,14 +116,17 @@ const singleAnswerLogic = () => {
       if (document.querySelector(answer.value!) === document.querySelector(correctSelector)) {
         correctAnswerGiven.value = true
         fillLastCircle()
+        updateLocalStorage()
       }
       if (document.querySelector(`.browser__page-content-container ${answer.value!}`) === document.querySelector(correctSelector)) {
         correctAnswerGiven.value = true
         fillLastCircle()
+        updateLocalStorage()
       }
       if (document.querySelector(`.two-pain-grid__right ${answer.value!}`) === document.querySelector(correctSelector)) {
         correctAnswerGiven.value = true
         fillLastCircle()
+        updateLocalStorage()
       }
     });
   }
@@ -175,12 +180,37 @@ const highlightSelected = (all: boolean) => {
   lastCheckedAnswer.value = answer.value
 }
 
+const updateLocalStorage = () => {
+ const completedFromLocalStorage = localStorage.getItem('completed')
 
-onBeforeUnmount(() => {
-  if (correctAnswerGiven.value)  {
-    localStorage.setItem(currentPath, String(findCurrentRouteIndex(currentPath)))
-  }
-})
+  if (typeof completedFromLocalStorage === 'string') {
+    let parsedCompleted:string[] | [] = JSON.parse(completedFromLocalStorage)
+    if (correctAnswerGiven.value)  {
+      parsedCompleted = [...parsedCompleted, findKeyFromPath(currentPath)]
+      parsedCompleted = [...new Set(parsedCompleted)]
+      localStorage.setItem('completed', JSON.stringify(parsedCompleted))
+    }
+  } 
+}
+
+
+// onBeforeUnmount(() => {
+  
+//   const completedFromLocalStorage = localStorage.getItem('completed')
+
+//   if (typeof completedFromLocalStorage === 'string') {
+//     let parsedCompleted:string[] | [] = JSON.parse(completedFromLocalStorage)
+//     if (correctAnswerGiven.value)  {
+//       parsedCompleted = [...parsedCompleted, findKeyFromPath(currentPath)]
+//       parsedCompleted = [...new Set(parsedCompleted)]
+//       localStorage.setItem('completed', JSON.stringify(parsedCompleted))
+//     }
+//   }
+// })
+
+const testingPush = (link:string) => {
+  router.push(link)
+}
 </script>
 
 
