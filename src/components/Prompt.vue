@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onBeforeUnmount } from 'vue';
-import { findNextPreviousPath, lastPathCheck, findCurrentRouteIndex } from '../utils/utils'
+import { findNextPreviousPath, lastPathCheck, findKeyFromPath, findCurrentRouteIndex } from '../utils/utils'
 import { exercisePathKeys } from '../router/paths'
 import { useRoute } from 'vue-router';
 import ShortcutIndicatorVue from './ShortcutIndicator.vue';
@@ -177,8 +177,15 @@ const highlightSelected = (all: boolean) => {
 
 
 onBeforeUnmount(() => {
-  if (correctAnswerGiven.value)  {
-    localStorage.setItem(currentPath, String(findCurrentRouteIndex(currentPath)))
+  
+  const completedFromLocalStorage = localStorage.getItem('completed')
+
+  if (typeof completedFromLocalStorage === 'string') {
+    let parsedCompleted:string[] | [] = JSON.parse(completedFromLocalStorage)
+    if (correctAnswerGiven.value)  {
+      parsedCompleted = [...parsedCompleted, findKeyFromPath(currentPath)]
+      localStorage.setItem('completed', JSON.stringify(parsedCompleted))
+    }
   }
 })
 </script>

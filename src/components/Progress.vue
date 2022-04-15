@@ -12,6 +12,7 @@ const currentPathIndex = ref(findCurrentRouteIndex(currentPath.value))
 const activeExerciseKeys = ref(exercisePathKeys.slice(0, currentPathIndex.value))
 const inactiveExerciseKeys = ref(exercisePathKeys.slice(currentPathIndex.value))
 const completeExerciseKeys = ref([''])
+const reachedExercises = ref([''])
 
 const progressWidth = ref(`${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`)
 
@@ -19,20 +20,20 @@ interface ProgressIndicator {
   key: string
   completed: boolean
   current: boolean
+  reached: boolean
 }
 
 const progressIndicators = ref<ProgressIndicator[] | []>([])
 
 const setProgressIndicatorState = () => {
+  progressIndicators.value = []
   exercisePathKeys.forEach((key, index) => {
-    let progressIndicator:ProgressIndicator = { key: '', completed: false, current: false}
+    let progressIndicator:ProgressIndicator = { key: '', completed: false, current: false, reached: false}
     progressIndicator.key = key
     currentPathIndex.value === index ? progressIndicator.current = true : progressIndicator.current = false
-    if (completeExerciseKeys.value.includes(key)) {
-      progressIndicator.completed = true
-    } else {
-      progressIndicator.completed = false
-    }
+    completeExerciseKeys.value.includes(key) ? progressIndicator.completed = true : progressIndicator.completed = false
+    reachedExercises.value.includes(key) ? progressIndicator.reached = true : progressIndicator.reached = false
+    
     progressIndicators.value = [...progressIndicators.value, progressIndicator]
   })
 }
@@ -50,35 +51,33 @@ router.afterEach((to, from) => {
   inactiveExerciseKeys.value = exercisePathKeys.slice(currentPathIndex.value)
   progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`
   // findCompletedExercises()
+  //@ts-ignore
+  // DOESN'T WORK
+  // reachedExercises.value = reachedExercises.value.push(exercisePathKeys[currentPathIndex.value])
+  // reachedExercises.value = [...new Set(reachedExercises.value)]
+  setProgressIndicatorState()
+  
 })
 
 const findCompletedExercises = () => {
-    for (const path in exercisePaths) {
-    if (localStorage.getItem(exercisePaths[<keyof ExercisePaths>path])) {
-      if (completeExerciseKeys.value) {
-        if (!completeExerciseKeys.value.includes(path)) {
-          completeExerciseKeys.value = [...completeExerciseKeys.value, path]
-        }
-      }
-    }
+
+  const completedKeys = localStorage.getItem('completed')
+  if (typeof completedKeys === 'string') {
+    const parsedCompletedKeys = JSON.parse(completedKeys)
+    completeExerciseKeys.value = parsedCompletedKeys
   }
+
 }
 
-const checkIfCompleted = (exercisePath:string) => {
-  if (completeExerciseKeys.value) {
-    return completeExerciseKeys.value.includes(exercisePath)
-  } else {
-    return false
-  }
-}
 
 
 onUpdated(() => {
   findCompletedExercises()
-  setProgressIndicatorState()
 })
 
 onMounted(() => {
+  localStorage.setItem('reached', '[]')
+  localStorage.setItem('completed', '[]')
   findCompletedExercises()
   setProgressIndicatorState()
 })
@@ -91,20 +90,12 @@ onMounted(() => {
   <div class="Progress-exercises">
     <span class="Progress-exercises-bar"></span>
     <div 
-      v-for="(exercisePath, index) in activeExerciseKeys" 
-      class="Progress-exercise" :ref="exercisePath" 
-      :data-exercise-completed="`${checkIfCompleted(exercisePath) ? 'true' : 'false'}`"
-      @click="handleExerciseClick(exercisePath)"
-      :data-path="exercisePath"  
-      :key="`exercise-${index}`"
-      >
-    </div>
-    <div 
-      v-for="(exercisePath, index) in inactiveExerciseKeys" 
-      :class="`Progress-exercise ${index < 1 ? '--current' : ''}`" 
-      :data-exercise-completed="`${checkIfCompleted(exercisePath) ? 'true' : 'false'}`"
-      @click="handleExerciseClick(exercisePath)"
-      :data-path="exercisePath" 
+      v-for="(progressIndicator, index) in progressIndicators" 
+      class="Progress-exercise" :ref="progressIndicator.key" 
+      :data-exercise-completed="`${progressIndicator.completed}`"
+      :data-exercise-current="`${progressIndicator.current}`"
+      :data-exercise-reached="`${progressIndicator.reached}`"
+      @click="handleExerciseClick(progressIndicator.key)"
       :key="`exercise-${index}`"
       >
     </div>
@@ -164,11 +155,15 @@ onMounted(() => {
   cursor: pointer;
 }
 
-[data-exercise-completed="false"] {
+[data-exercise-completed="false"]:not([data-exercise-reached="true"]) {
   pointer-events: none;
 }
 
 .--current {
+  box-shadow: inset 0px 0px 0px 2px rgba(215, 177, 235, 1); 
+}
+
+[data-exercise-current="true"] {
   box-shadow: inset 0px 0px 0px 2px rgba(215, 177, 235, 1); 
 }
 

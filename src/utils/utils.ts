@@ -5,6 +5,14 @@ export const findCurrentRouteIndex = (currentPath:string):number => {
   return exercisePathKeys.findIndex(key => exercisePaths[<keyof ExercisePaths>key] === currentPath)
 }
 
+export const findKeyFromPath = (path:string) => {
+  let matchedKey = ''
+  exercisePathKeys.forEach(key => {
+    if (exercisePaths[<keyof ExercisePaths>key] === path) matchedKey = key
+  })
+  return matchedKey
+}
+
 export const findNextPreviousPath = (currentPath: string, direction: 'next' | 'prev') => {
   const currentPathIndex = findCurrentRouteIndex(currentPath)
   console.log('current index:', currentPathIndex)
