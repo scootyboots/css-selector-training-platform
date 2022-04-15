@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import router from '../router'
-import { findCurrentRouteIndex, findNextPreviousPath } from '../utils/utils'
+import { findCurrentRouteIndex, findKeyFromPath, findNextPreviousPath } from '../utils/utils'
 import { exercisePathKeys, exercisePaths } from '../router/paths'
-import { ref, onMounted, onUpdated } from 'vue'
+import { ref, onMounted, onUpdated, onBeforeUpdate } from 'vue'
 import { ExercisePaths } from '../types/types';
 
 const currentPath = ref(useRoute().fullPath)
 
 const currentPathIndex = ref(findCurrentRouteIndex(currentPath.value))
-const activeExerciseKeys = ref(exercisePathKeys.slice(0, currentPathIndex.value))
-const inactiveExerciseKeys = ref(exercisePathKeys.slice(currentPathIndex.value))
+// const activeExerciseKeys = ref(exercisePathKeys.slice(0, currentPathIndex.value))
+// const inactiveExerciseKeys = ref(exercisePathKeys.slice(currentPathIndex.value))
 const completeExerciseKeys = ref([''])
 const reachedExercises = ref([''])
+// const progressWidth = ref(`${(100 / (exercisePathKeys.length - 1)) * (reachedExercises.value.length - 1)}%`)
+const progressWidth = ref('')
 
-const progressWidth = ref(`${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`)
 
 interface ProgressIndicator {
   key: string
@@ -43,41 +44,102 @@ const handleExerciseClick = (key:string) => {
   router.push(path)
 }
 
+// router.afterEach((to, from) => {
+//   setReachedKeysLocalStorage(currentPath.value)
+//   getReachedKeysFromLocalStorage()
+//   findCompletedExercises()
+//   currentPath.value = to.fullPath
+//   currentPathIndex.value = findCurrentRouteIndex(currentPath.value)
+//   setProgressIndicatorState()
+//   progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * (reachedExercises.value.length - 1)}%`
+// })
+
 router.afterEach((to, from) => {
-  console.log('to from router', to)
   currentPath.value = to.fullPath
+  setReachedKeysLocalStorage(currentPath.value)
+  getReachedKeysFromLocalStorage()
+  findCompletedExercises()
   currentPathIndex.value = findCurrentRouteIndex(currentPath.value)
-  activeExerciseKeys.value = exercisePathKeys.slice(0, currentPathIndex.value)
-  inactiveExerciseKeys.value = exercisePathKeys.slice(currentPathIndex.value)
-  progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`
-  // findCompletedExercises()
-  //@ts-ignore
-  // DOESN'T WORK
-  // reachedExercises.value = reachedExercises.value.push(exercisePathKeys[currentPathIndex.value])
-  // reachedExercises.value = [...new Set(reachedExercises.value)]
   setProgressIndicatorState()
-  
 })
+
+// router.beforeEach((to, from) => {
+//   setReachedKeysLocalStorage(currentPath.value)
+//   getReachedKeysFromLocalStorage()
+//   findCompletedExercises()
+//   currentPath.value = to.fullPath
+//   currentPathIndex.value = findCurrentRouteIndex(currentPath.value)
+//   setProgressIndicatorState()
+//   progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * (reachedExercises.value.length - 1)}%`
+// })
 
 const findCompletedExercises = () => {
 
   const completedKeys = localStorage.getItem('completed')
   if (typeof completedKeys === 'string') {
     const parsedCompletedKeys = JSON.parse(completedKeys)
+    console.log('parsedkeys', parsedCompletedKeys)
     completeExerciseKeys.value = parsedCompletedKeys
   }
 
 }
 
+const getReachedKeysFromLocalStorage = () => {
+  const reachedKeys = localStorage.getItem('reached')
+  console.log('reachedKeys:', reachedKeys)
+  if (typeof reachedKeys === 'string') {
+    const parsedReachedKeys = JSON.parse(reachedKeys)
+    // if (!parsedReachedKeys.length) {
+    //   reachedExercises.value = [exercisePathKeys[0]]
+    // } else {
+    //   reachedExercises.value = parsedReachedKeys
+    // }
+    reachedExercises.value = parsedReachedKeys
+    reachedExercises.value = reachedExercises.value.filter(key => key !== '')
+    console.log('getreachedkeys', reachedExercises.value)
+    progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * (reachedExercises.value.length - 1)}%`
+  }
+}
+
+const parsedReached = ref<string[] | []>([])
+
+const setReachedKeysLocalStorage = (toPath:string) => {
+  const reachedFromLocalStorage = localStorage.getItem('reached')
+  if (typeof reachedFromLocalStorage === 'string') {
+    parsedReached.value = JSON.parse(reachedFromLocalStorage)
+    console.log('parsedReach', parsedReached.value.length)
+    if (!parsedReached.value.length) {
+      parsedReached.value = [exercisePathKeys[0]]
+      localStorage.setItem('reached', JSON.stringify(parsedReached.value))
+    } else {
+      parsedReached.value = [...parsedReached.value, findKeyFromPath(toPath)]
+      parsedReached.value = [...new Set(parsedReached.value)]
+      localStorage.setItem('reached', JSON.stringify(parsedReached.value))
+    }
+  }
+}
 
 
 onUpdated(() => {
-  findCompletedExercises()
+  progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * (reachedExercises.value.length - 1)}%`
+  // findCompletedExercises()
+  // findReachedKeys()
+  // setProgressIndicatorState()
+})
+
+onBeforeUpdate(() => {
+  progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * (reachedExercises.value.length - 1)}%`
+  // setReachedKeys()
+  // findReachedKeys()
+  // findCompletedExercises()
+  // setProgressIndicatorState()
 })
 
 onMounted(() => {
-  localStorage.setItem('reached', '[]')
-  localStorage.setItem('completed', '[]')
+  if (!localStorage.getItem('reached')) localStorage.setItem('reached', '[]')
+  if (!localStorage.getItem('completed')) localStorage.setItem('completed', '[]')
+  setReachedKeysLocalStorage(exercisePathKeys[0])
+  getReachedKeysFromLocalStorage()
   findCompletedExercises()
   setProgressIndicatorState()
 })
@@ -142,7 +204,7 @@ onMounted(() => {
   background-color: var(--lowlight);
   border-radius: 100%;
   z-index: 100;
-  transition: 2.95s;
+  transition: .75s;
 }
 
 /* .--active {
@@ -155,6 +217,15 @@ onMounted(() => {
   cursor: pointer;
 }
 
+[data-exercise-completed="true"][data-exercise-current="true"] {
+  background-color: rgba(141, 95, 165, 1);
+  box-shadow: none;
+}
+
+[data-exercise-reached="true"] {
+  cursor: pointer;
+}
+
 [data-exercise-completed="false"]:not([data-exercise-reached="true"]) {
   pointer-events: none;
 }
@@ -163,7 +234,7 @@ onMounted(() => {
   box-shadow: inset 0px 0px 0px 2px rgba(215, 177, 235, 1); 
 }
 
-[data-exercise-current="true"] {
+[data-exercise-current="true"] , [data-exercise-reached="true"] {
   box-shadow: inset 0px 0px 0px 2px rgba(215, 177, 235, 1); 
 }
 
