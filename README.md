@@ -5,7 +5,7 @@
 Have you or anybody else found that learning about CSS selectors to be difficult? Well here's an interactive app that can teach you the basics and cheer you on in your journey to!
  learning about CSS selectors!
  
-![css-training](https://user-images.githubusercontent.com/6701630/163525037-7455e453-828d-4863-bed6-76a3200365c9.gif)
+![css-training2](https://user-images.githubusercontent.com/6701630/163525330-d3019303-2908-4572-8bc0-fc79c419ed0f.gif)
 
 ### Installation
 
