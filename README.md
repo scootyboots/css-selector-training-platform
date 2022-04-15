@@ -1,4 +1,23 @@
-# Vue 3 + Typescript + Vite
+# CSS Selector Training Platform
+
+## Description
+
+Have you or anybody else found that learning about CSS selectors to be difficult? Well here's an interactive app that can teach you the basics and cheer you on in your journey to learning about CSS selectors!
+
+### Installation
+
+To install this project and run in development, run the following commands:
+
+```
+$ git clone https://github.com/scootyboots/css-selector-training-platform.git
+$ cd css-selector-training-platform
+$ npm install
+$ npm run dev
+```
+
+### Stack
+
+Vue 3 + Typescript + Vite
 
 This app was developed with Vue 3 and Typescript in Vite. The app uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
