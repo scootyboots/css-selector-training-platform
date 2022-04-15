@@ -13,8 +13,29 @@ const activeExerciseKeys = ref(exercisePathKeys.slice(0, currentPathIndex.value)
 const inactiveExerciseKeys = ref(exercisePathKeys.slice(currentPathIndex.value))
 const completeExerciseKeys = ref([''])
 
-
 const progressWidth = ref(`${(100 / (exercisePathKeys.length - 1)) * currentPathIndex.value}%`)
+
+interface ProgressIndicator {
+  key: string
+  completed: boolean
+  current: boolean
+}
+
+const progressIndicators = ref<ProgressIndicator[] | []>([])
+
+const setProgressIndicatorState = () => {
+  exercisePathKeys.forEach((key, index) => {
+    let progressIndicator:ProgressIndicator = { key: '', completed: false, current: false}
+    progressIndicator.key = key
+    currentPathIndex.value === index ? progressIndicator.current = true : progressIndicator.current = false
+    if (completeExerciseKeys.value.includes(key)) {
+      progressIndicator.completed = true
+    } else {
+      progressIndicator.completed = false
+    }
+    progressIndicators.value = [...progressIndicators.value, progressIndicator]
+  })
+}
 
 const handleExerciseClick = (key:string) => {
   const path = exercisePaths[<keyof ExercisePaths>key]
@@ -54,10 +75,12 @@ const checkIfCompleted = (exercisePath:string) => {
 
 onUpdated(() => {
   findCompletedExercises()
+  setProgressIndicatorState()
 })
 
 onMounted(() => {
   findCompletedExercises()
+  setProgressIndicatorState()
 })
 
 </script>
