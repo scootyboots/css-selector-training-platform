@@ -7,15 +7,10 @@ import { ref, onMounted, onUpdated, onBeforeUpdate } from 'vue'
 import { ExercisePaths } from '../types/types';
 
 const currentPath = ref(useRoute().fullPath)
-
 const currentPathIndex = ref(findCurrentRouteIndex(currentPath.value))
-// const activeExerciseKeys = ref(exercisePathKeys.slice(0, currentPathIndex.value))
-// const inactiveExerciseKeys = ref(exercisePathKeys.slice(currentPathIndex.value))
 const completeExerciseKeys = ref([''])
 const reachedExercises = ref([''])
-// const progressWidth = ref(`${(100 / (exercisePathKeys.length - 1)) * (reachedExercises.value.length - 1)}%`)
-const progressWidth = ref('')
-
+const progressWidth = ref(`${(100 / (exercisePathKeys.length - 1)) * (reachedExercises.value.length - 1)}%`)
 
 interface ProgressIndicator {
   key: string
@@ -44,15 +39,6 @@ const handleExerciseClick = (key:string) => {
   router.push(path)
 }
 
-// router.afterEach((to, from) => {
-//   setReachedKeysLocalStorage(currentPath.value)
-//   getReachedKeysFromLocalStorage()
-//   findCompletedExercises()
-//   currentPath.value = to.fullPath
-//   currentPathIndex.value = findCurrentRouteIndex(currentPath.value)
-//   setProgressIndicatorState()
-//   progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * (reachedExercises.value.length - 1)}%`
-// })
 
 router.afterEach((to, from) => {
   currentPath.value = to.fullPath
@@ -63,15 +49,6 @@ router.afterEach((to, from) => {
   setProgressIndicatorState()
 })
 
-// router.beforeEach((to, from) => {
-//   setReachedKeysLocalStorage(currentPath.value)
-//   getReachedKeysFromLocalStorage()
-//   findCompletedExercises()
-//   currentPath.value = to.fullPath
-//   currentPathIndex.value = findCurrentRouteIndex(currentPath.value)
-//   setProgressIndicatorState()
-//   progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * (reachedExercises.value.length - 1)}%`
-// })
 
 const findCompletedExercises = () => {
 
@@ -89,11 +66,6 @@ const getReachedKeysFromLocalStorage = () => {
   console.log('reachedKeys:', reachedKeys)
   if (typeof reachedKeys === 'string') {
     const parsedReachedKeys = JSON.parse(reachedKeys)
-    // if (!parsedReachedKeys.length) {
-    //   reachedExercises.value = [exercisePathKeys[0]]
-    // } else {
-    //   reachedExercises.value = parsedReachedKeys
-    // }
     reachedExercises.value = parsedReachedKeys
     reachedExercises.value = reachedExercises.value.filter(key => key !== '')
     console.log('getreachedkeys', reachedExercises.value)
@@ -101,39 +73,21 @@ const getReachedKeysFromLocalStorage = () => {
   }
 }
 
-const parsedReached = ref<string[] | []>([])
-
 const setReachedKeysLocalStorage = (toPath:string) => {
   const reachedFromLocalStorage = localStorage.getItem('reached')
   if (typeof reachedFromLocalStorage === 'string') {
-    parsedReached.value = JSON.parse(reachedFromLocalStorage)
-    console.log('parsedReach', parsedReached.value.length)
-    if (!parsedReached.value.length) {
-      parsedReached.value = [exercisePathKeys[0]]
-      localStorage.setItem('reached', JSON.stringify(parsedReached.value))
+    let parsedReached = JSON.parse(reachedFromLocalStorage)
+    if (!parsedReached.length) {
+      parsedReached = [exercisePathKeys[0]]
+      localStorage.setItem('reached', JSON.stringify(parsedReached))
     } else {
-      parsedReached.value = [...parsedReached.value, findKeyFromPath(toPath)]
-      parsedReached.value = [...new Set(parsedReached.value)]
-      localStorage.setItem('reached', JSON.stringify(parsedReached.value))
+      parsedReached = [...parsedReached, findKeyFromPath(toPath)]
+      parsedReached = [...new Set(parsedReached)]
+      localStorage.setItem('reached', JSON.stringify(parsedReached))
     }
   }
 }
 
-
-onUpdated(() => {
-  progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * (reachedExercises.value.length - 1)}%`
-  // findCompletedExercises()
-  // findReachedKeys()
-  // setProgressIndicatorState()
-})
-
-onBeforeUpdate(() => {
-  progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * (reachedExercises.value.length - 1)}%`
-  // setReachedKeys()
-  // findReachedKeys()
-  // findCompletedExercises()
-  // setProgressIndicatorState()
-})
 
 onMounted(() => {
   if (!localStorage.getItem('reached')) localStorage.setItem('reached', '[]')
