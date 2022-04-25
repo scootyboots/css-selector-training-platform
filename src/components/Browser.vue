@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-defineProps<{url: string}>()
+defineProps<{url: string, iframeSrc: string}>()
 
 </script>
 
@@ -20,7 +20,7 @@ defineProps<{url: string}>()
       </div>
       <div class="browser__page-content">
         <div class="browser__page-content-container">
-          <slot>this is the slot!</slot>
+          <iframe class="browser__iframe" :src="iframeSrc" frameborder="0"></iframe>
         </div>  
       </div>
     </div>
@@ -113,8 +113,13 @@ defineProps<{url: string}>()
   height: var(--browser-height);
   max-width: var(--browser-width);
   /* width: var(--browser-width); */
-  overflow: auto;
+  /* overflow: auto; */
   background-color: white;
+}
+
+.browser__iframe {
+  width: 100%;
+  height: 100%;
 }
 
 @media (max-width: 1090px) {

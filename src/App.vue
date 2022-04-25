@@ -1,24 +1,31 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import Progress from './components/Progress.vue'
 import Modal from './components/Modal.vue'
 import MobileWarning from './components/modal_content/MobileWarning.vue'
 
 const displayMobileWarning = ref<boolean>(false)
 
+const isTrainingSite = ref<boolean>(false)
+const currentPath = useRoute().fullPath
 onMounted(() => {
   const screenWidth = window.innerWidth
   if (screenWidth < 1090) displayMobileWarning.value = true
+
+  if (/training-site/.test(currentPath)) {
+    isTrainingSite.value = true
+  }
 })
 
 </script>
 
 <template>
 
-  <Modal class="mobile-warning" v-show="displayMobileWarning" @click="displayMobileWarning = false" :display="displayMobileWarning" :toggle="displayMobileWarning">
+  <Modal class="mobile-warning" v-show="displayMobileWarning" v-if="!isTrainingSite"  @click="displayMobileWarning = false" :display="displayMobileWarning" :toggle="displayMobileWarning">
     <MobileWarning/>
   </Modal>
-  <Progress />
+  <Progress v-if="!isTrainingSite" />
   <router-view/>
 
 </template>

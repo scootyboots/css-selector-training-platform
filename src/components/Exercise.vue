@@ -10,6 +10,7 @@ interface ExerciseProps {
   correctSelectors: string[]
   selectAll: boolean
   browserUrl: string
+  iframeSrc: string
   modalDefaultDisplay: boolean
   allowModalToggle: boolean
   hint: string
@@ -101,9 +102,7 @@ onBeforeUnmount(() => {
     </div>
     <div class="two-pain-grid__right">
       <div class="two-pain-grid__right-container">
-        <Browser :url="browserUrl">
-          <slot name="training-site"/>
-        </Browser>
+        <Browser :url="browserUrl" :iframe-src="iframeSrc" />
       </div>
     </div>
   </div>
