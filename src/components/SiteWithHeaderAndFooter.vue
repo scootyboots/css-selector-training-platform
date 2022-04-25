@@ -27,6 +27,7 @@ const props = defineProps<{ header: string, navLinks: string[], primaryColor: st
 
 .header-main-footer {
   width: inherit;
+  background-color: white;
 }
 
 header, footer {

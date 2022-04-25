@@ -15,6 +15,7 @@ const props = defineProps<{ newAlt?: string }>()
   margin: 2rem 0;
   width: 15rem;
 }
+
 .Blog-post__img {
   width: 15rem;
 }
