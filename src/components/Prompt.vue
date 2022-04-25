@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onBeforeUnmount } from 'vue';
+import { ref, onBeforeUnmount, IframeHTMLAttributes } from 'vue';
 import router from '../router';
 import { findNextPreviousPath, lastPathCheck, findKeyFromPath, findCurrentRouteIndex } from '../utils/utils'
 import { exercisePathKeys } from '../router/paths'
@@ -45,10 +45,15 @@ const fillLastCircle = () => {
   }
 }
 
+const getIframeDocument = ():Document => {
+  const iframe = document.querySelector('.browser__iframe') as HTMLIFrameElement
+  return iframe.contentWindow!.document
+}
+
 
 const compareArrayElements = (answerElements:Element[]) => {
   props.correctSelectors.forEach(correctSelector => {
-      const correctElements = [...document.querySelectorAll(correctSelector)];
+      const correctElements = [...getIframeDocument().querySelectorAll(correctSelector)];
       let elementChecks:boolean[] = []
       // check length
       if (answerElements.length === correctElements.length) {
@@ -103,6 +108,7 @@ const checkSelectAllAnswer = (clicked:boolean, event?:KeyboardEvent) => {
   }
 }
 
+// TODO: update so that the logic works with the iframe'd in test site
 const singleAnswerLogic = () => {
   if (answer.value === '') return
   // check to make sure one one's trying to game the system 
@@ -113,17 +119,17 @@ const singleAnswerLogic = () => {
     handleWrongAnswer()
   } else {
     props.correctSelectors.forEach(correctSelector => {
-      if (document.querySelector(answer.value!) === document.querySelector(correctSelector)) {
+      if (getIframeDocument().querySelector(answer.value!) === getIframeDocument().querySelector(correctSelector)) {
         correctAnswerGiven.value = true
         fillLastCircle()
         updateLocalStorage()
       }
-      if (document.querySelector(`.browser__page-content-container ${answer.value!}`) === document.querySelector(correctSelector)) {
+      if (getIframeDocument().querySelector(`.browser__page-content-container ${answer.value!}`) === getIframeDocument().querySelector(correctSelector)) {
         correctAnswerGiven.value = true
         fillLastCircle()
         updateLocalStorage()
       }
-      if (document.querySelector(`.two-pain-grid__right ${answer.value!}`) === document.querySelector(correctSelector)) {
+      if (getIframeDocument().querySelector(`.two-pain-grid__right ${answer.value!}`) === getIframeDocument().querySelector(correctSelector)) {
         correctAnswerGiven.value = true
         fillLastCircle()
         updateLocalStorage()
@@ -132,6 +138,7 @@ const singleAnswerLogic = () => {
   }
 }
 
+// TODO: update so that the logic works with the iframe'd in test site
 const selectAllLogic = () => {
   if (answer.value === '') return
   // check to make sure one one's trying to game the system 
@@ -141,10 +148,10 @@ const selectAllLogic = () => {
   } else if (props.answerCondition && checkCondition()) {
     handleWrongAnswer()
   } else {
-    const answerElements = [...document.querySelectorAll(answer.value)];
-    const answerElementsScoped = [...document.querySelectorAll(`.browser__page-content-container ${answer.value}`)];
+    const answerElements = [...getIframeDocument().querySelectorAll(answer.value)];
+    // const answerElementsScoped = [...getIframeDocument().querySelectorAll(`.browser__page-content-container ${answer.value}`)];
     compareArrayElements(answerElements)
-    compareArrayElements(answerElementsScoped) 
+    // compareArrayElements(answerElementsScoped) 
   }
 }
 
@@ -165,17 +172,17 @@ const checkCondition = ():boolean => {
 
 const highlightSelected = (all: boolean) => {
   if (answer.value === '') return
-  const browserElement = document.querySelector('.browser')
+  // const browserElement = getIframeDocument().querySelector('.browser')
   if (lastCheckedAnswer.value) {
-    const lastSelectedElements = [...document.querySelectorAll(lastCheckedAnswer.value)]
+    const lastSelectedElements = [...getIframeDocument().querySelectorAll(lastCheckedAnswer.value)]
     if (lastSelectedElements.length > 0) {
-      lastSelectedElements.forEach(el => { if (browserElement?.contains(el)) el.removeAttribute('data-selected-from-answer') })
+      lastSelectedElements.forEach(el => { if (getIframeDocument()?.contains(el)) el.removeAttribute('data-selected-from-answer') })
     }
   }
-  const selectedElements = all ? [...document.querySelectorAll(answer.value)] : [document.querySelectorAll(answer.value)[0]]
+  const selectedElements = all ? [...getIframeDocument().querySelectorAll(answer.value)] : [getIframeDocument().querySelectorAll(answer.value)[0]]
   console.log('selectedElements', selectedElements)
   if (selectedElements.length > 0) {
-    selectedElements.forEach(el => { if (browserElement?.contains(el)) el.setAttribute('data-selected-from-answer' , 'true') })
+    selectedElements.forEach(el => { if (getIframeDocument()?.contains(el)) el.setAttribute('data-selected-from-answer' , 'true') })
   }
   lastCheckedAnswer.value = answer.value
 }
