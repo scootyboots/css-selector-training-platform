@@ -12,3 +12,7 @@ export const exercisePaths:ExercisePaths = {
 export const exercisePathKeys = Object.keys(exercisePaths)
 
 export default exercisePaths
+
+export const trainingSitePaths = {
+  blog: '/css-selector-training-platform/training-sites/blog'
+}

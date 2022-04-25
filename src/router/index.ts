@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory  } from 'vue-router'
 import exercisePaths from './paths'
+import { trainingSitePaths } from './paths'
 
 import SelectSingle from '../exercises/SelectSingle.vue'
 import SelectAll from '../exercises/SelectAll.vue'
@@ -7,6 +8,7 @@ import SelectEveryOther from '../exercises/SelectEveryOther.vue'
 import Condition from '../exercises/Condition.vue'
 import ConditionNoMatch from '../exercises/ConditionNoMatch.vue'
 import SelectAllAttributes from '../exercises/SelectAllAttributes.vue'
+import Blog from '../components/training_sites/Blog.vue'
 
 
 export const routes = [
@@ -20,6 +22,7 @@ export const routes = [
   { path: exercisePaths.exampleCondition, component:  Condition },
   { path: exercisePaths.exampleConditionNoMatch, component:  ConditionNoMatch },
   { path: exercisePaths.exampleSelectAllAttributes, component:  SelectAllAttributes },
+  { path: trainingSitePaths.blog, component: Blog}
 ]
 
 const router = createRouter({
