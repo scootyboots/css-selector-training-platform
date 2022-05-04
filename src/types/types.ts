@@ -13,7 +13,11 @@ export interface TrainingSitePaths {
 
 export interface AllExercisePropsData {
   exampleSingle: ExerciseProps,
-  exampleAll: ExerciseProps
+  exampleAll: ExerciseProps,
+  exampleEveryOther: ExerciseProps,
+  exampleCondition: ExerciseProps,
+  exampleConditionNoMatch: ExerciseProps,
+  exampleSelectAllAttributes: ExerciseProps
 }
 
 export interface ExerciseProps {

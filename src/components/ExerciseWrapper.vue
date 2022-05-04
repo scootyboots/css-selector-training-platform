@@ -32,6 +32,19 @@ const findModalContentComponent = () => {
       break
     case 'exampleAll':
       ModalContent.value = SelectAllModalContent
+      break
+    case 'exampleEveryOther':
+      ModalContent.value = SelectEveryOtherModalContent
+      break
+    case 'exampleCondition':
+      ModalContent.value = ConditionModalContent
+      break
+    case 'exampleConditionNoMatch':
+      ModalContent.value = ConditionNoMatchModalContent
+      break
+    case 'exampleSelectAllAttributes':
+      ModalContent.value = SelectAllAttributeModalContent
+      break
   }
 
 }

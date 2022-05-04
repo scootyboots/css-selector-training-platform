@@ -20,10 +20,10 @@ export const routes = [
   { path: '/css-selector-training-platform/example-exercise/', redirect: exercisePaths.exampleSingle },
   { path: exercisePaths.exampleSingle, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleSingle'} },
   { path: exercisePaths.exampleAll, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleAll'} },
-  { path: exercisePaths.exampleEveryOther, component: SelectEveryOther },
-  { path: exercisePaths.exampleCondition, component:  Condition },
-  { path: exercisePaths.exampleConditionNoMatch, component:  ConditionNoMatch },
-  { path: exercisePaths.exampleSelectAllAttributes, component:  SelectAllAttributes },
+  { path: exercisePaths.exampleEveryOther, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleEveryOther'} },
+  { path: exercisePaths.exampleCondition, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleConditionNoMatch'} },
+  { path: exercisePaths.exampleConditionNoMatch, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleCondition'} },
+  { path: exercisePaths.exampleSelectAllAttributes, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleSelectAllAttributes'} },
   // below this life should be paths to training sites
   { path: trainingSitePaths.blog, component: Blog}
 ]

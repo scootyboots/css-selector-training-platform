@@ -20,5 +20,51 @@
     "modalDefaultDisplay": true,
     "allowModalToggle": true,
     "hint": "look towards the first <p> in each Blog-post"
+  },
+  "exampleEveryOther": {
+    "promptHeader": "Select Every Other",
+    "explanationArray": ["Now write a selector that selects every other blog post"],
+    "correctSelectors": [".Blog-post:nth-child(even)"],
+    "selectAll": true,
+    "browserUrl": "www.music.blog",
+    "iframeSrcKey": "blog",
+    "modalDefaultDisplay": true,
+    "allowModalToggle": true,
+    "hint": "you'll need to utilize the :nth-child pseudo-class... okay here's the answer I'm looking for .Blog-post:nth-child(even)"
+  },
+  "exampleCondition": {
+    "promptHeader": "Select Second",
+    "explanationArray": ["Write one selector that selects the second blog post", "without using the :nth-child or :first-child pseudo-class"],
+    "correctSelectors": [".Blog-post + .Blog-post"],
+    "selectAll": false,
+    "browserUrl": "www.music.blog",
+    "iframeSrcKey": "blog",
+    "modalDefaultDisplay": true,
+    "allowModalToggle": true,
+    "hint": "you will need to use the + operator to select the adjacent sibling of the first blog post",
+    "answerCondition": {"regex":"/:nth-child|:first-child/","wantToMatch":true}
+  },
+  "exampleConditionNoMatch": {
+    "promptHeader": "Select Second",
+    "explanationArray": ["Write one selector that selects the second blog post", "using the :nth-child pseudo-class"],
+    "correctSelectors": [".Blog-post:nth-child(2)"],
+    "selectAll": false,
+    "browserUrl": "www.music.blog",
+    "iframeSrcKey": "blog",
+    "modalDefaultDisplay": true,
+    "allowModalToggle": true,
+    "hint": "the :nth-child pseudo-class needs to be passed a number",
+    "answerCondition": {"regex":"/:nth-child/","wantToMatch":false}
+  },
+  "exampleSelectAllAttributes": {
+    "promptHeader": "Select All by Attribute",
+    "explanationArray": ["Write a selector that selects the images that start with \"new\" as their alt text"],
+    "correctSelectors": ["main img[alt^=\"new-\"]"],
+    "selectAll": true,
+    "browserUrl": "www.music.blog",
+    "iframeSrcKey": "blog",
+    "modalDefaultDisplay": true,
+    "allowModalToggle": true,
+    "hint": "you will need to adjust the bracket syntax to perform a partial match - review the provided link in the information modal"
   }
 }
