@@ -30,6 +30,9 @@ export interface ExerciseProps {
   modalDefaultDisplay: boolean
   allowModalToggle: boolean
   hint: string
-  answerCondition?: {regex: RegExp, wantToMatch: boolean}
+  answerCondition?: AnswerCondition
 }
 
+export interface AnswerCondition {
+  regex: string, wantToMatch: boolean
+}

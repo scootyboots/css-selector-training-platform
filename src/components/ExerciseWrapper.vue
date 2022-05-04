@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue';
 import Exercise from './Exercise.vue';
-import { AllExercisePropsData, ExerciseProps } from '../types/types';
+import { AllExercisePropsData, ExerciseProps, AnswerCondition } from '../types/types';
 import { trainingSitePaths } from '../router/paths';
 import exercisePropsData from '../exercise_props/exercise-props.json'
 
@@ -20,6 +20,15 @@ const allExerciseProps:AllExercisePropsData = exercisePropsData
 const targetExerciseData = ref<ExerciseProps>(allExerciseProps[props.targetExerciseKey]) 
 
 const trainingSiteRoute = ref(trainingSitePaths[targetExerciseData.value.iframeSrcKey])
+
+const parsedAnswerCondition = ref<{regex: RegExp, wantToMatch: boolean}>({regex: /.*/, wantToMatch: true})
+
+if (targetExerciseData.value.answerCondition) {
+  const stringToRegex = targetExerciseData.value.answerCondition.regex
+  const answerConditionRegex = new RegExp(stringToRegex)
+  parsedAnswerCondition.value.regex = answerConditionRegex
+  parsedAnswerCondition.value.wantToMatch = targetExerciseData.value.answerCondition.wantToMatch
+}
 
 console.log(trainingSitePaths["blog"])
 
@@ -65,6 +74,7 @@ findModalContentComponent()
     :modal-default-display="targetExerciseData.modalDefaultDisplay"
     :allow-modal-toggle="targetExerciseData.allowModalToggle"
     :hint="targetExerciseData.hint"
+    :answer-condition="parsedAnswerCondition"
   >
     <template #modal-content>
       <ModalContent/>
