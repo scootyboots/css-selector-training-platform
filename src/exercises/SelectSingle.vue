@@ -11,7 +11,7 @@ import { trainingSitePaths  } from '../router/paths'
   :explanation-array="[
     'write a selector targeting the website\'s header text',
     ]"
-  :correct-selectors="['.browser__page-content h1']"
+  :correct-selectors="['header h1']"
   :select-all="false"
   browser-url="www.music.blog"
   :iframe-src="trainingSitePaths.blog"

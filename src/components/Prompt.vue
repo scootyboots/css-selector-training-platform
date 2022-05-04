@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref, onBeforeUnmount, IframeHTMLAttributes } from 'vue';
+import { ref } from 'vue';
 import router from '../router';
 import { findNextPreviousPath, lastPathCheck, findKeyFromPath, findCurrentRouteIndex } from '../utils/utils'
-import { exercisePathKeys } from '../router/paths'
 import { useRoute } from 'vue-router';
 import ShortcutIndicatorVue from './ShortcutIndicator.vue';
 import GitHubIcon from './svg_components/GitHubIcon.vue';
@@ -108,7 +107,7 @@ const checkSelectAllAnswer = (clicked:boolean, event?:KeyboardEvent) => {
   }
 }
 
-// TODO: update so that the logic works with the iframe'd in test site
+
 const singleAnswerLogic = () => {
   if (answer.value === '') return
   // check to make sure one one's trying to game the system 
@@ -141,7 +140,7 @@ const singleAnswerLogic = () => {
 // TODO: update so that the logic works with the iframe'd in test site
 const selectAllLogic = () => {
   if (answer.value === '') return
-  // check to make sure one one's trying to game the system 
+  // check to make sure no one's trying to game the system 
   // by using the attribute that highlights the selected elements
   if (/data-selected-from-answer/.test(answer.value)) {
     handleWrongAnswer()
@@ -200,24 +199,6 @@ const updateLocalStorage = () => {
   } 
 }
 
-
-// onBeforeUnmount(() => {
-  
-//   const completedFromLocalStorage = localStorage.getItem('completed')
-
-//   if (typeof completedFromLocalStorage === 'string') {
-//     let parsedCompleted:string[] | [] = JSON.parse(completedFromLocalStorage)
-//     if (correctAnswerGiven.value)  {
-//       parsedCompleted = [...parsedCompleted, findKeyFromPath(currentPath)]
-//       parsedCompleted = [...new Set(parsedCompleted)]
-//       localStorage.setItem('completed', JSON.stringify(parsedCompleted))
-//     }
-//   }
-// })
-
-const testingPush = (link:string) => {
-  router.push(link)
-}
 </script>
 
 
