@@ -34,5 +34,5 @@ export interface ExerciseProps {
 }
 
 export interface AnswerCondition {
-  regex: string, wantToMatch: boolean
+  regex: string, ifRegexMatchDontProceed: boolean
 }

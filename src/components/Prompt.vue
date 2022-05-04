@@ -17,7 +17,7 @@ interface PromptProps {
   allowModalToggle: boolean
   defaultDisplayHint: boolean
   hint: string
-  answerCondition?: {regex: RegExp, wantToMatch: boolean}
+  answerCondition?: {regex: RegExp, ifRegexMatchDontProceed: boolean}
 }
 
 const props = defineProps<PromptProps>()
@@ -157,9 +157,9 @@ const selectAllLogic = () => {
 const checkCondition = ():boolean => {
   if (props.answerCondition) {
     const regexMatch = props.answerCondition.regex.test(answer.value)
-    if (regexMatch && props.answerCondition.wantToMatch) {
+    if (regexMatch && props.answerCondition.ifRegexMatchDontProceed) {
       return true
-    } else if (!regexMatch && !props.answerCondition.wantToMatch) {
+    } else if (!regexMatch && !props.answerCondition.ifRegexMatchDontProceed) {
       return true
     } else {
       return false

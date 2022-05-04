@@ -17,7 +17,7 @@ export interface ExerciseProps {
   modalDefaultDisplay: boolean
   allowModalToggle: boolean
   hint: string
-  answerCondition?: {regex: RegExp, wantToMatch: boolean}
+  answerCondition?: {regex: RegExp, ifRegexMatchDontProceed: boolean}
 }
 
 const props = defineProps<ExerciseProps>()

@@ -42,7 +42,7 @@
     "modalDefaultDisplay": true,
     "allowModalToggle": true,
     "hint": "you will need to use the + operator to select the adjacent sibling of the first blog post",
-    "answerCondition": {"regex":":nth-child|:first-child","wantToMatch":true}
+    "answerCondition": {"regex":":nth-child|:first-child","ifRegexMatchDontProceed":true}
   },
   "exampleConditionNoMatch": {
     "promptHeader": "Select Second",
@@ -54,7 +54,7 @@
     "modalDefaultDisplay": true,
     "allowModalToggle": true,
     "hint": "the :nth-child pseudo-class needs to be passed a number",
-    "answerCondition": {"regex":":nth-child","wantToMatch":false}
+    "answerCondition": {"regex":":nth-child","ifRegexMatchDontProceed":false}
   },
   "exampleSelectAllAttributes": {
     "promptHeader": "Select All by Attribute",

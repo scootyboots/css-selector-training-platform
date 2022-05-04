@@ -21,13 +21,13 @@ const targetExerciseData = ref<ExerciseProps>(allExerciseProps[props.targetExerc
 
 const trainingSiteRoute = ref(trainingSitePaths[targetExerciseData.value.iframeSrcKey])
 
-const parsedAnswerCondition = ref<{regex: RegExp, wantToMatch: boolean}>({regex: /.*/, wantToMatch: true})
+const parsedAnswerCondition = ref<{regex: RegExp, ifRegexMatchDontProceed: boolean}>({regex: /./, ifRegexMatchDontProceed: false})
 
 if (targetExerciseData.value.answerCondition) {
   const stringToRegex = targetExerciseData.value.answerCondition.regex
   const answerConditionRegex = new RegExp(stringToRegex)
   parsedAnswerCondition.value.regex = answerConditionRegex
-  parsedAnswerCondition.value.wantToMatch = targetExerciseData.value.answerCondition.wantToMatch
+  parsedAnswerCondition.value.ifRegexMatchDontProceed = targetExerciseData.value.answerCondition.ifRegexMatchDontProceed
 }
 
 console.log(trainingSitePaths["blog"])
