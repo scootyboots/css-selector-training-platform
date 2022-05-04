@@ -1,0 +1,13 @@
+{
+  "single": {
+    "promptHeader": "Select Single Element",
+    "explanationArray": ["write a selector targeting the website's header text"],
+    "correctSelectors": ["header h1"],
+    "selectAll": false,
+    "browserUrl": "www.music.blog",
+    "iframeSrcTarget": "blog",
+    "modalDefaultDisplay": true,
+    "allowModalToggle": true,
+    "hint": "you'll want to select the <h1> element inside of the <header>"
+  }
+}

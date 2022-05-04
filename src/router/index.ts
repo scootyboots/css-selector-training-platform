@@ -22,6 +22,7 @@ export const routes = [
   { path: exercisePaths.exampleCondition, component:  Condition },
   { path: exercisePaths.exampleConditionNoMatch, component:  ConditionNoMatch },
   { path: exercisePaths.exampleSelectAllAttributes, component:  SelectAllAttributes },
+  // below this life should be paths to training sites
   { path: trainingSitePaths.blog, component: Blog}
 ]
 

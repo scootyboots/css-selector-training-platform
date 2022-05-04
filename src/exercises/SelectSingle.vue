@@ -3,11 +3,12 @@ import Exercise from '../components/Exercise.vue'
 import SelectSingleModalContent from '../components/modal_content/SelectSingleModalContent.vue';
 import Blog from '../components/training_sites/Blog.vue';
 import { trainingSitePaths  } from '../router/paths'
+import ExerciseProps from '../exercise_props/exercise-props.json'
 </script>
 
 <template>
  <Exercise
-  prompt-header="Select Single Element"
+  :prompt-header="ExerciseProps.single.promptHeader"
   :explanation-array="[
     'write a selector targeting the website\'s header text',
     ]"
