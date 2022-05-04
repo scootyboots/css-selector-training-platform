@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, shallowRef } from 'vue';
 import Exercise from './Exercise.vue';
 import { AllExercisePropsData, ExerciseProps } from '../types/types';
 import { trainingSitePaths } from '../router/paths';
 import exercisePropsData from '../exercise_props/exercise-props.json'
 
+import SelectSingleModalContent from './modal_content/SelectSingleModalContent.vue';
+import SelectAllModalContent from './modal_content/SelectAllModalContent.vue';
+import SelectAllAttributeModalContent from './modal_content/SelectAllAttributeModalContent.vue';
+import SelectEveryOtherModalContent from './modal_content/SelectEveryOtherModalContent.vue';
+import ConditionModalContent from './modal_content/ConditionModalContent.vue';
+import ConditionNoMatchModalContent from './modal_content/ConditionNoMatchModalContent.vue';
+
 const props = defineProps<{ targetExerciseKey: keyof AllExercisePropsData }>()
 
-const exercisePropsKeys = Object.keys(exercisePropsData)
 // @ts-ignore
 const allExerciseProps:AllExercisePropsData = exercisePropsData
 
@@ -15,9 +21,27 @@ const targetExerciseData = ref<ExerciseProps>(allExerciseProps[props.targetExerc
 
 const trainingSiteRoute = ref(trainingSitePaths[targetExerciseData.value.iframeSrcKey])
 
+console.log(trainingSitePaths["blog"])
+
+const ModalContent = shallowRef(SelectSingleModalContent)
+
+const findModalContentComponent = () => {
+  switch (props.targetExerciseKey) {
+    case 'exampleSingle':
+      ModalContent.value = SelectSingleModalContent
+      break
+    case 'exampleAll':
+      ModalContent.value = SelectAllModalContent
+  }
+
+}
+
+findModalContentComponent()
+
 </script>
 
 <template>
+
   <Exercise
     :prompt-header="targetExerciseData.promptHeader"
     :explanation-array="targetExerciseData.explanationArray"
@@ -28,7 +52,12 @@ const trainingSiteRoute = ref(trainingSitePaths[targetExerciseData.value.iframeS
     :modal-default-display="targetExerciseData.modalDefaultDisplay"
     :allow-modal-toggle="targetExerciseData.allowModalToggle"
     :hint="targetExerciseData.hint"
-  />
+  >
+    <template #modal-content>
+      <ModalContent/>
+    </template>
+  </Exercise>
+
 </template>
 
 <style>

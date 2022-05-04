@@ -26,7 +26,7 @@ onMounted(() => {
     <MobileWarning/>
   </Modal>
   <Progress v-if="!isTrainingSite" />
-  <router-view/>
+  <router-view :key="$route.path"/>
 
 </template>
 

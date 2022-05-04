@@ -19,7 +19,7 @@ export const routes = [
   { path: '/example-exercise/', redirect: exercisePaths.exampleSingle },
   { path: '/css-selector-training-platform/example-exercise/', redirect: exercisePaths.exampleSingle },
   { path: exercisePaths.exampleSingle, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleSingle'} },
-  { path: exercisePaths.exampleAll, component: SelectAll },
+  { path: exercisePaths.exampleAll, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleAll'} },
   { path: exercisePaths.exampleEveryOther, component: SelectEveryOther },
   { path: exercisePaths.exampleCondition, component:  Condition },
   { path: exercisePaths.exampleConditionNoMatch, component:  ConditionNoMatch },

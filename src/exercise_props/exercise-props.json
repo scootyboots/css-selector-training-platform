@@ -5,9 +5,20 @@
     "correctSelectors": ["header h1"],
     "selectAll": false,
     "browserUrl": "www.music.blog",
-    "iframeSrcTarget": "blog",
+    "iframeSrcKey": "blog",
     "modalDefaultDisplay": true,
     "allowModalToggle": true,
     "hint": "you'll want to select the <h1> element inside of the <header>"
+  },
+  "exampleAll": {
+    "promptHeader": "Select All Elements",
+    "explanationArray": ["Now write one selector that selects the description text of each blog post"],
+    "correctSelectors": [".Blog-posts p"],
+    "selectAll": true,
+    "browserUrl": "www.music.blog",
+    "iframeSrcKey": "blog",
+    "modalDefaultDisplay": true,
+    "allowModalToggle": true,
+    "hint": "look towards the first <p> in each Blog-post"
   }
 }

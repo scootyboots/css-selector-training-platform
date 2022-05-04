@@ -12,7 +12,8 @@ export interface TrainingSitePaths {
 }
 
 export interface AllExercisePropsData {
-  exampleSingle: ExerciseProps
+  exampleSingle: ExerciseProps,
+  exampleAll: ExerciseProps
 }
 
 export interface ExerciseProps {
