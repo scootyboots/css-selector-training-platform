@@ -1,5 +1,5 @@
 {
-  "single": {
+  "exampleSingle": {
     "promptHeader": "Select Single Element",
     "explanationArray": ["write a selector targeting the website's header text"],
     "correctSelectors": ["header h1"],

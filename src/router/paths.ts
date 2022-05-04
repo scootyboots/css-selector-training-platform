@@ -1,4 +1,4 @@
-import { ExercisePaths } from '../types/types'
+import { ExercisePaths, TrainingSitePaths } from '../types/types'
 
 export const exercisePaths:ExercisePaths = {
   exampleSingle: '/css-selector-training-platform/example-exercise/single',
@@ -13,6 +13,6 @@ export const exercisePathKeys = Object.keys(exercisePaths)
 
 export default exercisePaths
 
-export const trainingSitePaths = {
+export const trainingSitePaths:TrainingSitePaths = {
   blog: '/css-selector-training-platform/training-sites/blog'
 }

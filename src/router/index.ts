@@ -10,13 +10,15 @@ import ConditionNoMatch from '../exercises/ConditionNoMatch.vue'
 import SelectAllAttributes from '../exercises/SelectAllAttributes.vue'
 import Blog from '../components/training_sites/Blog.vue'
 
+import ExerciseWrapper from '../components/ExerciseWrapper.vue'
+
 
 export const routes = [
   { path: '/', redirect: exercisePaths.exampleSingle },
   { path: '/css-selector-training-platform/', redirect: exercisePaths.exampleSingle },
   { path: '/example-exercise/', redirect: exercisePaths.exampleSingle },
   { path: '/css-selector-training-platform/example-exercise/', redirect: exercisePaths.exampleSingle },
-  { path: exercisePaths.exampleSingle, component:  SelectSingle },
+  { path: exercisePaths.exampleSingle, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleSingle'} },
   { path: exercisePaths.exampleAll, component: SelectAll },
   { path: exercisePaths.exampleEveryOther, component: SelectEveryOther },
   { path: exercisePaths.exampleCondition, component:  Condition },

@@ -4,7 +4,10 @@ import Browser from './Browser.vue'
 import Prompt from './Prompt.vue';
 import Modal from './Modal.vue'
 
-interface ExerciseProps {
+// this needs to be manually copied over from './types/types.ts'
+// because of some bug with using imported interfaces with defineProps()
+// https://github.com/vuejs/core/issues/4294
+export interface ExerciseProps {
   promptHeader: string
   explanationArray: string[]
   correctSelectors: string[]

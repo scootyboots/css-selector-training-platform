@@ -6,3 +6,25 @@ export interface ExercisePaths {
   exampleConditionNoMatch: '/css-selector-training-platform/example-exercise/condition-no-match',
   exampleSelectAllAttributes: '/css-selector-training-platform/example-exercise/select-all-attributes',
 }
+
+export interface TrainingSitePaths {
+  blog: '/css-selector-training-platform/training-sites/blog'
+}
+
+export interface AllExercisePropsData {
+  exampleSingle: ExerciseProps
+}
+
+export interface ExerciseProps {
+  promptHeader: string
+  explanationArray: string[]
+  correctSelectors: string[]
+  selectAll: boolean
+  browserUrl: string
+  iframeSrcKey: keyof TrainingSitePaths
+  modalDefaultDisplay: boolean
+  allowModalToggle: boolean
+  hint: string
+  answerCondition?: {regex: RegExp, wantToMatch: boolean}
+}
+
