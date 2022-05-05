@@ -14,11 +14,9 @@
 
 <p>Often the people tasked with writing these CSS selectors aren't developers and might be writing CSS selectors for the first time.</p>
 
-<p>With this app all you need to do is provide some props to the Exercise component and slot in the content most relevant to your use case.</p>
-
 <p>Maybe you scrape ecommerce data and want to train users on common formats and patterns used in ecommerce sites. Maybe you're only interested in scraping reddit and want to familiarize users with common classes and elements found there.</p>
 
-<p>Here you will find 5 simple exercises to demonstrate how this app can be utilized.</p>
+<p>Here you will find some simple exercises to demonstrate how this app can be utilized.</p>
 
 </template>
 
