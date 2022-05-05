@@ -30,7 +30,6 @@ if (targetExerciseData.value.answerCondition) {
   parsedAnswerCondition.value.ifRegexMatchDontProceed = targetExerciseData.value.answerCondition.ifRegexMatchDontProceed
 }
 
-console.log(trainingSitePaths["blog"])
 
 const ModalContent = shallowRef(SelectSingleModalContent)
 

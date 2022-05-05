@@ -55,7 +55,6 @@ const findCompletedExercises = () => {
   const completedKeys = localStorage.getItem('completed')
   if (typeof completedKeys === 'string') {
     const parsedCompletedKeys = JSON.parse(completedKeys)
-    console.log('parsedkeys', parsedCompletedKeys)
     completeExerciseKeys.value = parsedCompletedKeys
   }
 

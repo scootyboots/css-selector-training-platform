@@ -179,7 +179,6 @@ const highlightSelected = (all: boolean) => {
     }
   }
   const selectedElements = all ? [...getIframeDocument().querySelectorAll(answer.value)] : [getIframeDocument().querySelectorAll(answer.value)[0]]
-  console.log('selectedElements', selectedElements)
   if (selectedElements.length > 0) {
     selectedElements.forEach(el => { if (getIframeDocument()?.contains(el)) el.setAttribute('data-selected-from-answer' , 'true') })
   }
