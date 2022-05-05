@@ -62,12 +62,10 @@ const findCompletedExercises = () => {
 
 const getReachedKeysFromLocalStorage = () => {
   const reachedKeys = localStorage.getItem('reached')
-  console.log('reachedKeys:', reachedKeys)
   if (typeof reachedKeys === 'string') {
     const parsedReachedKeys = JSON.parse(reachedKeys)
     reachedExercises.value = parsedReachedKeys
     reachedExercises.value = reachedExercises.value.filter(key => key !== '')
-    console.log('getreachedkeys', reachedExercises.value)
     progressWidth.value = `${(100 / (exercisePathKeys.length - 1)) * (reachedExercises.value.length - 1)}%`
   }
 }
