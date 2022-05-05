@@ -22,8 +22,14 @@ onMounted(() => {
 
 <template>
 
-  <Modal class="mobile-warning" v-show="displayMobileWarning" v-if="!isTrainingSite"  @click="displayMobileWarning = false" :display="displayMobileWarning" :toggle="displayMobileWarning">
-    <MobileWarning/>
+  <Modal 
+    class="mobile-warning" 
+    v-show="displayMobileWarning" 
+    v-if="!isTrainingSite"  
+    @click="displayMobileWarning = false" 
+    :display="displayMobileWarning" 
+    :toggle="displayMobileWarning">
+      <MobileWarning/>
   </Modal>
   <Progress v-if="!isTrainingSite" />
   <router-view :key="$route.path"/>
@@ -33,7 +39,6 @@ onMounted(() => {
 <style>
 :root {
   --main-bg-color: rgba(43,42,47,255);
-  /* --primary-color: rgba(82,96,124,255); */
   --text-color: rgba(235,242,245,255);
   --lowlight: rgba(82,96,124,255);
 
@@ -66,12 +71,6 @@ body {
   margin: 0;
   background-color: var(--main-bg-color);
 }
-
-/* .--selected-from-answer {
-  -webkit-box-shadow: 0px 0px 2px 2px rgba(246,55,147,0.72); 
-  box-shadow: 0px 0px 2px 2px rgba(246,55,147,0.70);
-  transition: 0.175s;
-} */
 
 [data-selected-from-answer="true"] {
   -webkit-box-shadow: 0px 0px 2px 2px rgba(246,55,147,0.72); 
