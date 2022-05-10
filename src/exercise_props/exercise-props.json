@@ -22,7 +22,8 @@
     "iframeSrcKey": "blog",
     "modalDefaultDisplay": true,
     "allowModalToggle": true,
-    "hint": "look towards the first <p> in each Blog-post"
+    "hint": "look towards the first <p> in each Blog-post",
+    "modalHtml": "<h2>Select All</h2><p>Use the <span class=\"--lowlight\">selectAll</span> property to change the answer checker's logic to look for the first element the selector hits or all elements the selector hits.</p><p>The answer checker will highlight the elements selected by the given CSS selector to help users work through via trial and error.</p>"
   },
   "exampleEveryOther": {
     "path": "/css-selector-training-platform/example-exercise/every-other",
@@ -34,7 +35,8 @@
     "iframeSrcKey": "blog",
     "modalDefaultDisplay": true,
     "allowModalToggle": true,
-    "hint": "you'll need to utilize the :nth-child pseudo-class... okay here's the answer I'm looking for .Blog-post:nth-child(even)"
+    "hint": "you'll need to utilize the :nth-child pseudo-class... okay here's the answer I'm looking for .Blog-post:nth-child(even)",
+    "modalHtml": "<h2>Select Every Other</h2><p>Hints can be passed to the user through the <span class=\"--lowlight\">hint</span> prop.</p><p>Hints are displayed by hitting \"h\" on the keyboard or clicking the hint area under the answer input.</p>"
   },
   "exampleCondition": {
     "path": "/css-selector-training-platform/example-exercise/condition",
@@ -47,6 +49,7 @@
     "modalDefaultDisplay": true,
     "allowModalToggle": true,
     "hint": "you will need to use the + operator to select the adjacent sibling of the first blog post",
+    "modalHtml": "<h2>Optional Conditions</h2><p>By default this app checks the elements returned by the provided CSS selector against the elements selected from the <span class=\"--lowlight\">correctSelectors</span> array prop.</p><p>You can add an addition check before this comparison to see if the answer matches or doesn't match the specified regex in the optional <span class=\"--lowlight\">answerCondition</span> prop.</p>",
     "answerCondition": {"regex":":nth-child|:first-child","ifRegexMatchDontProceed":true}
   },
   "exampleConditionNoMatch": {
@@ -60,6 +63,7 @@
     "modalDefaultDisplay": true,
     "allowModalToggle": true,
     "hint": "the :nth-child pseudo-class needs to be passed a number",
+    "modalHtml": "<h2>Optional Conditions</h2><p>By default this app checks the elements returned by the provided CSS selector against the elements selected from the <span class=\"--lowlight\">correctSelectors</span> array prop.</p><p>You can add an addition check before this comparison to see if the answer matches or doesn't match the specified regex in the optional <span class=\"--lowlight\">answerCondition</span> prop.</p>",
     "answerCondition": {"regex":":nth-child","ifRegexMatchDontProceed":false}
   },
   "exampleSelectAllAttributes": {
@@ -72,6 +76,7 @@
     "iframeSrcKey": "blog",
     "modalDefaultDisplay": true,
     "allowModalToggle": true,
-    "hint": "you will need to adjust the bracket syntax to perform a partial match - review the provided link in the information modal"
+    "hint": "you will need to adjust the bracket syntax to perform a partial match - review the provided link in the information modal",
+    "modalHtml": "<h2>Selecting Elements using their Attributes</h2><p>Using the id and class shorthand # and . are the most common when writing CSS selectors, but sometimes we might need to reference another of the HTML element's attributes.</p><p class=\"no-padding\"><a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors\" target=\"_blank\" rel=\"noopener noreferrer\">Attribute selectors</a> use a bracket syntax:</p><p class=\"no-padding\"><span class=\"--lowlight\">element[attribute]</span> or <span class=\"--lowlight\">element[attribute=\"attribute-value\"]</span> in order to specify the attribute's value.</p>"
   }
 }
