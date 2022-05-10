@@ -6,13 +6,6 @@ import { trainingSitePaths } from '../router/paths';
 import exercisePropsData from '../exercise_props/exercise-props.json'
 import Modal from './Modal.vue';
 
-import SelectSingleModalContent from './modal_content/SelectSingleModalContent.vue';
-import SelectAllModalContent from './modal_content/SelectAllModalContent.vue';
-import SelectAllAttributeModalContent from './modal_content/SelectAllAttributeModalContent.vue';
-import SelectEveryOtherModalContent from './modal_content/SelectEveryOtherModalContent.vue';
-import ConditionModalContent from './modal_content/ConditionModalContent.vue';
-import ConditionNoMatchModalContent from './modal_content/ConditionNoMatchModalContent.vue';
-
 const props = defineProps<{ targetExerciseKey: keyof AllExercisePropsData }>()
 
 // @ts-ignore
@@ -34,35 +27,6 @@ if (targetExerciseData.value.answerCondition) {
   parsedAnswerCondition.value.regex = answerConditionRegex
   parsedAnswerCondition.value.ifRegexMatchDontProceed = targetExerciseData.value.answerCondition.ifRegexMatchDontProceed
 }
-
-
-const ModalContent = shallowRef(SelectSingleModalContent)
-
-const findModalContentComponent = () => {
-  switch (props.targetExerciseKey) {
-    case 'exampleSingle':
-      ModalContent.value = SelectSingleModalContent
-      break
-    case 'exampleAll':
-      ModalContent.value = SelectAllModalContent
-      break
-    case 'exampleEveryOther':
-      ModalContent.value = SelectEveryOtherModalContent
-      break
-    case 'exampleCondition':
-      ModalContent.value = ConditionModalContent
-      break
-    case 'exampleConditionNoMatch':
-      ModalContent.value = ConditionNoMatchModalContent
-      break
-    case 'exampleSelectAllAttributes':
-      ModalContent.value = SelectAllAttributeModalContent
-      break
-  }
-
-}
-
-findModalContentComponent()
 
 </script>
 
