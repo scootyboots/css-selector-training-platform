@@ -1,10 +1,15 @@
 <script setup lang="ts">
-const props = defineProps<{ newAlt?: string }>()
+import { ref } from 'vue';
+const props = defineProps<{ newAlt?: string, newSrc?: string }>()
+const imgSrc = ref<string>('../assets/placeholder.png')
+props.newSrc ? imgSrc.value = props.newSrc : imgSrc.value = '../assets/placeholder.png'
+
 </script>
 
 <template>
   <div class="Blog-post">
-    <img class="Blog-post__img" src="../assets/placeholder.png" :alt="`${newAlt ? newAlt : 'placeholder'}`">
+    <img v-if="!newSrc" class="Blog-post__img" src="../assets/placeholder.png" alt="placeholder"/>
+    <img v-if="newSrc" class="Blog-post__img" src="../assets/placeholder-new.png" alt="new-placeholder"/>
     <div class="Blog-post__header">Header text</div>
     <p>This describes the blog post, This describes the blog post, This describes the blog post...</p>
   </div>

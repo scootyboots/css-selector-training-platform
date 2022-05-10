@@ -134,4 +134,9 @@ const props = defineProps<{ display: boolean, toggle: boolean, html?: string  }>
   }
 }
 
+.no-padding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 </style>
