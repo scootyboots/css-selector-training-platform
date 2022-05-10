@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CloseIcon from './svg_components/CloseIcon.vue';
-const props = defineProps<{ display: boolean, toggle: boolean  }>()
+const props = defineProps<{ display: boolean, toggle: boolean, html?: string  }>()
 </script>
 
 <template>
@@ -11,7 +11,8 @@ const props = defineProps<{ display: boolean, toggle: boolean  }>()
         <div class="Information-modal-content-container" v-show="display">
           <CloseIcon class="Information-modal__close" @click="$emit('close-modal')"/>
           <div class="Information-modal-content">
-              <slot></slot>
+              <slot v-if="!html"></slot>
+              <div v-if="html" v-html="html" class="html-from-string" />
           </div>
         </div>
       </Transition>

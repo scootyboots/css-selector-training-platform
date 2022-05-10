@@ -30,6 +30,7 @@ export interface ExerciseProps {
   modalDefaultDisplay: boolean
   allowModalToggle: boolean
   hint: string
+  modalHtml?: string
   answerCondition?: AnswerCondition
 }
 

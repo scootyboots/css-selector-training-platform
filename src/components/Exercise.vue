@@ -17,6 +17,7 @@ export interface ExerciseProps {
   modalDefaultDisplay: boolean
   allowModalToggle: boolean
   hint: string
+  modalHtml: string
   answerCondition?: {regex: RegExp, ifRegexMatchDontProceed: boolean}
 }
 
@@ -110,9 +111,13 @@ onBeforeUnmount(() => {
     </div>
   </div>
   
-  <Modal v-show="displayModal" :display="displayModal" :toggle="allowModalToggle"  @close-modal="displayModal = false">
+  <!-- <Modal v-show="displayModal" :display="displayModal" :toggle="allowModalToggle"  @close-modal="displayModal = false">
     <slot name="modal-content"/>
-  </Modal>
+  </Modal> -->
+
+  <Modal v-show="displayModal" :display="displayModal" :toggle="allowModalToggle" :html="modalHtml"  @close-modal="displayModal = false" />
+
+
 
 </template>
 

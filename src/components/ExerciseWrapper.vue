@@ -4,6 +4,7 @@ import Exercise from './Exercise.vue';
 import { AllExercisePropsData, ExerciseProps, AnswerCondition } from '../types/types';
 import { trainingSitePaths } from '../router/paths';
 import exercisePropsData from '../exercise_props/exercise-props.json'
+import Modal from './Modal.vue';
 
 import SelectSingleModalContent from './modal_content/SelectSingleModalContent.vue';
 import SelectAllModalContent from './modal_content/SelectAllModalContent.vue';
@@ -22,6 +23,10 @@ const targetExerciseData = ref<ExerciseProps>(allExerciseProps[props.targetExerc
 const trainingSiteRoute = ref(trainingSitePaths[targetExerciseData.value.iframeSrcKey])
 
 const parsedAnswerCondition = ref<{regex: RegExp, ifRegexMatchDontProceed: boolean}>({regex: /./, ifRegexMatchDontProceed: false})
+
+const modalHtml = ref<string>('')
+
+targetExerciseData.value.modalHtml ? modalHtml.value = targetExerciseData.value.modalHtml : modalHtml.value = ''
 
 if (targetExerciseData.value.answerCondition) {
   const stringToRegex = targetExerciseData.value.answerCondition.regex
@@ -73,11 +78,12 @@ findModalContentComponent()
     :modal-default-display="targetExerciseData.modalDefaultDisplay"
     :allow-modal-toggle="targetExerciseData.allowModalToggle"
     :hint="targetExerciseData.hint"
+    :modal-html="modalHtml"
     :answer-condition="parsedAnswerCondition"
   >
-    <template #modal-content>
+    <!-- <template #modal-content>
       <ModalContent/>
-    </template>
+    </template> -->
   </Exercise>
 
 </template>
