@@ -10,7 +10,7 @@ props.newSrc ? imgSrc.value = props.newSrc : imgSrc.value = '../assets/placehold
   <div class="Blog-post">
     <img v-if="!newSrc" class="Blog-post__img" src="../assets/placeholder.png" alt="placeholder"/>
     <img v-if="newSrc" class="Blog-post__img" src="../assets/placeholder-new.png" alt="new-placeholder"/>
-    <div class="Blog-post__header">Header text</div>
+    <div class="Blog-post__header">Blog Post Title</div>
     <p>This describes the blog post, This describes the blog post, This describes the blog post...</p>
   </div>
 </template>

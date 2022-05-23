@@ -82,6 +82,8 @@ body {
   z-index: 100000;
 }
 
+/* TODO: style links better */
+
 .--lowlight {
   padding: 0rem 0.4rem;
   margin: 0 0.2rem;
