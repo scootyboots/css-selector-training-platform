@@ -4,6 +4,7 @@ import router from '../router';
 import { findNextPreviousPath, lastPathCheck, findKeyFromPath, findCurrentRouteIndex } from '../utils/utils'
 import { useRoute } from 'vue-router';
 import ShortcutIndicatorVue from './ShortcutIndicator.vue';
+import BoolStateDisplay from './BoolStateDisplay.vue';
 import GitHubIcon from './svg_components/GitHubIcon.vue';
 
 const currentPath = useRoute().fullPath
@@ -228,6 +229,8 @@ const updateLocalStorage = () => {
       @keydown="(event) => checkSelectAllAnswer(false, event)"
     >
   </div>
+  <BoolStateDisplay v-if="!selectAll" badge="1st" tooltip="this exercise looks for the first element your selector targets"/>
+  <BoolStateDisplay v-if="selectAll"  badge="All" tooltip="this exercise looks for all the elements your selector targets"/>
   <div class="Prompt-shortcuts">
     <ShortcutIndicatorVue v-if="!selectAll" hotkey="Enter" @click="checkSingleAnswer(true)" explanation="to check answer" />
     <ShortcutIndicatorVue v-if="selectAll" hotkey="Enter" @click="checkSelectAllAnswer(true)" explanation="to check answer" />
