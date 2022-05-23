@@ -49,6 +49,8 @@ onMounted(() => {
 
   --browser-height: calc(95vh - 150px);
   --browser-width: calc(60vw - 40px);
+  
+  --border-radius: 3px;
 }
 
 html {

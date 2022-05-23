@@ -229,9 +229,9 @@ const updateLocalStorage = () => {
       @keydown="(event) => checkSelectAllAnswer(false, event)"
     >
   </div>
-  <BoolStateDisplay v-if="!selectAll" badge="1st" tooltip="this exercise looks for the first element your selector targets"/>
-  <BoolStateDisplay v-if="selectAll"  badge="All" tooltip="this exercise looks for all the elements your selector targets"/>
   <div class="Prompt-shortcuts">
+    <BoolStateDisplay v-if="!selectAll" badge="1st" tooltip="this exercise looks for the first element your selector targets"/>
+    <BoolStateDisplay v-if="selectAll"  badge="All" tooltip="this exercise looks for all the elements your selector targets"/>
     <ShortcutIndicatorVue v-if="!selectAll" hotkey="Enter" @click="checkSingleAnswer(true)" explanation="to check answer" />
     <ShortcutIndicatorVue v-if="selectAll" hotkey="Enter" @click="checkSelectAllAnswer(true)" explanation="to check answer" />
     <ShortcutIndicatorVue hotkey="l" explanation="to focus input" @click="$emit('l-clicked')"/>
@@ -322,6 +322,16 @@ const updateLocalStorage = () => {
   /* color: var(--highlight-purple); */
 }
 
+.Prompt-shortcuts {
+  position: relative;
+}
+
+.Prompt-shortcuts .Bool-state-display {
+  position: absolute;
+  top: 0;
+  right: 0.8rem;
+}
+
 .Prompt-notification-area {
   min-height: 25rem;
 }
@@ -362,6 +372,8 @@ const updateLocalStorage = () => {
 @media (max-width: 1090px) {
   .Prompt-notification-area { min-height: 25rem; }
 }
+
+.Prompt-shortcuts .Bool-state-display { right: 1.2rem;  }
 
 .fade-in-enter-active,
 .fade-in-leave-active {
