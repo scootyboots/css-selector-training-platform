@@ -42,7 +42,7 @@
   "exampleCondition": {
     "path": "/css-selector-training-platform/example-exercise/condition",
     "promptHeader": "Select Second",
-    "explanationArray": ["Write a selector that targets the second blog post without using the :nth-child or :first-child pseudo-class"],
+    "explanationArray": ["Now select the second blog post without using a pseudo-class"],
     "correctSelectors": [".Blog-post + .Blog-post"],
     "selectAll": false,
     "browserUrl": "www.music.blog",
@@ -57,7 +57,7 @@
   "exampleConditionNoMatch": {
     "path": "/css-selector-training-platform/example-exercise/condition-no-match",
     "promptHeader": "Select Second",
-    "explanationArray": ["Write a selector that targets the second blog post by using the :nth-child pseudo-class"],
+    "explanationArray": ["Now use the same pseudo-class :nth-child to select just the second blog post"],
     "correctSelectors": [".Blog-post:nth-child(2)"],
     "selectAll": false,
     "browserUrl": "www.music.blog",
@@ -65,7 +65,8 @@
     "modalDefaultDisplay": false,
     "allowModalToggle": false,
     "hint": "the :nth-child pseudo-class needs to be passed a number",
-    "modalHtml": "<h2>Optional Conditions</h2><p>By default this app checks the elements returned by the provided CSS selector against the elements selected from the <span class=\"--lowlight\">correctSelectors</span> array prop.</p><p>You can add an addition check before this comparison to see if the answer matches or doesn't match the specified regex in the optional <span class=\"--lowlight\">answerCondition</span> prop.</p>",
+    "modalHtml": "<h2>Pseudo-classes</h2><p><a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes\" target=\"_blank\" rel=\"noopener noreferrer\">Pseudo-classes</a> are a powerful tool you can leverage to select elements in dynamic ways.</p><p>You can think of pseudo-classes as classes inherent to certain HTML elements that reflect something about the state of that element.</p><p>For this exercise you'll need to use the <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child\" target=\"_blank\" rel=\"noopener noreferrer\">:nth-child()</a> pseudo-class.</p>",
+    "devModalHtml": "<h2>Optional Conditions</h2><p>By default this app checks the elements returned by the provided CSS selector against the elements selected from the <span class=\"--lowlight\">correctSelectors</span> array prop.</p><p>You can add an addition check before this comparison to see if the answer matches or doesn't match the specified regex in the optional <span class=\"--lowlight\">answerCondition</span> prop.</p>",
     "answerCondition": {"regex":":nth-child","ifRegexMatchDontProceed":false}
   },
   "exampleSelectAllAttributes": {

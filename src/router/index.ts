@@ -14,11 +14,11 @@ export const routes = [
   { path: '/css-selector-training-platform/example-exercise/', redirect: exerciseProps.exampleSingle.path },
   { path: exerciseProps.exampleSingle.path, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleSingle'} },
   { path: exerciseProps.exampleAll.path, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleAll'} },
+  { path: exerciseProps.exampleEveryOther.path, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleEveryOther'} },
   { path: exerciseProps.exampleConditionNoMatch.path, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleConditionNoMatch'} },
   { path: exerciseProps.exampleCondition.path, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleCondition'} },
-  { path: exerciseProps.exampleEveryOther.path, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleEveryOther'} },
   { path: exerciseProps.exampleSelectAllAttributes.path, component:  ExerciseWrapper, props: {targetExerciseKey: 'exampleSelectAllAttributes'} },
-  // below this life should be paths to training sites
+  // below this line should be paths to training sites
   { path: trainingSitePaths.blog, component: Blog}
 ]
 
