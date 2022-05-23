@@ -5,6 +5,7 @@ import { findNextPreviousPath, lastPathCheck, findKeyFromPath, findCurrentRouteI
 import { useRoute } from 'vue-router';
 import ShortcutIndicatorVue from './ShortcutIndicator.vue';
 import BoolStateDisplay from './BoolStateDisplay.vue';
+import RightArrowSvg from './svg_components/RightArrow.vue'
 import GitHubIcon from './svg_components/GitHubIcon.vue';
 
 const currentPath = useRoute().fullPath
@@ -248,7 +249,10 @@ const updateLocalStorage = () => {
       <div class="Prompt-correct" v-if="correctAnswerGiven && !isLastPath">
         you did it!
         <Transition name="fade-in">
-          <router-link :to="findNextPreviousPath(currentPath, 'next')" v-if="showNextLink" class="next-exercise-link">next</router-link>
+          <router-link :to="findNextPreviousPath(currentPath, 'next')" v-if="showNextLink" class="next-exercise-link">
+            <div class="next-exercise-link-text">next exercise</div>
+            <RightArrowSvg />
+          </router-link>
         </Transition>
       </div>
     </Transition>
@@ -337,7 +341,24 @@ const updateLocalStorage = () => {
 }
 
 .Prompt-correct {
-  color: var(--highlight-blue)
+  display: flex;
+  gap: 1rem;
+  color: var(--highlight-blue);
+}
+
+.Prompt-correct a {
+  color: var(--highlight-blue);
+  text-decoration: none;
+}
+
+.next-exercise-link {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.next-exercise-link-text {
+  color: var(--highlight-blue);
+  text-decoration: none;
 }
 
 .Prompt-hint {
